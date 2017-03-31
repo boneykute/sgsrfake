@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>SmartFoxServer 2X</title>
+	<style type="text/css" media="screen">
+	
+		body{ font: 100% "Tahoma", Verdana, sans-serif; margin:20px; }
+		h1, h2 { color: #990000;}
+		h3 {color: #cc0000;}
+		.notes { font-size: 80%;}
+	</style>
+</head>
+<body>
+	<h2>
+		{ SmartFoxServer 2X -- 2.12 }
+</h2>
+	
+	<p>
+		<em>Version 2.12.0</em><br>
+		(c) 2009-2016 GOTOANDPLAY snc -- All rights reserved --<br>
+	</p>
+
+	<h3>&raquo; What's new </h3>
+	<ul>
+	<li><strong>Server Side</strong>
+      <ul>
+   	    <li>NEW: JoinRoomInvite, allows players to invite other clients in a game Room to play, available also from client side</li>
+   	    <li>NEW: Private UserVariables. Allow to create UserVariables that are local to the player, and not broadcast to other clients. They can be mixed with standard UserVariables</li>
+   	    <li>NEW: SFSObject type TEXT allows to transmit vare large strings &gt; 32KBytes and up 2GBytes. See SFSObject.putText/getText()</li>
+   	    <li>NEW: Updated Jetty to version 9.3 for web services (BlueBox, uploads, crypto init)</li>
+   	    <li>NEW: Support for IP ranges for black/white lists in IP Filter </li>
+   	    <li>NEW: Zone maxFailedLogin config property, allows a limited number of wrong login attempts per session before kicking the user out</li>
+   	    <li>NEW: Updated MaxMind’s IP geolocation database and API</li>
+   	    <li>NEW: Updated Log Analysis application, now compatible with IPv6 addresses and new IP geolocation API</li>
+   	    <li>NEW: Zone geoLocationEnabled config property, allows to geolocate users and expose it via User.getCountry()</li>
+   	    <li>NEW: AdminTool supports TLS connection</li>
+   	    <li>NEW: Embedded Java 8 Runtime</li>
+   	    <li>NEW: Options for SignUpAssistant Password recovery, allows to specify which field to match as the ID for password recovery (e.g. default = user name, can be changed to match email, nickname or any other available field)</li>
+   	    <li>NEW: Signed installer for macOS</li>
+   	    <li>FIX: 	CreateMMORoom from Javascript / Unity WebGL client causes server side error</li>
+   	    <li>FIX: BlueBox / Jetty exception (AsyncContext#dispath s=ASYNCWAIT i=false a=DISPATCH)</li>
+   	    <li>FIX: Jetty upload limits</li>
+   	    <li>FIX: 	Manual disconnection after having logged out causes server side NPE</li>
+   	    <li>FIX: Incorrect handling of custom permissions codes on the client side<br>
+   	      <br>
+        </li>
+      </ul>
+	</li>
+	<li><strong>AdminTool</strong>
+	  <ul>
+	    <li>NEW: upgraded interface and flash player compatibility. Will allow for future expansions that are in development. Among other things will allow the AdminTool to be delivered as a native application, when the Flash Player will be phased out from certain browsers</li>
+	    <li>NEW:  setting in the &quot;Remote admin&quot; tab of the Server Configurator module makes it possible to encrypt the Admin Tool's connection to the server</li>
+	    <li>NEW: A custom name can be assigned to the server in the &quot;General&quot; tab of the Server Configurator module, for easier identification in case of environments running multiple SmartFoxServer instances</li>
+	  </ul>
+	</li>
+	<ul>
+	    <br>
+	  </li>
+	</ul>
+</ul>
+	<h3>&raquo; Important Note</h3>
+	<p>If you are <strong>migrating from a previous</strong> SmartFoxServer 2X version (2.8 or less) please make sure to read the <a href="http://docs2x.smartfoxserver.com/GettingStarted/migration" target="_blank"><strong>Migration Guide</strong></a>.</p>
+	<p>&nbsp;</p>
+<hr/>
+	<p>
+  <strong>SmartFoxServer 2X</strong><br>
+		<em>Version 2.12.0</em><br>
+		(c) 2009-2016 GOTOANDPLAY snc -- All rights reserved --<br>
+	</p>
+</body>
+</html>

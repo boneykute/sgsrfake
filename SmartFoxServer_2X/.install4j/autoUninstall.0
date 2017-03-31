@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<autoUninstall>
+<action className="com.install4j.runtime.beans.actions.services.InstallServiceAction">
+<property name="startupType" value="auto"/>
+<property name="servicePath" value="C:\Users\VuongKM\SmartFoxServer_2X\SFS2X\sfs2x-service.exe"/>
+<property name="serviceName" value="sfs2x-service"/>
+</action>
+<action className="com.install4j.runtime.beans.actions.desktop.RegisterAddRemoveAction"/>
+</autoUninstall>
