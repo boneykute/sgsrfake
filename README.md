@@ -1,0 +1,2 @@
+# SGS Revolt Server
+
