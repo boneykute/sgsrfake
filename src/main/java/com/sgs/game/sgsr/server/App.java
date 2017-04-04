@@ -3,6 +3,9 @@ package com.sgs.game.sgsr.server;
 import com.sgs.game.sgsr.server.utils.FileUtil;
 import com.sgs.game.sgsr.server.utils.TimeUtil;
 import com.sgs.game.sgsr.server.utils.config.Environment;
+
+import org.apache.commons.csv.CSVRecord;
+
 import com.sgs.game.sgsr.server.extentions.SGSRExtension;
 import com.sgs.game.sgsr.server.utils.config.Constants.ENV;
 import com.sgs.game.sgsr.server.utils.db.DynamicDBUtil;
@@ -28,15 +31,15 @@ public class App {
 	public void setEnvironment(ENV env) {
 		environment = env;
 	}
-	
+
 	private static void init() {
 		App app = new App();
 		new Environment(app.getEnvironment());
-		
+
 		// Init helper
 		FileUtil.init();
 		TimeUtil.init();
-		
+
 		StaticDBUtil.init();
 
 		// Download static data
@@ -44,8 +47,11 @@ public class App {
 	}
 
 	public static void main(String[] agrs) {
-		
+
 		init();
-		// Do more stuff
+
+		// TODO: remove in production, just test here
+		Iterable<CSVRecord> records = FileUtil.readCSVFile("staticdatafiles/version.csv");
+		records.forEach(record -> System.out.println(record.get("Client") + ", " + record.get(1) + ", " + record.get(2)));
 	}
 }
