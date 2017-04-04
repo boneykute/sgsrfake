@@ -24,6 +24,9 @@
 
 		<smartfox.version>2.12</smartfox.version>
 		<commons-lang.version>2.6</commons-lang.version>
+		
+		<maven.compiler.source>1.8</maven.compiler.source>
+    	<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
 
 	<dependencies>
