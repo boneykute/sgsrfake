@@ -1,5 +1,12 @@
 ### SGSR
-SmartFoxServer_2X/SFS2X/logs/
+SmartFoxServer_2X.zip
+#SmartFoxServer_2X/SFS2X/logs/
+
+# ignore everything in SmartFoxServer_2X
+SmartFoxServer_2X
+# except for some directories
+!SmartFoxServer_2X/SFS2X/lib/
+
 
 ### MAVEN
 #pom stuff
