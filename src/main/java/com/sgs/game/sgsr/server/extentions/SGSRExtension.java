@@ -4,7 +4,10 @@ import java.util.Iterator;
 import java.util.Map;
 
 import com.sgs.game.sgsr.server.handlers.evt.BaseEventHandler;
-import com.sgs.game.sgsr.server.utils.DBUtil;
+import com.sgs.game.sgsr.server.utils.FileUtil;
+import com.sgs.game.sgsr.server.utils.TimeUtil;
+import com.sgs.game.sgsr.server.utils.db.DynamicDBUtil;
+import com.sgs.game.sgsr.server.utils.db.StaticDBUtil;
 import com.sgs.game.sgsr.server.utils.handlers.EventHandlerUtil;
 import com.sgs.game.sgsr.server.utils.handlers.RequestHandlerUtil;
 import com.smartfoxserver.v2.core.SFSEventType;
@@ -18,14 +21,21 @@ import com.smartfoxserver.v2.extensions.SFSExtension;
 public class SGSRExtension extends SFSExtension {
 
 	public void init() {
-		// Init db manager
-		DBUtil.dbManager = getParentZone().getDBManager();
+		// Init helper
+		FileUtil.init();
+		TimeUtil.init();
+		
+		DynamicDBUtil.init(getParentZone().getDBManager());
+		StaticDBUtil.init();
 
 		// Init all request handlers
 		initRequestHandlers();
 
 		// Init all event hanlders
 		initEventHandlers();
+		
+		// Download static data
+		StaticDBUtil.downloadData();
 	}
 
 	private void initEventHandlers() {
