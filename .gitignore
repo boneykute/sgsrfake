@@ -6,6 +6,7 @@ SmartFoxServer_2X.zip
 SmartFoxServer_2X
 # except for some directories
 !SmartFoxServer_2X/SFS2X/lib/
+!SmartFoxServer_2X/SFS2X/extensions/__lib__/
 
 
 ### MAVEN
