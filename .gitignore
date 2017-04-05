@@ -1,6 +1,6 @@
 ### SGSR
 SmartFoxServer_2X.zip
-staticdatafiles
+data/static/
 # ignore many folders in SmartFoxServer_2X
 #SmartFoxServer_2X
 SmartFoxServer_2X/SFS2X/logs/
