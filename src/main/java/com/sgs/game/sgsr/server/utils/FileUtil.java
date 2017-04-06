@@ -1,3 +1,6 @@
+/****************************************
+ * SGS Revolt - Server Project
+ ****************************************/
 package com.sgs.game.sgsr.server.utils;
 
 import java.io.File;
@@ -11,11 +14,27 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 import org.apache.commons.io.FileUtils;
 
+/**
+ * The Class FileUtil.
+ */
 public class FileUtil {
+
+	/**
+	 * Inits the.
+	 */
 	public static void init() {
 
 	}
 
+	/**
+	 * Download.
+	 *
+	 * @param fromUrl
+	 *            the from url
+	 * @param desUrl
+	 *            the des url
+	 * @return the file
+	 */
 	public static File download(String fromUrl, String desUrl) {
 		try {
 			URL url = new URL(fromUrl);
@@ -30,6 +49,13 @@ public class FileUtil {
 		return null;
 	}
 
+	/**
+	 * Read CSV file.
+	 *
+	 * @param fileUrl
+	 *            the file url
+	 * @return the iterable
+	 */
 	public static Iterable<CSVRecord> readCSVFile(String fileUrl) {
 		Reader in;
 		try {
