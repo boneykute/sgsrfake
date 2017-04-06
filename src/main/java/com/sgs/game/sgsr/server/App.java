@@ -68,7 +68,6 @@ public class App {
 		StaticDBUtil.init();
 
 		// Download static data
-		StaticDBUtil.fetchVersionDataFromFile();
 		StaticDBUtil.downloadDataFirstTime();
 	}
 

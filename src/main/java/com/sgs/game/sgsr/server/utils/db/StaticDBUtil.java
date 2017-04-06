@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.activation.FileTypeMap;
+
 import org.apache.commons.csv.CSVRecord;
 
 import com.sgs.game.sgsr.server.dto.staticdata.BaseStaticDataDTO;
@@ -26,11 +28,11 @@ public class StaticDBUtil {
 	/** The static data config. */
 	private static HashMap<String, String> staticDataConfig;
 
-	/** The Constant REMOTE_BASE_URL. */
-	private static final String REMOTE_BASE_URL = "http://download947.mediafireuserdownload.com/";
+	/** The Constant REMOTE_VERSION_FILE_URL. */
+	private static final String REMOTE_VERSION_FILE_URL = "http://download1481.mediafireuserdownload.com/o87tjm789kqg/dvuci0hdikl0c5x/version.csv";
 
 	/** The Constant REMOTE_VERSION_FILE_URL. */
-	private static final String REMOTE_VERSION_FILE_URL = REMOTE_BASE_URL + "version.csv";
+	private static final String REMOTE_MAPPING_FILE_URL = "http://download1481.mediafireuserdownload.com/o87tjm789kqg/dvuci0hdikl0c5x/version.csv";
 
 	/** The Constant LOCAL_BASE_PATH. */
 	private static final String LOCAL_BASE_PATH = "data/static/";
@@ -38,15 +40,30 @@ public class StaticDBUtil {
 	/** The Constant LOCAL_VERSION_FILE_PATH. */
 	private static final String LOCAL_VERSION_FILE_PATH = LOCAL_BASE_PATH + "version.csv";
 
+	/** Mapping file data parsed */
+	private static HashMap<String, String> MAPPING_FILE_DATA = new HashMap<>();
+
+	private static File versionFile;
+
+	private static File mappingFile;
+
 	// endregion FIELD
 
 	/**
-	 * Inits the.
+	 * Init stuff.
 	 */
 	public static void init() {
 		setStaticDataConfig(new HashMap<>());
 		setStaticData(new HashMap<>());
+
+		downloadVersionFile();
+
 		downloadDataFirstTime();
+	}
+
+	private static void parseMappingFile() {
+		Iterable<CSVRecord> records = FileUtil.readCSVFile("");
+		records.forEach(record -> MAPPING_FILE_DATA.put(record.get("File"), record.get("Url")));
 	}
 
 	// region FETCH DATA FROM FILE
@@ -103,18 +120,20 @@ public class StaticDBUtil {
 			String[] changedFiles = record.get("ChangedFiles").split(",");
 			for (int i = 0; i < changedFiles.length; i++) {
 				String changedFileName = changedFiles[i];
-				File changedFile = FileUtil.download(REMOTE_BASE_URL + changedFileName,
-						LOCAL_BASE_PATH + changedFileName);
+				File changedFile = FileUtil.download(changedFileName, LOCAL_BASE_PATH + changedFileName);
 				fetchDataFromFile(changedFile);
 			}
 		}
 	}
 
+	private static void downloadVersionFile() {
+		versionFile = FileUtil.download(REMOTE_VERSION_FILE_URL, LOCAL_VERSION_FILE_PATH);
+	}
+
 	/**
 	 * Fetch version data from file.
 	 */
-	public static void fetchVersionDataFromFile() {
-		FileUtil.download(REMOTE_VERSION_FILE_URL, LOCAL_VERSION_FILE_PATH);
+	private static void fetchVersionDataFromFile() {
 		Iterable<CSVRecord> records = FileUtil.readCSVFile(LOCAL_VERSION_FILE_PATH);
 		String previousKey = "";
 		Iterator<CSVRecord> recordsIterator = records.iterator();
@@ -173,27 +192,29 @@ public class StaticDBUtil {
 	}
 
 	/**
-	 * Download data.
-	 *
-	 * @param isFirstTime
-	 *            the is first time
-	 */
-	public static void downloadData(boolean isFirstTime) {
-
-	}
-
-	/**
 	 * Download data first time.
 	 */
 	public static void downloadDataFirstTime() {
-		downloadData(true);
+		Iterable<CSVRecord> versionsData = FileUtil.readCSVFile(LOCAL_VERSION_FILE_PATH);
+		for (CSVRecord version : versionsData) {
+			String versionName = version.get("Version");
+			// TODO: Create folder with version name
+			String versionMappingFilePath = LOCAL_BASE_PATH + "/" + versionName + "/mapping.csv";
+			File mappingFile = FileUtil.download(version.get("Url"), versionMappingFilePath);
+			Iterable<CSVRecord> mappingData = FileUtil.readCSVFile(versionMappingFilePath);
+			for (CSVRecord mappingItem : mappingData) {
+				String fileName = mappingItem.get("File");
+				String filePath = LOCAL_BASE_PATH + "/" + versionName + "/" + fileName;
+				FileUtil.download(mappingItem.get("Url"), filePath);
+			}
+		}
 	}
 
 	/**
 	 * Download data update.
 	 */
 	public static void downloadDataUpdate() {
-		downloadData(false);
+
 	}
 
 	// endregion UTILITY FUNCTION
