@@ -16,7 +16,8 @@ public class AppTest extends TestCase {
 	/**
 	 * Instantiates a new app test.
 	 *
-	 * @param testName the test name
+	 * @param testName
+	 *            the test name
 	 */
 	public AppTest(String testName) {
 		super(testName);

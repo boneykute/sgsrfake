@@ -1,7 +1,7 @@
 /****************************************
  * SGS Revolt - Server Project
  ****************************************/
-package com.sgs.game.sgsr.server.utils.db;
+package com.sgs.game.sgsr.server.utils.db.dynamicdata;
 
 import com.smartfoxserver.v2.db.IDBManager;
 

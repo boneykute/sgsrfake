@@ -1,15 +1,14 @@
 /****************************************
  * SGS Revolt - Server Project
  ****************************************/
-package com.sgs.game.sgsr.server.utils.db;
+package com.sgs.game.sgsr.server.utils.db.staticdata;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-
-import javax.activation.FileTypeMap;
 
 import org.apache.commons.csv.CSVRecord;
 import org.apache.commons.io.FileUtils;
@@ -33,9 +32,6 @@ public class StaticDBUtil {
 	/** The Constant REMOTE_VERSION_FILE_URL. */
 	private static final String REMOTE_VERSION_FILE_URL = "http://download1481.mediafireuserdownload.com/o87tjm789kqg/dvuci0hdikl0c5x/version.csv";
 
-	/** The Constant REMOTE_VERSION_FILE_URL. */
-	private static final String REMOTE_MAPPING_FILE_URL = "http://download1481.mediafireuserdownload.com/o87tjm789kqg/dvuci0hdikl0c5x/version.csv";
-
 	/** The Constant LOCAL_BASE_PATH. */
 	private static final String LOCAL_BASE_PATH = "data/static/";
 
@@ -46,8 +42,6 @@ public class StaticDBUtil {
 	private static HashMap<String, String> MAPPING_FILE_DATA = new HashMap<>();
 
 	private static File versionFile;
-
-	private static File mappingFile;
 
 	// endregion FIELD
 
@@ -61,43 +55,56 @@ public class StaticDBUtil {
 		downloadVersionFile();
 
 		downloadDataFirstTime();
+
+		fetchDataFirstTime();
 	}
 
-	private static void parseMappingFile() {
-		Iterable<CSVRecord> records = FileUtil.readCSVFile("");
-		records.forEach(record -> MAPPING_FILE_DATA.put(record.get("File"), record.get("Url")));
+	private static void fetchDataFirstTime() {
+		File localDirectory = new File(LOCAL_BASE_PATH);
+		String[] extensions = new String[] { "csv" };
+		Collection<File> files = FileUtils.listFiles(localDirectory, extensions, true);
+		files.forEach(file -> FetchDataFromFile.fetch(file));
 	}
 
-	// region FETCH DATA FROM FILE
+	private static void downloadVersionFile() {
+		versionFile = FileUtil.download(REMOTE_VERSION_FILE_URL, LOCAL_VERSION_FILE_PATH);
+	}
+
+	private static Iterable<CSVRecord> readVersionFile() {
+		return FileUtil.readCSVFile(LOCAL_VERSION_FILE_PATH);
+	}
 
 	/**
-	 * Fetch data from file.
-	 *
-	 * @param changedFile
-	 *            the changed file
+	 * Download data first time.
 	 */
-	private static void fetchDataFromFile(File changedFile) {
-		// Get filename without extension to check
-		String fileNameWithoutExtension = getFileNameWithoutExtension(changedFile.getName());
-		// Find data file type
-		DataFileType dataFileType = getDataFileType(fileNameWithoutExtension);
-		// Update static data
-		switch (dataFileType) {
-		case Building:
-			fetchBuildingDataFromFile(changedFile);
-			break;
-		case Rune:
-			fetchRuneDataFromFile(changedFile);
-			break;
-		case Character:
-			break;
-		case Chest:
-			break;
-		case Pack:
-			break;
-		default:
-			break;
+	public static void downloadDataFirstTime() {
+		Iterable<CSVRecord> versionsData = readVersionFile();
+		for (CSVRecord version : versionsData) {
+			String versionName = version.get("Version");
+			File versionFolder = new File(LOCAL_BASE_PATH + "/" + versionName);
+			try {
+				FileUtils.forceMkdir(versionFolder);
+				String versionMappingFilePath = LOCAL_BASE_PATH + "/" + versionName + "/mapping.csv";
+				File mappingFile = FileUtil.download(version.get("Url"), versionMappingFilePath);
+				Iterable<CSVRecord> mappingData = FileUtil.readCSVFile(versionMappingFilePath);
+				for (CSVRecord mappingItem : mappingData) {
+					String fileName = mappingItem.get("File");
+					String filePath = LOCAL_BASE_PATH + "/" + versionName + "/" + fileName;
+					FileUtil.download(mappingItem.get("Url"), filePath);
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
+	}
+
+	// region UPDATE DATA IN RUNTIME
+
+	/**
+	 * Download data update.
+	 */
+	public static void downloadDataUpdate() {
+
 	}
 
 	/**
@@ -123,13 +130,9 @@ public class StaticDBUtil {
 			for (int i = 0; i < changedFiles.length; i++) {
 				String changedFileName = changedFiles[i];
 				File changedFile = FileUtil.download(changedFileName, LOCAL_BASE_PATH + changedFileName);
-				fetchDataFromFile(changedFile);
+				FetchDataFromFile.fetch(changedFile);
 			}
 		}
-	}
-
-	private static void downloadVersionFile() {
-		versionFile = FileUtil.download(REMOTE_VERSION_FILE_URL, LOCAL_VERSION_FILE_PATH);
 	}
 
 	/**
@@ -147,84 +150,7 @@ public class StaticDBUtil {
 		}
 	}
 
-	/**
-	 * Fetch rune data from file.
-	 *
-	 * @param changedFile
-	 *            the changed file
-	 */
-	private static void fetchRuneDataFromFile(File changedFile) {
-		// TODO Auto-generated method stub
-	}
-
-	/**
-	 * Fetch building data from file.
-	 *
-	 * @param changedFile
-	 *            the changed file
-	 */
-	private static void fetchBuildingDataFromFile(File changedFile) {
-		// TODO Auto-generated method stub
-	}
-
-	// endregion FETCH DATA FROM FILE
-
-	// region UTILITY FUNCTION
-
-	/**
-	 * Gets the file name without extension.
-	 *
-	 * @param fileName
-	 *            the file name
-	 * @return the file name without extension
-	 */
-	private static String getFileNameWithoutExtension(String fileName) {
-		return fileName.substring(0, fileName.lastIndexOf("."));
-	}
-
-	/**
-	 * Gets the data file type.
-	 *
-	 * @param fileName
-	 *            the file name
-	 * @return the data file type
-	 */
-	private static DataFileType getDataFileType(final String fileName) {
-		return DataFileType.Character;
-	}
-
-	/**
-	 * Download data first time.
-	 */
-	public static void downloadDataFirstTime() {
-		Iterable<CSVRecord> versionsData = FileUtil.readCSVFile(LOCAL_VERSION_FILE_PATH);
-		for (CSVRecord version : versionsData) {
-			String versionName = version.get("Version");
-			File versionFolder = new File(LOCAL_BASE_PATH + "/" + versionName);
-			try {
-				FileUtils.forceMkdir(versionFolder);
-				String versionMappingFilePath = LOCAL_BASE_PATH + "/" + versionName + "/mapping.csv";
-				File mappingFile = FileUtil.download(version.get("Url"), versionMappingFilePath);
-				Iterable<CSVRecord> mappingData = FileUtil.readCSVFile(versionMappingFilePath);
-				for (CSVRecord mappingItem : mappingData) {
-					String fileName = mappingItem.get("File");
-					String filePath = LOCAL_BASE_PATH + "/" + versionName + "/" + fileName;
-					FileUtil.download(mappingItem.get("Url"), filePath);
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-
-	/**
-	 * Download data update.
-	 */
-	public static void downloadDataUpdate() {
-
-	}
-
-	// endregion UTILITY FUNCTION
+	// endregion UPDATE DATA IN RUNTIME
 
 	// region GETTER AND SETTER
 

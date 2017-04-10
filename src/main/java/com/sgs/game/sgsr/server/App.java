@@ -7,7 +7,7 @@ import com.sgs.game.sgsr.server.utils.FileUtil;
 import com.sgs.game.sgsr.server.utils.TimeUtil;
 import com.sgs.game.sgsr.server.utils.config.Constants.ENVIRONMENT;
 import com.sgs.game.sgsr.server.utils.config.Environment;
-import com.sgs.game.sgsr.server.utils.db.StaticDBUtil;
+import com.sgs.game.sgsr.server.utils.db.staticdata.StaticDBUtil;
 
 /**
  * The Class App.
