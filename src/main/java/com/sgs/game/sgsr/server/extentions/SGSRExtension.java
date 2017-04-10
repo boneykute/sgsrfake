@@ -1,3 +1,6 @@
+/****************************************
+ * SGS Revolt - Server Project
+ ****************************************/
 package com.sgs.game.sgsr.server.extentions;
 
 import java.util.Iterator;
@@ -6,8 +9,8 @@ import java.util.Map;
 import com.sgs.game.sgsr.server.handlers.evt.BaseEventHandler;
 import com.sgs.game.sgsr.server.utils.FileUtil;
 import com.sgs.game.sgsr.server.utils.TimeUtil;
-import com.sgs.game.sgsr.server.utils.db.DynamicDBUtil;
-import com.sgs.game.sgsr.server.utils.db.StaticDBUtil;
+import com.sgs.game.sgsr.server.utils.db.dynamicdata.DynamicDBUtil;
+import com.sgs.game.sgsr.server.utils.db.staticdata.StaticDBUtil;
 import com.sgs.game.sgsr.server.utils.handlers.EventHandlerUtil;
 import com.sgs.game.sgsr.server.utils.handlers.RequestHandlerUtil;
 import com.smartfoxserver.v2.core.SFSEventType;
@@ -15,16 +18,20 @@ import com.smartfoxserver.v2.extensions.BaseClientRequestHandler;
 import com.smartfoxserver.v2.extensions.SFSExtension;
 
 /**
- * Main extention
- *
+ * The Class SGSRExtension.
  */
 public class SGSRExtension extends SFSExtension {
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.smartfoxserver.v2.extensions.ISFSExtension#init()
+	 */
 	public void init() {
 		// Init helper
 		FileUtil.init();
 		TimeUtil.init();
-		
+
 		DynamicDBUtil.init(getParentZone().getDBManager());
 		StaticDBUtil.init();
 
@@ -33,11 +40,14 @@ public class SGSRExtension extends SFSExtension {
 
 		// Init all event hanlders
 		initEventHandlers();
-		
+
 		// Download static data
-		StaticDBUtil.downloadData();
+		StaticDBUtil.downloadDataFirstTime();
 	}
 
+	/**
+	 * Inits the event handlers.
+	 */
 	private void initEventHandlers() {
 		EventHandlerUtil.init();
 		Iterator<?> it = EventHandlerUtil.getHandlers().entrySet().iterator();
@@ -50,6 +60,9 @@ public class SGSRExtension extends SFSExtension {
 		}
 	}
 
+	/**
+	 * Inits the request handlers.
+	 */
 	private void initRequestHandlers() {
 		RequestHandlerUtil.init();
 		Iterator<?> it = RequestHandlerUtil.getHandlers().entrySet().iterator();
@@ -60,6 +73,11 @@ public class SGSRExtension extends SFSExtension {
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.smartfoxserver.v2.extensions.SFSExtension#destroy()
+	 */
 	@Override
 	public void destroy() {
 		super.destroy();

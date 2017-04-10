@@ -1,3 +1,6 @@
+/****************************************
+ * SGS Revolt - Server Project
+ ****************************************/
 package com.sgs.game.sgsr.server.utils;
 
 import java.io.FileOutputStream;
@@ -8,9 +11,21 @@ import java.util.Properties;
 
 import org.apache.commons.collections.map.HashedMap;
 
+/**
+ * The Class PropertiesUtil.
+ */
 public class PropertiesUtil {
 
-	public static Properties read(ClassLoader classLoader, String file) {
+	/**
+	 * Read properties file.
+	 *
+	 * @param classLoader
+	 *            the class loader
+	 * @param file
+	 *            the file
+	 * @return the properties data
+	 */
+	public static Properties readPropertiesFile(ClassLoader classLoader, String file) {
 		Properties prop = new Properties();
 		InputStream input = null;
 
@@ -33,8 +48,16 @@ public class PropertiesUtil {
 		}
 	}
 
+	/**
+	 * Write properties file.
+	 *
+	 * @param file
+	 *            the destination file
+	 * @param data
+	 *            the data need to write
+	 */
 	@SuppressWarnings("unchecked")
-	public static void write(String file, HashedMap data) {
+	public static void writePropertiesFile(String file, HashedMap data) {
 		Properties prop = new Properties();
 		OutputStream output = null;
 
@@ -56,6 +79,13 @@ public class PropertiesUtil {
 		}
 	}
 
+	/**
+	 * Properties to string.
+	 *
+	 * @param prop
+	 *            the prop
+	 * @return the string
+	 */
 	public static String propertiesToString(Properties prop) {
 		String str = "";
 		for (String key : prop.stringPropertyNames()) {

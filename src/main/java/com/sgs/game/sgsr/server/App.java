@@ -1,51 +1,84 @@
+/****************************************
+ * SGS Revolt - Server Project
+ ****************************************/
 package com.sgs.game.sgsr.server;
 
 import com.sgs.game.sgsr.server.utils.FileUtil;
 import com.sgs.game.sgsr.server.utils.TimeUtil;
+import com.sgs.game.sgsr.server.utils.config.Constants.ENVIRONMENT;
 import com.sgs.game.sgsr.server.utils.config.Environment;
-import com.sgs.game.sgsr.server.extentions.SGSRExtension;
-import com.sgs.game.sgsr.server.utils.config.Constants.ENV;
-import com.sgs.game.sgsr.server.utils.db.DynamicDBUtil;
-import com.sgs.game.sgsr.server.utils.db.StaticDBUtil;
-import com.smartfoxserver.v2.controllers.system.buddylist.InitBuddyList;
+import com.sgs.game.sgsr.server.utils.db.staticdata.StaticDBUtil;
 
+/**
+ * The Class App.
+ */
 public class App {
+
+	/** The environment. */
 	// Change this to switch environment
-	private ENV environment;
+	private ENVIRONMENT environment;
 
+	/**
+	 * Instantiates a new app.
+	 */
 	public App() {
-		environment = ENV.DEV;
+		environment = ENVIRONMENT.DEV;
 	}
 
-	public App(ENV env) {
-		environment = env;
+	/**
+	 * Instantiates a new app.
+	 *
+	 * @param ENVIRONMENT
+	 *            the environment
+	 */
+	public App(ENVIRONMENT ENVIRONMENT) {
+		environment = ENVIRONMENT;
 	}
 
-	public ENV getEnvironment() {
+	/**
+	 * Gets the environment.
+	 *
+	 * @return the environment
+	 */
+	public ENVIRONMENT getEnvironment() {
 		return environment;
 	}
 
-	public void setEnvironment(ENV env) {
-		environment = env;
+	/**
+	 * Sets the environment.
+	 *
+	 * @param ENVIRONMENT
+	 *            the new environment
+	 */
+	public void setEnvironment(ENVIRONMENT ENVIRONMENT) {
+		environment = ENVIRONMENT;
 	}
-	
+
+	/**
+	 * Init stuff.
+	 */
 	private static void init() {
 		App app = new App();
 		new Environment(app.getEnvironment());
-		
+
 		// Init helper
 		FileUtil.init();
 		TimeUtil.init();
-		
+
 		StaticDBUtil.init();
 
 		// Download static data
-		StaticDBUtil.downloadData();
+		StaticDBUtil.downloadDataFirstTime();
 	}
 
+	/**
+	 * The main method.
+	 *
+	 * @param agrs
+	 *            the arguments
+	 */
 	public static void main(String[] agrs) {
-		
+
 		init();
-		// Do more stuff
 	}
 }
