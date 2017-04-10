@@ -8,5 +8,5 @@ import com.sgs.game.sgsr.server.dto.IBaseDTO;
 /**
  * The Interface BaseStaticDataDTO.
  */
-public interface IBaseStaticDataDTO extends IBaseDTO {
+public interface IBaseStaticDataDTO<T> extends IBaseDTO {
 }

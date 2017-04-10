@@ -1,9 +1,9 @@
 package com.sgs.game.sgsr.server.dto.staticdata;
 
-public class BaseStaticDataDTO {
-	private int id;
-	private String name;
-	private String description;
+public abstract class BaseStaticDataDTO<T> implements IBaseStaticDataDTO<T> {
+	protected int id;
+	protected String name;
+	protected String description;
 
 	public BaseStaticDataDTO() {
 	}
@@ -13,6 +13,8 @@ public class BaseStaticDataDTO {
 		this.name = name;
 		this.description = description;
 	}
+
+	protected abstract T clone();
 
 	public int getId() {
 		return id;

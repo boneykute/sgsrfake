@@ -2,11 +2,15 @@ package com.sgs.game.sgsr.server.dto.staticdata;
 
 import java.util.List;
 
-public class Avatar extends BaseStaticDataDTO implements IBaseStaticDataDTO {
+public class Avatar extends BaseStaticDataDTO<Avatar> {
 
 	private int requirementCount;
 	private List<Requirement> requirements;
-	
+
+	public Avatar() {
+		super();
+	}
+
 	public Avatar(int id, String name, String description, int requirementCount, List<Requirement> requirements) {
 		super(id, name, description);
 		this.requirementCount = requirementCount;
@@ -27,5 +31,10 @@ public class Avatar extends BaseStaticDataDTO implements IBaseStaticDataDTO {
 
 	public void setRequirements(List<Requirement> requirements) {
 		this.requirements = requirements;
+	}
+
+	@Override
+	protected Avatar clone() {
+		return new Avatar(id, name, description, requirementCount, requirements);
 	}
 }
