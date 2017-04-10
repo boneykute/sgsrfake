@@ -3,27 +3,37 @@
  ****************************************/
 package com.sgs.game.sgsr.server.utils.db.staticdata;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Enum DataFileType.
  */
 public enum DataFileType {
 
+	/** The None. */
 	None("None"),
 
+	/** The Global config. */
 	GlobalConfig("GlobalConfig"),
 
+	/** The Element. */
 	Element("Element"),
 
+	/** The Faction. */
 	Faction("Faction"),
 
+	/** The Daily login reward. */
 	DailyLoginReward("DailyLoginReward"),
 
+	/** The Avatar. */
 	Avatar("Avatar"),
 
+	/** The Nick name. */
 	NickName("NickName"),
 
+	/** The Resource type. */
 	ResourceType("ResourceType"),
 
+	/** The Shop. */
 	Shop("Shop"),
 
 	/** The Chest. */
@@ -32,24 +42,31 @@ public enum DataFileType {
 	/** The Pack. */
 	Pack("Pack"),
 
+	/** The Decoration. */
 	Decoration("Decoration"),
 
+	/** The Booster. */
 	Booster("Booster"),
 
+	/** The Scroll. */
 	Scroll("Scroll"),
 
+	/** The Dungeon. */
 	Dungeon("Dungeon"),
 
+	/** The League. */
 	League("League"),
 
+	/** The Season. */
 	Season("Season"),
 
+	/** The Player level. */
 	PlayerLevel("PlayerLevel"),
 
 	/** The Character's stat. */
 	CharacterStat("CharacterStat"),
 
-	/** The Character's skills */
+	/** The Character's skills. */
 	CharacterSkill("CharacterSkill"),
 
 	/** The Building. */

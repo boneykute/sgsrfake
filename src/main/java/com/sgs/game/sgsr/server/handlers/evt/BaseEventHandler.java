@@ -7,6 +7,7 @@ import com.smartfoxserver.v2.core.ISFSEvent;
 import com.smartfoxserver.v2.exceptions.SFSException;
 import com.smartfoxserver.v2.extensions.BaseServerEventHandler;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class BaseEventHandler.
  */

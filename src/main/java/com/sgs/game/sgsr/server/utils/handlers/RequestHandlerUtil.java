@@ -8,6 +8,7 @@ import java.util.HashMap;
 import com.sgs.game.sgsr.server.handlers.req.BaseRequestHandler;
 import com.smartfoxserver.v2.extensions.BaseClientRequestHandler;
 
+// TODO: Auto-generated Javadoc
 enum RequestHandlerType {
 	type1("Type1"), type2("Type2");
 

@@ -17,6 +17,7 @@ import com.smartfoxserver.v2.core.SFSEventType;
 import com.smartfoxserver.v2.extensions.BaseClientRequestHandler;
 import com.smartfoxserver.v2.extensions.SFSExtension;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class SGSRExtension.
  */

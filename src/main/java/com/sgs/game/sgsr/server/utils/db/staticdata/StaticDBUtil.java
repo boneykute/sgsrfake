@@ -16,6 +16,7 @@ import org.apache.commons.io.FileUtils;
 import com.sgs.game.sgsr.server.dto.staticdata.IBaseStaticDataDTO;
 import com.sgs.game.sgsr.server.utils.FileUtil;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class StaticDBUtil.
  */
@@ -38,9 +39,10 @@ public class StaticDBUtil {
 	/** The Constant LOCAL_VERSION_FILE_PATH. */
 	private static final String LOCAL_VERSION_FILE_PATH = LOCAL_BASE_PATH + "version.csv";
 
-	/** Mapping file data parsed */
+	/** Mapping file data parsed. */
 	private static HashMap<String, String> MAPPING_FILE_DATA = new HashMap<>();
 
+	/** The version file. */
 	private static File versionFile;
 
 	// endregion FIELD
@@ -59,6 +61,9 @@ public class StaticDBUtil {
 		fetchDataFirstTime();
 	}
 
+	/**
+	 * Fetch data first time.
+	 */
 	private static void fetchDataFirstTime() {
 		File localDirectory = new File(LOCAL_BASE_PATH);
 		String[] extensions = new String[] { "csv" };
@@ -66,10 +71,18 @@ public class StaticDBUtil {
 		files.forEach(file -> FetchDataFromFile.fetch(file));
 	}
 
+	/**
+	 * Download version file.
+	 */
 	private static void downloadVersionFile() {
 		versionFile = FileUtil.download(REMOTE_VERSION_FILE_URL, LOCAL_VERSION_FILE_PATH);
 	}
 
+	/**
+	 * Read version file.
+	 *
+	 * @return the iterable
+	 */
 	private static Iterable<CSVRecord> readVersionFile() {
 		return FileUtil.readCSVFile(LOCAL_VERSION_FILE_PATH);
 	}

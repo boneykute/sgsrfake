@@ -6,6 +6,7 @@ package com.sgs.game.sgsr.server.dto.dynamicdata;
 import com.sgs.game.sgsr.server.dto.IBaseDTO;
 import com.smartfoxserver.v2.entities.data.SFSObject;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Interface BaseDynamicDataDTO.
  */

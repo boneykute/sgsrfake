@@ -5,6 +5,7 @@ package com.sgs.game.sgsr.server.extentions;
 
 import com.smartfoxserver.v2.extensions.SFSExtension;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class MyExtension.
  */

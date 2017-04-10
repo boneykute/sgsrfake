@@ -8,6 +8,7 @@ import java.util.Properties;
 import com.sgs.game.sgsr.server.utils.PropertiesUtil;
 import com.sgs.game.sgsr.server.utils.config.Constants.ENVIRONMENT;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class Environment.
  */
@@ -43,6 +44,11 @@ public class Environment {
 			this.dbpass = dbpass;
 		}
 
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see java.lang.Object#toString()
+		 */
 		@Override
 		public String toString() {
 			return "DB: " + dbname + " -> " + dbpass;
@@ -52,8 +58,8 @@ public class Environment {
 	/**
 	 * Instantiates a new environment.
 	 *
-	 * @param env
-	 *            the env
+	 * @param environment
+	 *            the environment
 	 */
 	public Environment(ENVIRONMENT environment) {
 		// Read environment file

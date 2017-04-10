@@ -8,6 +8,7 @@ import java.util.HashMap;
 import com.smartfoxserver.v2.core.SFSEventType;
 import com.smartfoxserver.v2.extensions.BaseServerEventHandler;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class EventHandlerUtil.
  */
