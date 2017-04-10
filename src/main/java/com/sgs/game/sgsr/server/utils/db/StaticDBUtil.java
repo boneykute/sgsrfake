@@ -4,6 +4,7 @@
 package com.sgs.game.sgsr.server.utils.db;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
 import javax.activation.FileTypeMap;
 
 import org.apache.commons.csv.CSVRecord;
+import org.apache.commons.io.FileUtils;
 
 import com.sgs.game.sgsr.server.dto.staticdata.BaseStaticDataDTO;
 import com.sgs.game.sgsr.server.utils.FileUtil;
@@ -198,14 +200,19 @@ public class StaticDBUtil {
 		Iterable<CSVRecord> versionsData = FileUtil.readCSVFile(LOCAL_VERSION_FILE_PATH);
 		for (CSVRecord version : versionsData) {
 			String versionName = version.get("Version");
-			// TODO: Create folder with version name
-			String versionMappingFilePath = LOCAL_BASE_PATH + "/" + versionName + "/mapping.csv";
-			File mappingFile = FileUtil.download(version.get("Url"), versionMappingFilePath);
-			Iterable<CSVRecord> mappingData = FileUtil.readCSVFile(versionMappingFilePath);
-			for (CSVRecord mappingItem : mappingData) {
-				String fileName = mappingItem.get("File");
-				String filePath = LOCAL_BASE_PATH + "/" + versionName + "/" + fileName;
-				FileUtil.download(mappingItem.get("Url"), filePath);
+			File versionFolder = new File(LOCAL_BASE_PATH + "/" + versionName);
+			try {
+				FileUtils.forceMkdir(versionFolder);
+				String versionMappingFilePath = LOCAL_BASE_PATH + "/" + versionName + "/mapping.csv";
+				File mappingFile = FileUtil.download(version.get("Url"), versionMappingFilePath);
+				Iterable<CSVRecord> mappingData = FileUtil.readCSVFile(versionMappingFilePath);
+				for (CSVRecord mappingItem : mappingData) {
+					String fileName = mappingItem.get("File");
+					String filePath = LOCAL_BASE_PATH + "/" + versionName + "/" + fileName;
+					FileUtil.download(mappingItem.get("Url"), filePath);
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
 		}
 	}
