@@ -3,13 +3,13 @@
  ****************************************/
 package com.sgs.game.sgsr.server.dto.dynamicdata;
 
-import com.sgs.game.sgsr.server.dto.BaseDTO;
+import com.sgs.game.sgsr.server.dto.IBaseDTO;
 import com.smartfoxserver.v2.entities.data.SFSObject;
 
 /**
  * The Interface BaseDynamicDataDTO.
  */
-public interface BaseDynamicDataDTO extends BaseDTO {
+public interface IBaseDynamicDataDTO extends IBaseDTO {
 
 	/**
 	 * To SFS object.
@@ -23,6 +23,6 @@ public interface BaseDynamicDataDTO extends BaseDTO {
 	 *
 	 * @return the base dynamic data DTO
 	 */
-	public BaseDynamicDataDTO fromSFSObject();
+	public IBaseDynamicDataDTO fromSFSObject();
 
 }

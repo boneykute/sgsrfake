@@ -3,10 +3,10 @@
  ****************************************/
 package com.sgs.game.sgsr.server.dao.staticdata;
 
-import com.sgs.game.sgsr.server.dao.BaseDAO;
+import com.sgs.game.sgsr.server.dao.IBaseDAO;
 
 /**
  * The Interface BaseStaticDataDAO.
  */
-public interface BaseStaticDataDAO extends BaseDAO {
+public interface IBaseStaticDataDAO extends IBaseDAO {
 }

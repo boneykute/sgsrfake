@@ -13,7 +13,7 @@ import java.util.List;
 import org.apache.commons.csv.CSVRecord;
 import org.apache.commons.io.FileUtils;
 
-import com.sgs.game.sgsr.server.dto.staticdata.BaseStaticDataDTO;
+import com.sgs.game.sgsr.server.dto.staticdata.IBaseStaticDataDTO;
 import com.sgs.game.sgsr.server.utils.FileUtil;
 
 /**
@@ -24,7 +24,7 @@ public class StaticDBUtil {
 	// region FIELD
 
 	/** The static data. */
-	private static HashMap<String, HashMap<String, List<BaseStaticDataDTO>>> staticData;
+	private static HashMap<String, HashMap<String, List<IBaseStaticDataDTO>>> staticData;
 
 	/** The static data config. */
 	private static HashMap<String, String> staticDataConfig;
@@ -122,7 +122,7 @@ public class StaticDBUtil {
 
 		if (!isExisted) {
 			// Clone data from previous data
-			HashMap<String, List<BaseStaticDataDTO>> previousVerionStaticData = staticData.get(previousKey);
+			HashMap<String, List<IBaseStaticDataDTO>> previousVerionStaticData = staticData.get(previousKey);
 			staticData.put(key, previousVerionStaticData);
 
 			// Download new static data depend on changed files
@@ -159,7 +159,7 @@ public class StaticDBUtil {
 	 *
 	 * @return the static data
 	 */
-	public static HashMap<String, HashMap<String, List<BaseStaticDataDTO>>> getStaticData() {
+	public static HashMap<String, HashMap<String, List<IBaseStaticDataDTO>>> getStaticData() {
 		return staticData;
 	}
 
@@ -169,7 +169,7 @@ public class StaticDBUtil {
 	 * @param staticData
 	 *            the static data
 	 */
-	public static void setStaticData(HashMap<String, HashMap<String, List<BaseStaticDataDTO>>> staticData) {
+	public static void setStaticData(HashMap<String, HashMap<String, List<IBaseStaticDataDTO>>> staticData) {
 		StaticDBUtil.staticData = staticData;
 	}
 

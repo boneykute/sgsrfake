@@ -6,5 +6,5 @@ package com.sgs.game.sgsr.server.dto;
 /**
  * The Interface BaseDTO.
  */
-public interface BaseDTO {
+public interface IBaseDTO {
 }
