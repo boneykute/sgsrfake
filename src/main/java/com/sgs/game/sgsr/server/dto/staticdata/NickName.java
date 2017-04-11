@@ -5,6 +5,8 @@ package com.sgs.game.sgsr.server.dto.staticdata;
 
 import java.util.List;
 
+import com.sgs.game.sgsr.server.dto.staticdata.subitem.Requirement;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class NickName.

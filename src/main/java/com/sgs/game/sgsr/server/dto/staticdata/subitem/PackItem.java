@@ -1,13 +1,13 @@
 /****************************************
  * SGS Revolt - Server Project
  ****************************************/
-package com.sgs.game.sgsr.server.dto.staticdata;
+package com.sgs.game.sgsr.server.dto.staticdata.subitem;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class SubItem.
  */
-public class SubItem {
+public class PackItem {
 
 	/** The id. */
 	private int id;
@@ -21,7 +21,7 @@ public class SubItem {
 	/**
 	 * Instantiates a new sub item.
 	 */
-	public SubItem() {
+	public PackItem() {
 	}
 
 	/**
@@ -34,7 +34,7 @@ public class SubItem {
 	 * @param amount
 	 *            the amount
 	 */
-	public SubItem(int id, String name, int amount) {
+	public PackItem(int id, String name, int amount) {
 		this.id = id;
 		this.name = name;
 		this.amount = amount;

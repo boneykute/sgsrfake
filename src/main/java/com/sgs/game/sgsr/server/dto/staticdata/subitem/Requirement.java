@@ -1,7 +1,7 @@
 /****************************************
  * SGS Revolt - Server Project
  ****************************************/
-package com.sgs.game.sgsr.server.dto.staticdata;
+package com.sgs.game.sgsr.server.dto.staticdata.subitem;
 
 // TODO: Auto-generated Javadoc
 /**

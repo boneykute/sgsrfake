@@ -25,6 +25,7 @@ public class StaticDBUtil {
 	// region FIELD
 
 	/** The static data. */
+	@SuppressWarnings("rawtypes")
 	private static HashMap<String, HashMap<String, List<IBaseStaticDataDTO>>> staticData;
 
 	/** The static data config. */
@@ -38,9 +39,6 @@ public class StaticDBUtil {
 
 	/** The Constant LOCAL_VERSION_FILE_PATH. */
 	private static final String LOCAL_VERSION_FILE_PATH = LOCAL_BASE_PATH + "version.csv";
-
-	/** Mapping file data parsed. */
-	private static HashMap<String, String> MAPPING_FILE_DATA = new HashMap<>();
 
 	/** The version file. */
 	private static File versionFile;
@@ -98,7 +96,7 @@ public class StaticDBUtil {
 			try {
 				FileUtils.forceMkdir(versionFolder);
 				String versionMappingFilePath = LOCAL_BASE_PATH + "/" + versionName + "/mapping.csv";
-				File mappingFile = FileUtil.download(version.get("Url"), versionMappingFilePath);
+				FileUtil.download(version.get("Url"), versionMappingFilePath);
 				Iterable<CSVRecord> mappingData = FileUtil.readCSVFile(versionMappingFilePath);
 				for (CSVRecord mappingItem : mappingData) {
 					String fileName = mappingItem.get("File");
@@ -128,6 +126,7 @@ public class StaticDBUtil {
 	 * @param previousKey
 	 *            the previous key
 	 */
+	@SuppressWarnings("rawtypes")
 	private static void processVersionRecord(CSVRecord record, String previousKey) {
 		// Check if version existed in static data (check by client id)
 		String key = record.get("Client") + "-" + record.get("Data");
@@ -151,6 +150,7 @@ public class StaticDBUtil {
 	/**
 	 * Fetch version data from file.
 	 */
+	@SuppressWarnings("unused")
 	private static void fetchVersionDataFromFile() {
 		Iterable<CSVRecord> records = FileUtil.readCSVFile(LOCAL_VERSION_FILE_PATH);
 		String previousKey = "";
@@ -172,6 +172,7 @@ public class StaticDBUtil {
 	 *
 	 * @return the static data
 	 */
+	@SuppressWarnings("rawtypes")
 	public static HashMap<String, HashMap<String, List<IBaseStaticDataDTO>>> getStaticData() {
 		return staticData;
 	}
@@ -182,6 +183,7 @@ public class StaticDBUtil {
 	 * @param staticData
 	 *            the static data
 	 */
+	@SuppressWarnings("rawtypes")
 	public static void setStaticData(HashMap<String, HashMap<String, List<IBaseStaticDataDTO>>> staticData) {
 		StaticDBUtil.staticData = staticData;
 	}

@@ -8,8 +8,19 @@ import com.smartfoxserver.v2.entities.data.ISFSObject;
 import com.smartfoxserver.v2.entities.data.SFSObject;
 import com.smartfoxserver.v2.extensions.BaseClientRequestHandler;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AddReqHandler.
+ */
 public class AddReqHandler extends BaseClientRequestHandler {
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.smartfoxserver.v2.extensions.IClientRequestHandler#
+	 * handleClientRequest(com.smartfoxserver.v2.entities.User,
+	 * com.smartfoxserver.v2.entities.data.ISFSObject)
+	 */
 	@Override
 	public void handleClientRequest(User sender, ISFSObject params) {
 		// Get the client parameters

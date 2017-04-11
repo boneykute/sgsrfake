@@ -5,6 +5,8 @@ package com.sgs.game.sgsr.server.dto.staticdata;
 
 import java.util.List;
 
+import com.sgs.game.sgsr.server.dto.staticdata.subitem.PackItem;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class Pack.
@@ -15,7 +17,7 @@ public class Pack extends BaseStaticDataDTO<Pack> {
 	private int itemCount;
 
 	/** The items. */
-	private List<SubItem> items;
+	private List<PackItem> items;
 
 	/**
 	 * Instantiates a new pack.
@@ -36,7 +38,7 @@ public class Pack extends BaseStaticDataDTO<Pack> {
 	 * @param items
 	 *            the items
 	 */
-	public Pack(int id, String name, String desciption, List<SubItem> items) {
+	public Pack(int id, String name, String desciption, List<PackItem> items) {
 		super(id, name, desciption);
 		this.items = items;
 	}
@@ -65,7 +67,7 @@ public class Pack extends BaseStaticDataDTO<Pack> {
 	 *
 	 * @return the items
 	 */
-	public List<SubItem> getItems() {
+	public List<PackItem> getItems() {
 		return items;
 	}
 
@@ -75,7 +77,7 @@ public class Pack extends BaseStaticDataDTO<Pack> {
 	 * @param items
 	 *            the new items
 	 */
-	public void setItems(List<SubItem> items) {
+	public void setItems(List<PackItem> items) {
 		this.items = items;
 	}
 
