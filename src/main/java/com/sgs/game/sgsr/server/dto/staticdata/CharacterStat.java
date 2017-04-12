@@ -5,6 +5,8 @@ package com.sgs.game.sgsr.server.dto.staticdata;
 
 import java.util.List;
 
+import com.sgs.game.sgsr.server.dto.staticdata.enumitem.ElementType;
+import com.sgs.game.sgsr.server.dto.staticdata.enumitem.RarityType;
 import com.sgs.game.sgsr.server.dto.staticdata.subitem.CharacterStatLevelData;
 
 // TODO: Auto-generated Javadoc
@@ -17,10 +19,10 @@ public class CharacterStat extends BaseStaticDataDTO<CharacterStat> {
 	private String role;
 
 	/** The rarity. */
-	private String rarity;
+	private RarityType rarity;
 
 	/** The element. */
-	private String element;
+	private ElementType element;
 
 	/** The base level. */
 	private int baseLevel;
@@ -65,7 +67,7 @@ public class CharacterStat extends BaseStaticDataDTO<CharacterStat> {
 	 * @param levels
 	 *            the levels
 	 */
-	public CharacterStat(int id, String name, String description, String role, String rarity, String element,
+	public CharacterStat(int id, String name, String description, String role, RarityType rarity, ElementType element,
 			int baseLevel, int baseStar, int totalLevel, List<CharacterStatLevelData> levels) {
 		super(id, name, description);
 		this.role = role;
@@ -101,7 +103,7 @@ public class CharacterStat extends BaseStaticDataDTO<CharacterStat> {
 	 *
 	 * @return the rarity
 	 */
-	public String getRarity() {
+	public RarityType getRarity() {
 		return rarity;
 	}
 
@@ -111,7 +113,7 @@ public class CharacterStat extends BaseStaticDataDTO<CharacterStat> {
 	 * @param rarity
 	 *            the new rarity
 	 */
-	public void setRarity(String rarity) {
+	public void setRarity(RarityType rarity) {
 		this.rarity = rarity;
 	}
 
@@ -120,7 +122,7 @@ public class CharacterStat extends BaseStaticDataDTO<CharacterStat> {
 	 *
 	 * @return the element
 	 */
-	public String getElement() {
+	public ElementType getElement() {
 		return element;
 	}
 
@@ -130,7 +132,7 @@ public class CharacterStat extends BaseStaticDataDTO<CharacterStat> {
 	 * @param element
 	 *            the new element
 	 */
-	public void setElement(String element) {
+	public void setElement(ElementType element) {
 		this.element = element;
 	}
 

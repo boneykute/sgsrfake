@@ -3,6 +3,8 @@
  ****************************************/
 package com.sgs.game.sgsr.server.dto.staticdata;
 
+import java.util.Date;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class Season.
@@ -10,10 +12,10 @@ package com.sgs.game.sgsr.server.dto.staticdata;
 public class Season extends BaseStaticDataDTO<Season> {
 
 	/** The start date. */
-	private String startDate;
+	private Date startDate;
 
 	/** The end date. */
-	private String endDate;
+	private Date endDate;
 
 	/** The duration. */
 	private long duration;
@@ -46,7 +48,7 @@ public class Season extends BaseStaticDataDTO<Season> {
 	 * @param isRepeat
 	 *            the is repeat
 	 */
-	public Season(int id, String name, String description, String startDate, String endDate, long duration,
+	public Season(int id, String name, String description, Date startDate, Date endDate, long duration,
 			boolean isRepeat) {
 		super(id, name, description);
 		this.startDate = startDate;
@@ -60,7 +62,7 @@ public class Season extends BaseStaticDataDTO<Season> {
 	 *
 	 * @return the start date
 	 */
-	public String getStartDate() {
+	public Date getStartDate() {
 		return startDate;
 	}
 
@@ -70,7 +72,7 @@ public class Season extends BaseStaticDataDTO<Season> {
 	 * @param startDate
 	 *            the new start date
 	 */
-	public void setStartDate(String startDate) {
+	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
 
@@ -79,7 +81,7 @@ public class Season extends BaseStaticDataDTO<Season> {
 	 *
 	 * @return the end date
 	 */
-	public String getEndDate() {
+	public Date getEndDate() {
 		return endDate;
 	}
 
@@ -89,7 +91,7 @@ public class Season extends BaseStaticDataDTO<Season> {
 	 * @param endDate
 	 *            the new end date
 	 */
-	public void setEndDate(String endDate) {
+	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
 

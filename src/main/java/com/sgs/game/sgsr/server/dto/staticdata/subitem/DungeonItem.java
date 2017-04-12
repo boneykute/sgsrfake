@@ -7,7 +7,7 @@ package com.sgs.game.sgsr.server.dto.staticdata.subitem;
 /**
  * The Class DungeoneonItem.
  */
-public class DungeoneonItem {
+public class DungeonItem {
 
 	/** The type. */
 	private String type;

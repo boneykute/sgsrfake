@@ -5,7 +5,7 @@ package com.sgs.game.sgsr.server.dto.staticdata;
 
 import java.util.List;
 
-import com.sgs.game.sgsr.server.dto.staticdata.subitem.DungeoneonItem;
+import com.sgs.game.sgsr.server.dto.staticdata.subitem.DungeonItem;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -26,7 +26,7 @@ public class Dungeon extends BaseStaticDataDTO<Dungeon> {
 	private int itemCount;
 
 	/** The items. */
-	private List<DungeoneonItem> items;
+	private List<DungeonItem> items;
 
 	/**
 	 * Instantiates a new dungeon.
@@ -56,7 +56,7 @@ public class Dungeon extends BaseStaticDataDTO<Dungeon> {
 	 *            the items
 	 */
 	public Dungeon(int id, String name, String description, int totalLevel, int requiredLevel, int foodConsume,
-			int itemCount, List<DungeoneonItem> items) {
+			int itemCount, List<DungeonItem> items) {
 		super(id, name, description);
 		this.totalLevel = totalLevel;
 		this.requiredLevel = requiredLevel;
@@ -146,7 +146,7 @@ public class Dungeon extends BaseStaticDataDTO<Dungeon> {
 	 *
 	 * @return the items
 	 */
-	public List<DungeoneonItem> getItems() {
+	public List<DungeonItem> getItems() {
 		return items;
 	}
 
@@ -156,7 +156,7 @@ public class Dungeon extends BaseStaticDataDTO<Dungeon> {
 	 * @param items
 	 *            the new items
 	 */
-	public void setItems(List<DungeoneonItem> items) {
+	public void setItems(List<DungeonItem> items) {
 		this.items = items;
 	}
 

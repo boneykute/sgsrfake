@@ -3,6 +3,8 @@
  ****************************************/
 package com.sgs.game.sgsr.server.dto.staticdata;
 
+import com.sgs.game.sgsr.server.dto.staticdata.enumitem.EffectType;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class SecondaryRuneEffect.
@@ -22,7 +24,7 @@ public class SecondaryRuneEffect extends BaseStaticDataDTO<SecondaryRuneEffect> 
 	private int effectCount;
 
 	/** The effect type. */
-	private String effectType;
+	private EffectType effectType;
 
 	/** The effect amount. */
 	private String effectAmount;
@@ -57,7 +59,7 @@ public class SecondaryRuneEffect extends BaseStaticDataDTO<SecondaryRuneEffect> 
 	 *            the effect amount
 	 */
 	public SecondaryRuneEffect(int id, String name, String description, String rune1, String rune2, String rune3,
-			int effectCount, String effectType, String effectAmount) {
+			int effectCount, EffectType effectType, String effectAmount) {
 		super(id, name, description);
 		this.rune1 = rune1;
 		this.rune2 = rune2;
@@ -148,7 +150,7 @@ public class SecondaryRuneEffect extends BaseStaticDataDTO<SecondaryRuneEffect> 
 	 *
 	 * @return the effect type
 	 */
-	public String getEffectType() {
+	public EffectType getEffectType() {
 		return effectType;
 	}
 
@@ -158,7 +160,7 @@ public class SecondaryRuneEffect extends BaseStaticDataDTO<SecondaryRuneEffect> 
 	 * @param effectType
 	 *            the new effect type
 	 */
-	public void setEffectType(String effectType) {
+	public void setEffectType(EffectType effectType) {
 		this.effectType = effectType;
 	}
 

@@ -5,6 +5,7 @@ package com.sgs.game.sgsr.server.dto.staticdata;
 
 import java.util.List;
 
+import com.sgs.game.sgsr.server.dto.staticdata.enumitem.ResourceType;
 import com.sgs.game.sgsr.server.dto.staticdata.subitem.BuildingLevelData;
 
 // TODO: Auto-generated Javadoc
@@ -21,7 +22,7 @@ public class Building extends BaseStaticDataDTO<Building> {
 	private boolean isResourceGenerator;
 
 	/** The resource type id. */
-	private int resourceTypeId;
+	private ResourceType resourceType;
 
 	/** The generate speed. */
 	private float generateSpeed;
@@ -60,8 +61,8 @@ public class Building extends BaseStaticDataDTO<Building> {
 	 *            the total level
 	 * @param isResourceGenerator
 	 *            the is resource generator
-	 * @param resourceTypeId
-	 *            the resource type id
+	 * @param resourceType
+	 *            the resource type
 	 * @param generateSpeed
 	 *            the generate speed
 	 * @param maximumResource
@@ -74,12 +75,12 @@ public class Building extends BaseStaticDataDTO<Building> {
 	 *            the levels
 	 */
 	public Building(int id, String name, String description, int totalLevel, boolean isResourceGenerator,
-			int resourceTypeId, float generateSpeed, int maximumResource, boolean isAttackable, int isOnPath,
+			ResourceType resourceType, float generateSpeed, int maximumResource, boolean isAttackable, int isOnPath,
 			List<BuildingLevelData> levels) {
 		super(id, name, description);
 		this.totalLevel = totalLevel;
 		this.isResourceGenerator = isResourceGenerator;
-		this.resourceTypeId = resourceTypeId;
+		this.resourceType = resourceType;
 		this.generateSpeed = generateSpeed;
 		this.maximumResource = maximumResource;
 		this.isAttackable = isAttackable;
@@ -130,18 +131,18 @@ public class Building extends BaseStaticDataDTO<Building> {
 	 *
 	 * @return the resource type id
 	 */
-	public int getResourceTypeId() {
-		return resourceTypeId;
+	public ResourceType getResourceType() {
+		return resourceType;
 	}
 
 	/**
 	 * Sets the resource type id.
 	 *
-	 * @param resourceTypeId
+	 * @param resourceType
 	 *            the new resource type id
 	 */
-	public void setResourceTypeId(int resourceTypeId) {
-		this.resourceTypeId = resourceTypeId;
+	public void setResourceTypeId(ResourceType resourceType) {
+		this.resourceType = resourceType;
 	}
 
 	/**
@@ -246,7 +247,7 @@ public class Building extends BaseStaticDataDTO<Building> {
 	 */
 	@Override
 	protected Building clone() {
-		return new Building(id, name, description, totalLevel, isResourceGenerator, resourceTypeId, generateSpeed,
+		return new Building(id, name, description, totalLevel, isResourceGenerator, resourceType, generateSpeed,
 				maximumResource, isAttackable, isOnPath, levels);
 	}
 

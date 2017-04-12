@@ -20,7 +20,7 @@ public class CharacterSkill extends BaseStaticDataDTO<CharacterSkill> {
 	private String skillType;
 
 	/** The Total skill level. */
-	private int TotalSkillLevel;
+	private int totalLevel;
 
 	/** The levels. */
 	private List<CharacterSkillLevelData> levels;
@@ -55,7 +55,7 @@ public class CharacterSkill extends BaseStaticDataDTO<CharacterSkill> {
 		super(id, name, description);
 		this.type = type;
 		this.skillType = skillType;
-		TotalSkillLevel = totalSkillLevel;
+		totalLevel = totalSkillLevel;
 		this.levels = levels;
 	}
 
@@ -103,7 +103,7 @@ public class CharacterSkill extends BaseStaticDataDTO<CharacterSkill> {
 	 * @return the total skill level
 	 */
 	public int getTotalSkillLevel() {
-		return TotalSkillLevel;
+		return totalLevel;
 	}
 
 	/**
@@ -113,7 +113,7 @@ public class CharacterSkill extends BaseStaticDataDTO<CharacterSkill> {
 	 *            the new total skill level
 	 */
 	public void setTotalSkillLevel(int totalSkillLevel) {
-		TotalSkillLevel = totalSkillLevel;
+		totalLevel = totalSkillLevel;
 	}
 
 	/**
@@ -142,6 +142,6 @@ public class CharacterSkill extends BaseStaticDataDTO<CharacterSkill> {
 	 */
 	@Override
 	protected CharacterSkill clone() {
-		return new CharacterSkill(id, name, description, type, skillType, TotalSkillLevel, levels);
+		return new CharacterSkill(id, name, description, type, skillType, totalLevel, levels);
 	}
 }

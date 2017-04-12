@@ -3,6 +3,8 @@
  ****************************************/
 package com.sgs.game.sgsr.server.dto.staticdata;
 
+import com.sgs.game.sgsr.server.dto.staticdata.enumitem.ResourceType;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class Decoration.
@@ -13,7 +15,7 @@ public class Decoration extends BaseStaticDataDTO<Decoration> {
 	private int price;
 
 	/** The resource type. */
-	private String resourceType;
+	private ResourceType resourceType;
 
 	/** The quantity. */
 	private int quantity;
@@ -46,7 +48,7 @@ public class Decoration extends BaseStaticDataDTO<Decoration> {
 	 * @param order
 	 *            the order
 	 */
-	public Decoration(int id, String name, String description, int price, String resourceType, int quantity,
+	public Decoration(int id, String name, String description, int price, ResourceType resourceType, int quantity,
 			int order) {
 		super(id, name, description);
 		this.price = price;
@@ -79,7 +81,7 @@ public class Decoration extends BaseStaticDataDTO<Decoration> {
 	 *
 	 * @return the resource type
 	 */
-	public String getResourceType() {
+	public ResourceType getResourceType() {
 		return resourceType;
 	}
 
@@ -89,7 +91,7 @@ public class Decoration extends BaseStaticDataDTO<Decoration> {
 	 * @param resourceType
 	 *            the new resource type
 	 */
-	public void setResourceType(String resourceType) {
+	public void setResourceType(ResourceType resourceType) {
 		this.resourceType = resourceType;
 	}
 

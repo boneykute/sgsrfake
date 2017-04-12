@@ -5,6 +5,8 @@ package com.sgs.game.sgsr.server.dto.staticdata;
 
 import java.util.List;
 
+import com.sgs.game.sgsr.server.dto.staticdata.enumitem.ElementType;
+import com.sgs.game.sgsr.server.dto.staticdata.enumitem.RarityType;
 import com.sgs.game.sgsr.server.dto.staticdata.subitem.PrimaryRuneLevelData;
 
 // TODO: Auto-generated Javadoc
@@ -14,10 +16,10 @@ import com.sgs.game.sgsr.server.dto.staticdata.subitem.PrimaryRuneLevelData;
 public class PrimaryRune extends BaseStaticDataDTO<PrimaryRune> {
 
 	/** The rarity. */
-	private String rarity;
+	private RarityType rarity;
 
 	/** The element. */
-	private String element;
+	private ElementType element;
 
 	/** The star number. */
 	private int starNumber;
@@ -55,7 +57,7 @@ public class PrimaryRune extends BaseStaticDataDTO<PrimaryRune> {
 	 * @param levels
 	 *            the levels
 	 */
-	public PrimaryRune(int id, String name, String description, String rarity, String element, int starNumber,
+	public PrimaryRune(int id, String name, String description, RarityType rarity, ElementType element, int starNumber,
 			int totalLevel, List<PrimaryRuneLevelData> levels) {
 		super(id, name, description);
 		this.rarity = rarity;
@@ -70,7 +72,7 @@ public class PrimaryRune extends BaseStaticDataDTO<PrimaryRune> {
 	 *
 	 * @return the rarity
 	 */
-	public String getRarity() {
+	public RarityType getRarity() {
 		return rarity;
 	}
 
@@ -80,7 +82,7 @@ public class PrimaryRune extends BaseStaticDataDTO<PrimaryRune> {
 	 * @param rarity
 	 *            the new rarity
 	 */
-	public void setRarity(String rarity) {
+	public void setRarity(RarityType rarity) {
 		this.rarity = rarity;
 	}
 
@@ -89,7 +91,7 @@ public class PrimaryRune extends BaseStaticDataDTO<PrimaryRune> {
 	 *
 	 * @return the element
 	 */
-	public String getElement() {
+	public ElementType getElement() {
 		return element;
 	}
 
@@ -99,7 +101,7 @@ public class PrimaryRune extends BaseStaticDataDTO<PrimaryRune> {
 	 * @param element
 	 *            the new element
 	 */
-	public void setElement(String element) {
+	public void setElement(ElementType element) {
 		this.element = element;
 	}
 

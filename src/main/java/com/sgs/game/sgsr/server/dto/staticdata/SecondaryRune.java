@@ -5,6 +5,8 @@ package com.sgs.game.sgsr.server.dto.staticdata;
 
 import java.util.List;
 
+import com.sgs.game.sgsr.server.dto.staticdata.enumitem.ElementType;
+import com.sgs.game.sgsr.server.dto.staticdata.enumitem.RarityType;
 import com.sgs.game.sgsr.server.dto.staticdata.subitem.SecondaryRuneLevelData;
 
 // TODO: Auto-generated Javadoc
@@ -14,10 +16,10 @@ import com.sgs.game.sgsr.server.dto.staticdata.subitem.SecondaryRuneLevelData;
 public class SecondaryRune extends BaseStaticDataDTO<SecondaryRune> {
 
 	/** The rarity. */
-	private String rarity;
+	private RarityType rarity;
 
 	/** The element. */
-	private String element;
+	private ElementType element;
 
 	/** The base stat. */
 	private String baseStat;
@@ -55,8 +57,8 @@ public class SecondaryRune extends BaseStaticDataDTO<SecondaryRune> {
 	 * @param levels
 	 *            the levels
 	 */
-	public SecondaryRune(int id, String name, String description, String rarity, String element, String baseStat,
-			int totalLevel, List<SecondaryRuneLevelData> levels) {
+	public SecondaryRune(int id, String name, String description, RarityType rarity, ElementType element,
+			String baseStat, int totalLevel, List<SecondaryRuneLevelData> levels) {
 		super(id, name, description);
 		this.rarity = rarity;
 		this.element = element;
@@ -70,7 +72,7 @@ public class SecondaryRune extends BaseStaticDataDTO<SecondaryRune> {
 	 *
 	 * @return the rarity
 	 */
-	public String getRarity() {
+	public RarityType getRarity() {
 		return rarity;
 	}
 
@@ -80,7 +82,7 @@ public class SecondaryRune extends BaseStaticDataDTO<SecondaryRune> {
 	 * @param rarity
 	 *            the new rarity
 	 */
-	public void setRarity(String rarity) {
+	public void setRarity(RarityType rarity) {
 		this.rarity = rarity;
 	}
 
@@ -89,7 +91,7 @@ public class SecondaryRune extends BaseStaticDataDTO<SecondaryRune> {
 	 *
 	 * @return the element
 	 */
-	public String getElement() {
+	public ElementType getElement() {
 		return element;
 	}
 
@@ -99,7 +101,7 @@ public class SecondaryRune extends BaseStaticDataDTO<SecondaryRune> {
 	 * @param element
 	 *            the new element
 	 */
-	public void setElement(String element) {
+	public void setElement(ElementType element) {
 		this.element = element;
 	}
 

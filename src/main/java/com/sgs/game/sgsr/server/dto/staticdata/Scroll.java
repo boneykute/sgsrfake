@@ -5,6 +5,9 @@ package com.sgs.game.sgsr.server.dto.staticdata;
 
 import java.util.List;
 
+import com.sgs.game.sgsr.server.dto.staticdata.enumitem.ElementType;
+import com.sgs.game.sgsr.server.dto.staticdata.enumitem.RarityType;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class Scroll.
@@ -12,13 +15,13 @@ import java.util.List;
 public class Scroll extends BaseStaticDataDTO<Scroll> {
 
 	/** The rarity. */
-	private String rarity;
+	private RarityType rarity;
 
 	/** The element count. */
 	private int elementCount;
 
 	/** The elements. */
-	private List<Element> elements;
+	private List<ElementType> elements;
 
 	/** The common percent. */
 	private float commonPercent;
@@ -63,8 +66,9 @@ public class Scroll extends BaseStaticDataDTO<Scroll> {
 	 * @param legendaryPercent
 	 *            the legendary percent
 	 */
-	public Scroll(int id, String name, String description, String rarity, int elementCount, List<Element> elements,
-			float commonPercent, float rarePercent, float epicPercent, float legendaryPercent) {
+	public Scroll(int id, String name, String description, RarityType rarity, int elementCount,
+			List<ElementType> elements, float commonPercent, float rarePercent, float epicPercent,
+			float legendaryPercent) {
 		super(id, name, description);
 		this.rarity = rarity;
 		this.elementCount = elementCount;
@@ -80,7 +84,7 @@ public class Scroll extends BaseStaticDataDTO<Scroll> {
 	 *
 	 * @return the rarity
 	 */
-	public String getRarity() {
+	public RarityType getRarity() {
 		return rarity;
 	}
 
@@ -90,7 +94,7 @@ public class Scroll extends BaseStaticDataDTO<Scroll> {
 	 * @param rarity
 	 *            the new rarity
 	 */
-	public void setRarity(String rarity) {
+	public void setRarity(RarityType rarity) {
 		this.rarity = rarity;
 	}
 
@@ -118,7 +122,7 @@ public class Scroll extends BaseStaticDataDTO<Scroll> {
 	 *
 	 * @return the elements
 	 */
-	public List<Element> getElements() {
+	public List<ElementType> getElements() {
 		return elements;
 	}
 
@@ -128,7 +132,7 @@ public class Scroll extends BaseStaticDataDTO<Scroll> {
 	 * @param elements
 	 *            the new elements
 	 */
-	public void setElements(List<Element> elements) {
+	public void setElements(List<ElementType> elements) {
 		this.elements = elements;
 	}
 

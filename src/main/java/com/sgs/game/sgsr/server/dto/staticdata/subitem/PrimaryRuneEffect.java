@@ -3,6 +3,10 @@
  ****************************************/
 package com.sgs.game.sgsr.server.dto.staticdata.subitem;
 
+import com.sgs.game.sgsr.server.dto.staticdata.enumitem.EffectType;
+import com.sgs.game.sgsr.server.dto.staticdata.enumitem.TargetType;
+import com.sgs.game.sgsr.server.dto.staticdata.enumitem.TriggerType;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class PrimaryRuneEffect.
@@ -10,16 +14,16 @@ package com.sgs.game.sgsr.server.dto.staticdata.subitem;
 public class PrimaryRuneEffect {
 
 	/** The effect bonus type. */
-	private String effectBonusType;
+	private EffectType effectBonusType;
 
 	/** The effect bonus trigger. */
-	private String effectBonusTrigger;
+	private TriggerType effectBonusTrigger;
 
 	/** The trigger percent. */
 	private float triggerPercent;
 
 	/** The effect bonus target. */
-	private String effectBonusTarget;
+	private TargetType effectBonusTarget;
 
 	/** The duration. */
 	private float duration;
@@ -50,8 +54,8 @@ public class PrimaryRuneEffect {
 	 * @param cooldown
 	 *            the cooldown
 	 */
-	public PrimaryRuneEffect(String effectBonusType, String effectBonusTrigger, float triggerPercent,
-			String effectBonusTarget, float duration, float cooldown) {
+	public PrimaryRuneEffect(EffectType effectBonusType, TriggerType effectBonusTrigger, float triggerPercent,
+			TargetType effectBonusTarget, float duration, float cooldown) {
 		this.effectBonusType = effectBonusType;
 		this.effectBonusTrigger = effectBonusTrigger;
 		this.triggerPercent = triggerPercent;
@@ -65,7 +69,7 @@ public class PrimaryRuneEffect {
 	 *
 	 * @return the effect bonus type
 	 */
-	public String getEffectBonusType() {
+	public EffectType getEffectBonusType() {
 		return effectBonusType;
 	}
 
@@ -75,7 +79,7 @@ public class PrimaryRuneEffect {
 	 * @param effectBonusType
 	 *            the new effect bonus type
 	 */
-	public void setEffectBonusType(String effectBonusType) {
+	public void setEffectBonusType(EffectType effectBonusType) {
 		this.effectBonusType = effectBonusType;
 	}
 
@@ -84,7 +88,7 @@ public class PrimaryRuneEffect {
 	 *
 	 * @return the effect bonus trigger
 	 */
-	public String getEffectBonusTrigger() {
+	public TriggerType getEffectBonusTrigger() {
 		return effectBonusTrigger;
 	}
 
@@ -94,7 +98,7 @@ public class PrimaryRuneEffect {
 	 * @param effectBonusTrigger
 	 *            the new effect bonus trigger
 	 */
-	public void setEffectBonusTrigger(String effectBonusTrigger) {
+	public void setEffectBonusTrigger(TriggerType effectBonusTrigger) {
 		this.effectBonusTrigger = effectBonusTrigger;
 	}
 
@@ -122,7 +126,7 @@ public class PrimaryRuneEffect {
 	 *
 	 * @return the effect bonus target
 	 */
-	public String getEffectBonusTarget() {
+	public TargetType getEffectBonusTarget() {
 		return effectBonusTarget;
 	}
 
@@ -132,7 +136,7 @@ public class PrimaryRuneEffect {
 	 * @param effectBonusTarget
 	 *            the new effect bonus target
 	 */
-	public void setEffectBonusTarget(String effectBonusTarget) {
+	public void setEffectBonusTarget(TargetType effectBonusTarget) {
 		this.effectBonusTarget = effectBonusTarget;
 	}
 

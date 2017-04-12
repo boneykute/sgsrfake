@@ -37,7 +37,6 @@ public class PrimaryRuneLevelData {
 	 *            the effects
 	 */
 	public PrimaryRuneLevelData(int id, int totalEffectBonus, List<PrimaryRuneEffect> effects) {
-		super();
 		this.id = id;
 		this.totalEffectBonus = totalEffectBonus;
 		this.effects = effects;

@@ -3,6 +3,8 @@
  ****************************************/
 package com.sgs.game.sgsr.server.dto.staticdata.subitem;
 
+import com.sgs.game.sgsr.server.dto.staticdata.enumitem.TargetType;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class SkillEffect.
@@ -13,7 +15,7 @@ public class SkillEffect {
 	private String stat;
 
 	/** The target. */
-	private String target;
+	private TargetType target;
 
 	/** The amount. */
 	private float amount;
@@ -44,7 +46,7 @@ public class SkillEffect {
 	 * @param operator
 	 *            the operator
 	 */
-	public SkillEffect(String stat, String target, float amount, float duration, String operator) {
+	public SkillEffect(String stat, TargetType target, float amount, float duration, String operator) {
 		this.stat = stat;
 		this.target = target;
 		this.amount = amount;
@@ -76,7 +78,7 @@ public class SkillEffect {
 	 *
 	 * @return the target
 	 */
-	public String getTarget() {
+	public TargetType getTarget() {
 		return target;
 	}
 
@@ -86,7 +88,7 @@ public class SkillEffect {
 	 * @param target
 	 *            the new target
 	 */
-	public void setTarget(String target) {
+	public void setTarget(TargetType target) {
 		this.target = target;
 	}
 

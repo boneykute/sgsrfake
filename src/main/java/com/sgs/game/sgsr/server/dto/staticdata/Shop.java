@@ -3,6 +3,8 @@
  ****************************************/
 package com.sgs.game.sgsr.server.dto.staticdata;
 
+import com.sgs.game.sgsr.server.dto.staticdata.enumitem.ResourceType;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class Shop.
@@ -19,7 +21,7 @@ public class Shop extends BaseStaticDataDTO<Shop> {
 	private int price;
 
 	/** The resource type. */
-	private String resourceType;
+	private ResourceType resourceType;
 
 	/** The quantity. */
 	private int quantity;
@@ -71,7 +73,7 @@ public class Shop extends BaseStaticDataDTO<Shop> {
 	 * @param cooldownTime
 	 *            the cooldown time
 	 */
-	public Shop(int id, String name, String description, String type, int itemId, int price, String resourceType,
+	public Shop(int id, String name, String description, String type, int itemId, int price, ResourceType resourceType,
 			int quantity, int order, String category, String tab, int cooldownTime) {
 		super(id, name, description);
 		this.type = type;
@@ -147,7 +149,7 @@ public class Shop extends BaseStaticDataDTO<Shop> {
 	 *
 	 * @return the resource type
 	 */
-	public String getResourceType() {
+	public ResourceType getResourceType() {
 		return resourceType;
 	}
 
@@ -157,7 +159,7 @@ public class Shop extends BaseStaticDataDTO<Shop> {
 	 * @param resourceType
 	 *            the new resource type
 	 */
-	public void setResourceType(String resourceType) {
+	public void setResourceType(ResourceType resourceType) {
 		this.resourceType = resourceType;
 	}
 

@@ -5,6 +5,7 @@ package com.sgs.game.sgsr.server.dto.staticdata;
 
 import java.util.List;
 
+import com.sgs.game.sgsr.server.dto.staticdata.enumitem.RarityType;
 import com.sgs.game.sgsr.server.dto.staticdata.subitem.ChestItem;
 
 // TODO: Auto-generated Javadoc
@@ -14,7 +15,7 @@ import com.sgs.game.sgsr.server.dto.staticdata.subitem.ChestItem;
 public class Chest extends BaseStaticDataDTO<Chest> {
 
 	/** The chest type. */
-	private String chestType;
+	private RarityType rarity;
 
 	/** The league id. */
 	private int leagueId;
@@ -44,8 +45,8 @@ public class Chest extends BaseStaticDataDTO<Chest> {
 	 *            the name
 	 * @param description
 	 *            the description
-	 * @param chestType
-	 *            the chest type
+	 * @param rarity
+	 *            the rarity
 	 * @param leagueId
 	 *            the league id
 	 * @param itemCount
@@ -55,10 +56,10 @@ public class Chest extends BaseStaticDataDTO<Chest> {
 	 * @param items
 	 *            the items
 	 */
-	public Chest(int id, String name, String description, String chestType, int leagueId, int itemCount, int unlockTime,
-			List<ChestItem> items) {
+	public Chest(int id, String name, String description, RarityType rarity, int leagueId, int itemCount,
+			int unlockTime, List<ChestItem> items) {
 		super(id, name, description);
-		this.chestType = chestType;
+		this.rarity = rarity;
 		this.leagueId = leagueId;
 		this.itemCount = itemCount;
 		this.unlockTime = unlockTime;
@@ -66,22 +67,22 @@ public class Chest extends BaseStaticDataDTO<Chest> {
 	}
 
 	/**
-	 * Gets the chest type.
+	 * Gets the rarity.
 	 *
-	 * @return the chest type
+	 * @return the rarity
 	 */
-	public String getChestType() {
-		return chestType;
+	public RarityType getRarity() {
+		return rarity;
 	}
 
 	/**
-	 * Sets the chest type.
+	 * Sets the rarity.
 	 *
-	 * @param chestType
-	 *            the new chest type
+	 * @param rarity
+	 *            the new rarity
 	 */
-	public void setChestType(String chestType) {
-		this.chestType = chestType;
+	public void setRarity(RarityType rarity) {
+		this.rarity = rarity;
 	}
 
 	/**
@@ -167,7 +168,7 @@ public class Chest extends BaseStaticDataDTO<Chest> {
 	 */
 	@Override
 	protected Chest clone() {
-		return new Chest(id, name, description, chestType, leagueId, itemCount, unlockTime, items);
+		return new Chest(id, name, description, rarity, leagueId, itemCount, unlockTime, items);
 	}
 
 }

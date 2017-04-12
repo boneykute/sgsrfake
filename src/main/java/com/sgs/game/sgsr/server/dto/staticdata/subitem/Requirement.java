@@ -3,62 +3,16 @@
  ****************************************/
 package com.sgs.game.sgsr.server.dto.staticdata.subitem;
 
+import com.sgs.game.sgsr.server.dto.staticdata.enumitem.RequirementType;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class Requirement.
  */
 public class Requirement {
 
-	/**
-	 * The Enum RequirementType.
-	 */
-	enum RequirementType {
-
-		/** The Kills. */
-		TotalKillsCount("TotalKillsCount"),
-
-		/** The login count. */
-		TotalLoginCount("TotalLoginCount"),
-
-		/** The trophies count. */
-		TotalTrophiesCount("TotalTrophiesCount");
-
-		/** The name. */
-		private final String name;
-
-		/**
-		 * Instantiates a new requirement type.
-		 *
-		 * @param str
-		 *            the str
-		 */
-		private RequirementType(String str) {
-			name = str;
-		}
-
-		/**
-		 * Equals name.
-		 *
-		 * @param otherName
-		 *            the other name
-		 * @return true, if successful
-		 */
-		public boolean equalsName(final String otherName) {
-			return name.equals(otherName);
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see java.lang.Enum#toString()
-		 */
-		public String toString() {
-			return this.name;
-		}
-	}
-
 	/** The items. */
-	private int items;
+	private int amount;
 
 	/** The type. */
 	private RequirementType type;
@@ -66,33 +20,33 @@ public class Requirement {
 	/**
 	 * Instantiates a new requirement.
 	 *
-	 * @param items
-	 *            the items
+	 * @param amount
+	 *            the amount
 	 * @param type
 	 *            the type
 	 */
-	public Requirement(int items, RequirementType type) {
-		this.setItems(items);
-		this.setType(type);
+	public Requirement(int amount, RequirementType type) {
+		this.amount = amount;
+		this.type = type;
 	}
 
 	/**
-	 * Gets the items.
+	 * Gets the amount.
 	 *
-	 * @return the items
+	 * @return the amount
 	 */
-	public int getItems() {
-		return items;
+	public int getAmount() {
+		return amount;
 	}
 
 	/**
-	 * Sets the items.
+	 * Sets the amount.
 	 *
-	 * @param items
-	 *            the new items
+	 * @param amount
+	 *            the new amount
 	 */
-	public void setItems(int items) {
-		this.items = items;
+	public void setAmount(int amount) {
+		this.amount = amount;
 	}
 
 	/**
