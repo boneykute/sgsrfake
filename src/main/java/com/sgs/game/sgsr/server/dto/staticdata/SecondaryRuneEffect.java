@@ -3,7 +3,7 @@
  ****************************************/
 package com.sgs.game.sgsr.server.dto.staticdata;
 
-import com.sgs.game.sgsr.server.dto.staticdata.enumitem.EffectType;
+import com.sgs.game.sgsr.server.dto.enumitem.EffectType;
 
 // TODO: Auto-generated Javadoc
 /**

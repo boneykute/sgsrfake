@@ -1,22 +1,20 @@
 /****************************************
  * SGS Revolt - Server Project
  ****************************************/
-package com.sgs.game.sgsr.server.dto.staticdata.enumitem;
+package com.sgs.game.sgsr.server.dto.enumitem;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Enum FactionType.
+ * The Enum RuneType.
  */
-public enum FactionType {
+public enum RuneType {
 
 	/** The None. */
 	None(0, "None"),
-	/** The Faction 1. */
-	Faction1(1, "Faction1"),
-	/** The Faction 2. */
-	Faction2(2, "Faction2"),
-	/** The Faction 3. */
-	Faction3(3, "Faction3");
+	/** The Primary. */
+	Primary(1, "Primary"),
+	/** The Secondary. */
+	Secondary(2, "Secondary");
 
 	/** The id. */
 	private int id;
@@ -25,14 +23,14 @@ public enum FactionType {
 	private String name;
 
 	/**
-	 * Instantiates a new faction type.
+	 * Instantiates a new rune type.
 	 *
 	 * @param id
 	 *            the id
 	 * @param name
 	 *            the name
 	 */
-	private FactionType(int id, String name) {
+	private RuneType(int id, String name) {
 		this.id = id;
 		this.name = name;
 	}
@@ -86,12 +84,12 @@ public enum FactionType {
 	 *            the name
 	 * @return the enum from name
 	 */
-	public FactionType getEnumFromName(String name) {
-		FactionType type;
+	public RuneType getEnumFromName(String name) {
+		RuneType type;
 		try {
 			type = valueOf(name);
 		} catch (Exception e) {
-			return FactionType.None;
+			return RuneType.None;
 		}
 		return type;
 	}

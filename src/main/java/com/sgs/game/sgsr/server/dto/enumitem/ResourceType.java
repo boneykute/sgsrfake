@@ -1,20 +1,32 @@
 /****************************************
  * SGS Revolt - Server Project
  ****************************************/
-package com.sgs.game.sgsr.server.dto.staticdata.enumitem;
+package com.sgs.game.sgsr.server.dto.enumitem;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Enum RuneType.
+ * The Enum ResourceType.
  */
-public enum RuneType {
+public enum ResourceType {
 
 	/** The None. */
 	None(0, "None"),
-	/** The Primary. */
-	Primary(1, "Primary"),
-	/** The Secondary. */
-	Secondary(2, "Secondary");
+	/** The Gold. */
+	Gold(1, "Gold"),
+	/** The Gem. */
+	Gem(2, "Gem"),
+	/** The Food. */
+	Food(3, "Food"),
+	/** The Fire crystal. */
+	FireCrystal(4, "FireCrystal"),
+	/** The Water crystal. */
+	WaterCrystal(5, "WaterCrystal"),
+	/** The Earth crystal. */
+	EarthCrystal(6, "EarthCrystal"),
+	/** The Light crystal. */
+	LightCrystal(7, "LightCrystal"),
+	/** The Dark crystal. */
+	DarkCrystal(8, "DarkCrystal");
 
 	/** The id. */
 	private int id;
@@ -23,14 +35,14 @@ public enum RuneType {
 	private String name;
 
 	/**
-	 * Instantiates a new rune type.
+	 * Instantiates a new resource type.
 	 *
 	 * @param id
 	 *            the id
 	 * @param name
 	 *            the name
 	 */
-	private RuneType(int id, String name) {
+	private ResourceType(int id, String name) {
 		this.id = id;
 		this.name = name;
 	}
@@ -84,12 +96,12 @@ public enum RuneType {
 	 *            the name
 	 * @return the enum from name
 	 */
-	public RuneType getEnumFromName(String name) {
-		RuneType type;
+	public ResourceType getEnumFromName(String name) {
+		ResourceType type;
 		try {
 			type = valueOf(name);
 		} catch (Exception e) {
-			return RuneType.None;
+			return ResourceType.None;
 		}
 		return type;
 	}

@@ -3,7 +3,7 @@
  ****************************************/
 package com.sgs.game.sgsr.server.dto.staticdata.subitem;
 
-import com.sgs.game.sgsr.server.dto.staticdata.enumitem.TargetType;
+import com.sgs.game.sgsr.server.dto.enumitem.TargetType;
 
 // TODO: Auto-generated Javadoc
 /**

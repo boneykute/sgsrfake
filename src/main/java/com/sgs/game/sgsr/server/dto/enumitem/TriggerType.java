@@ -1,37 +1,33 @@
 /****************************************
  * SGS Revolt - Server Project
  ****************************************/
-package com.sgs.game.sgsr.server.dto.staticdata.enumitem;
+package com.sgs.game.sgsr.server.dto.enumitem;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Enum EffectType.
+ * The Enum TriggerType.
  */
-public enum EffectType {
+public enum TriggerType {
 
 	/** The None. */
 	None("None"),
-	/** The ATK damage flat. */
-	ATKDamageFlat("ATKDamageFlat"),
-	/** The ATK damage percent. */
-	ATKDamagePercent("ATKDamagePercent"),
-	/** The ATK speed flat. */
-	ATKSpeedFlat("ATKSpeedFlat"),
-	/** The ATK speed percent. */
-	ATKSpeedPercent("ATKSpeedPercent"),
-	/** The Stun. */
-	Stun("Stun");
+	/** The On kill. */
+	OnKill("OnKill"),
+	/** The On attack. */
+	OnAttack("OnAttack"),
+	/** The On death. */
+	OnDeath("OnDeath");
 
 	/** The name. */
 	private String name;
 
 	/**
-	 * Instantiates a new effect type.
+	 * Instantiates a new trigger type.
 	 *
 	 * @param name
 	 *            the name
 	 */
-	private EffectType(String name) {
+	private TriggerType(String name) {
 		this.name = name;
 	}
 
@@ -62,12 +58,12 @@ public enum EffectType {
 	 *            the name
 	 * @return the enum from name
 	 */
-	public EffectType getEnumFromName(String name) {
-		EffectType type;
+	public TriggerType getEnumFromName(String name) {
+		TriggerType type;
 		try {
 			type = valueOf(name);
 		} catch (Exception e) {
-			return EffectType.None;
+			return TriggerType.None;
 		}
 		return type;
 	}

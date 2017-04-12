@@ -5,7 +5,7 @@ package com.sgs.game.sgsr.server.dto.staticdata;
 
 import java.util.List;
 
-import com.sgs.game.sgsr.server.dto.staticdata.enumitem.ResourceType;
+import com.sgs.game.sgsr.server.dto.enumitem.ResourceType;
 import com.sgs.game.sgsr.server.dto.staticdata.subitem.BuildingLevelData;
 
 // TODO: Auto-generated Javadoc

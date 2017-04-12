@@ -5,7 +5,7 @@ package com.sgs.game.sgsr.server.dto.staticdata;
 
 import java.util.List;
 
-import com.sgs.game.sgsr.server.dto.staticdata.enumitem.RarityType;
+import com.sgs.game.sgsr.server.dto.enumitem.RarityType;
 import com.sgs.game.sgsr.server.dto.staticdata.subitem.ChestItem;
 
 // TODO: Auto-generated Javadoc

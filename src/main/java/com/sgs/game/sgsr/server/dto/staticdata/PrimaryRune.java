@@ -5,8 +5,8 @@ package com.sgs.game.sgsr.server.dto.staticdata;
 
 import java.util.List;
 
-import com.sgs.game.sgsr.server.dto.staticdata.enumitem.ElementType;
-import com.sgs.game.sgsr.server.dto.staticdata.enumitem.RarityType;
+import com.sgs.game.sgsr.server.dto.enumitem.ElementType;
+import com.sgs.game.sgsr.server.dto.enumitem.RarityType;
 import com.sgs.game.sgsr.server.dto.staticdata.subitem.PrimaryRuneLevelData;
 
 // TODO: Auto-generated Javadoc
