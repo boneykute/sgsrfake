@@ -61,7 +61,7 @@ public class PlayerLevel extends BaseStaticDataDTO<PlayerLevel> {
 	 * @see com.sgs.game.sgsr.server.dto.staticdata.BaseStaticDataDTO#clone()
 	 */
 	@Override
-	protected PlayerLevel clone() {
+	public PlayerLevel clone() {
 		return new PlayerLevel(id, name, description, requiredEXP);
 	}
 

@@ -11,5 +11,6 @@ import com.sgs.game.sgsr.server.dto.IBaseDTO;
  * @param <T>
  *            the generic type
  */
-public interface IBaseStaticDataDTO<T> extends IBaseDTO {
+public interface IBaseStaticDataDTO<T extends BaseStaticDataDTO<T>> extends IBaseDTO {
+	public abstract T clone();
 }

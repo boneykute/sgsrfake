@@ -26,7 +26,7 @@ public class StaticDBUtil {
 
 	/** The static data. */
 	@SuppressWarnings("rawtypes")
-	private static HashMap<String, HashMap<String, List<IBaseStaticDataDTO>>> staticData;
+	private static HashMap<String, HashMap<String, HashMap<Integer, IBaseStaticDataDTO>>> staticData;
 
 	/** The static data config. */
 	private static HashMap<String, String> staticDataConfig;
@@ -134,7 +134,8 @@ public class StaticDBUtil {
 
 		if (!isExisted) {
 			// Clone data from previous data
-			HashMap<String, List<IBaseStaticDataDTO>> previousVerionStaticData = staticData.get(previousKey);
+			HashMap<String, HashMap<Integer, IBaseStaticDataDTO>> previousVerionStaticData = staticData
+					.get(previousKey);
 			staticData.put(key, previousVerionStaticData);
 
 			// Download new static data depend on changed files
@@ -173,7 +174,7 @@ public class StaticDBUtil {
 	 * @return the static data
 	 */
 	@SuppressWarnings("rawtypes")
-	public static HashMap<String, HashMap<String, List<IBaseStaticDataDTO>>> getStaticData() {
+	public static HashMap<String, HashMap<String, HashMap<Integer, IBaseStaticDataDTO>>> getStaticData() {
 		return staticData;
 	}
 
@@ -184,7 +185,8 @@ public class StaticDBUtil {
 	 *            the static data
 	 */
 	@SuppressWarnings("rawtypes")
-	public static void setStaticData(HashMap<String, HashMap<String, List<IBaseStaticDataDTO>>> staticData) {
+	public static void setStaticData(
+			HashMap<String, HashMap<String, HashMap<Integer, IBaseStaticDataDTO>>> staticData) {
 		StaticDBUtil.staticData = staticData;
 	}
 

@@ -168,7 +168,7 @@ public class SecondaryRune extends BaseStaticDataDTO<SecondaryRune> {
 	 * @see com.sgs.game.sgsr.server.dto.staticdata.BaseStaticDataDTO#clone()
 	 */
 	@Override
-	protected SecondaryRune clone() {
+	public SecondaryRune clone() {
 		return new SecondaryRune(id, name, description, rarity, element, baseStat, totalLevel, levels);
 	}
 

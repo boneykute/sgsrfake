@@ -139,7 +139,7 @@ public class Season extends BaseStaticDataDTO<Season> {
 	 * @see com.sgs.game.sgsr.server.dto.staticdata.BaseStaticDataDTO#clone()
 	 */
 	@Override
-	protected Season clone() {
+	public Season clone() {
 		return new Season(id, name, description, startDate, endDate, duration, isRepeat);
 	}
 

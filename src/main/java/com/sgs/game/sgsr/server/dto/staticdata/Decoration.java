@@ -139,7 +139,7 @@ public class Decoration extends BaseStaticDataDTO<Decoration> {
 	 * @see com.sgs.game.sgsr.server.dto.staticdata.BaseStaticDataDTO#clone()
 	 */
 	@Override
-	protected Decoration clone() {
+	public Decoration clone() {
 		return new Decoration(id, name, description, price, resourceType, quantity, order);
 	}
 

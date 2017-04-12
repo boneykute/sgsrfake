@@ -114,7 +114,7 @@ public class League extends BaseStaticDataDTO<League> {
 	 * @see com.sgs.game.sgsr.server.dto.staticdata.BaseStaticDataDTO#clone()
 	 */
 	@Override
-	protected League clone() {
+	public League clone() {
 		return new League(id, name, description, requiredTrophies, demotionAt, characterUnlock);
 	}
 

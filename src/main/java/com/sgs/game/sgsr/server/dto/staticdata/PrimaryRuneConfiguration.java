@@ -141,7 +141,7 @@ public class PrimaryRuneConfiguration extends BaseStaticDataDTO<PrimaryRuneConfi
 	 * @see com.sgs.game.sgsr.server.dto.staticdata.BaseStaticDataDTO#clone()
 	 */
 	@Override
-	protected PrimaryRuneConfiguration clone() {
+	public PrimaryRuneConfiguration clone() {
 		return new PrimaryRuneConfiguration(id, name, description, runeId, star, totalLevel, levels);
 	}
 

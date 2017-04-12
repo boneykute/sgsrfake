@@ -166,9 +166,8 @@ public class Dungeon extends BaseStaticDataDTO<Dungeon> {
 	 * @see com.sgs.game.sgsr.server.dto.staticdata.BaseStaticDataDTO#clone()
 	 */
 	@Override
-	protected Dungeon clone() {
-		// TODO Auto-generated method stub
-		return null;
+	public Dungeon clone() {
+		return new Dungeon(id, name, description, totalLevel, requiredLevel, foodConsume, itemCount, items);
 	}
 
 }

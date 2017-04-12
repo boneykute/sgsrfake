@@ -36,7 +36,7 @@ public class GlobalConfig extends BaseStaticDataDTO<GlobalConfig> {
 	 * @see com.sgs.game.sgsr.server.dto.staticdata.BaseStaticDataDTO#clone()
 	 */
 	@Override
-	protected GlobalConfig clone() {
+	public GlobalConfig clone() {
 		return new GlobalConfig(id, name, description);
 	}
 }

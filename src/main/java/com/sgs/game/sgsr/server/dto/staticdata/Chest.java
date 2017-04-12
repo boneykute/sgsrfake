@@ -167,7 +167,7 @@ public class Chest extends BaseStaticDataDTO<Chest> {
 	 * @see com.sgs.game.sgsr.server.dto.staticdata.BaseStaticDataDTO#clone()
 	 */
 	@Override
-	protected Chest clone() {
+	public Chest clone() {
 		return new Chest(id, name, description, rarity, leagueId, itemCount, unlockTime, items);
 	}
 

@@ -218,7 +218,7 @@ public class Scroll extends BaseStaticDataDTO<Scroll> {
 	 * @see com.sgs.game.sgsr.server.dto.staticdata.BaseStaticDataDTO#clone()
 	 */
 	@Override
-	protected Scroll clone() {
+	public Scroll clone() {
 		return new Scroll(id, name, description, rarity, elementCount, elements, commonPercent, rarePercent,
 				epicPercent, legendaryPercent);
 	}

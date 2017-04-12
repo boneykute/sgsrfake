@@ -264,7 +264,7 @@ public class Shop extends BaseStaticDataDTO<Shop> {
 	 * @see com.sgs.game.sgsr.server.dto.staticdata.BaseStaticDataDTO#clone()
 	 */
 	@Override
-	protected Shop clone() {
+	public Shop clone() {
 		return new Shop(id, category, category, type, itemId, price, resourceType, quantity, order, category, tab,
 				cooldownTime);
 	}

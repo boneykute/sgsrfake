@@ -90,7 +90,7 @@ public class NickName extends BaseStaticDataDTO<NickName> {
 	 * @see com.sgs.game.sgsr.server.dto.staticdata.BaseStaticDataDTO#clone()
 	 */
 	@Override
-	protected NickName clone() {
+	public NickName clone() {
 		// TODO Auto-generated method stub
 		return null;
 	}

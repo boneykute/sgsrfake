@@ -87,7 +87,7 @@ public class Pack extends BaseStaticDataDTO<Pack> {
 	 * @see com.sgs.game.sgsr.server.dto.staticdata.BaseStaticDataDTO#clone()
 	 */
 	@Override
-	protected Pack clone() {
+	public Pack clone() {
 		return new Pack(id, name, description, items);
 	}
 }

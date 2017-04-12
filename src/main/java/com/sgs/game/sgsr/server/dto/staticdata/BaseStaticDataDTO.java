@@ -10,7 +10,7 @@ package com.sgs.game.sgsr.server.dto.staticdata;
  * @param <T>
  *            the generic type
  */
-public abstract class BaseStaticDataDTO<T> implements IBaseStaticDataDTO<T> {
+public class BaseStaticDataDTO<T extends BaseStaticDataDTO<T>> implements IBaseStaticDataDTO<T> {
 
 	/** The id. */
 	protected int id;
@@ -42,13 +42,6 @@ public abstract class BaseStaticDataDTO<T> implements IBaseStaticDataDTO<T> {
 		this.name = name;
 		this.description = description;
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#clone()
-	 */
-	protected abstract T clone();
 
 	/**
 	 * Gets the id.
@@ -105,5 +98,11 @@ public abstract class BaseStaticDataDTO<T> implements IBaseStaticDataDTO<T> {
 	 */
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public T clone() {
+		return ((T) new BaseStaticDataDTO<T>(id, name, description));
 	}
 }

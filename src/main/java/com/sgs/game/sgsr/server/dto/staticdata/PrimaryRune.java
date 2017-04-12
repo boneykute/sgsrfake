@@ -168,7 +168,7 @@ public class PrimaryRune extends BaseStaticDataDTO<PrimaryRune> {
 	 * @see com.sgs.game.sgsr.server.dto.staticdata.BaseStaticDataDTO#clone()
 	 */
 	@Override
-	protected PrimaryRune clone() {
+	public PrimaryRune clone() {
 		return new PrimaryRune(id, name, description, rarity, element, starNumber, totalLevel, levels);
 	}
 

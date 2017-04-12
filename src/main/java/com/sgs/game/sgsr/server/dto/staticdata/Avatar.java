@@ -90,7 +90,7 @@ public class Avatar extends BaseStaticDataDTO<Avatar> {
 	 * @see com.sgs.game.sgsr.server.dto.staticdata.BaseStaticDataDTO#clone()
 	 */
 	@Override
-	protected Avatar clone() {
+	public Avatar clone() {
 		return new Avatar(id, name, description, requirementCount, requirements);
 	}
 }

@@ -86,7 +86,7 @@ public class DailyLoginReward extends BaseStaticDataDTO<DailyLoginReward> {
 	 * @see com.sgs.game.sgsr.server.dto.staticdata.BaseStaticDataDTO#clone()
 	 */
 	@Override
-	protected DailyLoginReward clone() {
+	public DailyLoginReward clone() {
 		return new DailyLoginReward(id, name, description, month, packId);
 	}
 }

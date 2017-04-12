@@ -141,7 +141,7 @@ public class CharacterSkill extends BaseStaticDataDTO<CharacterSkill> {
 	 * @see com.sgs.game.sgsr.server.dto.staticdata.BaseStaticDataDTO#clone()
 	 */
 	@Override
-	protected CharacterSkill clone() {
+	public CharacterSkill clone() {
 		return new CharacterSkill(id, name, description, type, skillType, totalLevel, levels);
 	}
 }

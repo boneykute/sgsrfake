@@ -189,7 +189,7 @@ public class SecondaryRuneEffect extends BaseStaticDataDTO<SecondaryRuneEffect> 
 	 * @see com.sgs.game.sgsr.server.dto.staticdata.BaseStaticDataDTO#clone()
 	 */
 	@Override
-	protected SecondaryRuneEffect clone() {
+	public SecondaryRuneEffect clone() {
 		return new SecondaryRuneEffect(id, name, description, rune1, rune2, rune3, effectCount, effectType,
 				effectAmount);
 	}

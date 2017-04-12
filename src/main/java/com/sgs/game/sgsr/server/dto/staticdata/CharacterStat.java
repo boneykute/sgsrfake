@@ -218,7 +218,7 @@ public class CharacterStat extends BaseStaticDataDTO<CharacterStat> {
 	 * @see com.sgs.game.sgsr.server.dto.staticdata.BaseStaticDataDTO#clone()
 	 */
 	@Override
-	protected CharacterStat clone() {
+	public CharacterStat clone() {
 		return new CharacterStat(id, name, description, role, rarity, element, baseLevel, baseStar, totalLevel, levels);
 	}
 

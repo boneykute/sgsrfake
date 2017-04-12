@@ -51,8 +51,7 @@ public class Booster extends BaseStaticDataDTO<Booster> {
 	 * 
 	 * @see com.sgs.game.sgsr.server.dto.staticdata.BaseStaticDataDTO#clone()
 	 */
-	@Override
-	protected Booster clone() {
+	public Booster clone() {
 		return new Booster(id, name, description, statsCount, boostStats);
 	}
 }

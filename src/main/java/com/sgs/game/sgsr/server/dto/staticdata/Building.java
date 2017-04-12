@@ -245,10 +245,11 @@ public class Building extends BaseStaticDataDTO<Building> {
 	 * 
 	 * @see com.sgs.game.sgsr.server.dto.staticdata.BaseStaticDataDTO#clone()
 	 */
-	@Override
-	protected Building clone() {
-		return new Building(id, name, description, totalLevel, isResourceGenerator, resourceType, generateSpeed,
-				maximumResource, isAttackable, isOnPath, levels);
-	}
+	// @Override
+	// public Building clone() {
+	// return new Building(id, name, description, totalLevel,
+	// isResourceGenerator, resourceType, generateSpeed,
+	// maximumResource, isAttackable, isOnPath, levels);
+	// }
 
 }
