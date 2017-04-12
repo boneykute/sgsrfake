@@ -3,23 +3,23 @@
  ****************************************/
 package com.sgs.game.sgsr.server.dao.staticdata;
 
-import com.sgs.game.sgsr.server.dto.staticdata.GlobalConfig;
+import com.sgs.game.sgsr.server.dto.staticdata.NickName;
 import com.sgs.game.sgsr.server.utils.db.staticdata.DataFileType;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class GlobalConfigDAO.
+ * The Class NickNameDAO.
  */
-public class GlobalConfigDAO extends BaseStaticDataDAO<GlobalConfig> {
+public class NickNameDAO extends BaseStaticDataDAO<NickName> {
 
 	/**
-	 * Instantiates a new global config DAO.
+	 * Instantiates a new nick name DAO.
 	 *
 	 * @param version
 	 *            the version
 	 */
-	public GlobalConfigDAO(String version) {
-		super(version, DataFileType.GlobalConfig.toString());
+	public NickNameDAO(String version) {
+		super(version, DataFileType.NickName.toString());
 	}
 
 }

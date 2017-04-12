@@ -48,7 +48,7 @@ public class StaticDBDAOManager {
 		BaseStaticDataDAO dao = null;
 		switch (type) {
 		case GlobalConfig:
-			dao = new GlobalConfigDAO(version, key);
+			dao = new GlobalConfigDAO(version);
 			break;
 		default:
 			break;

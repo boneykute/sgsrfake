@@ -3,23 +3,23 @@
  ****************************************/
 package com.sgs.game.sgsr.server.dao.staticdata;
 
-import com.sgs.game.sgsr.server.dto.staticdata.GlobalConfig;
+import com.sgs.game.sgsr.server.dto.staticdata.Shop;
 import com.sgs.game.sgsr.server.utils.db.staticdata.DataFileType;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class GlobalConfigDAO.
+ * The Class ShopDAO.
  */
-public class GlobalConfigDAO extends BaseStaticDataDAO<GlobalConfig> {
+public class ShopDAO extends BaseStaticDataDAO<Shop> {
 
 	/**
-	 * Instantiates a new global config DAO.
+	 * Instantiates a new shop DAO.
 	 *
 	 * @param version
 	 *            the version
 	 */
-	public GlobalConfigDAO(String version) {
-		super(version, DataFileType.GlobalConfig.toString());
+	public ShopDAO(String version) {
+		super(version, DataFileType.Shop.toString());
 	}
 
 }
