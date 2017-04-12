@@ -3,9 +3,9 @@
  ****************************************/
 package com.sgs.game.sgsr.server.dto.staticdata.subitem;
 
+import com.sgs.game.sgsr.server.dto.enumitem.EffectType;
 import com.sgs.game.sgsr.server.dto.enumitem.TargetType;
 import com.sgs.game.sgsr.server.dto.enumitem.TriggerType;
-import com.sgs.game.sgsr.server.dto.enumitem.EffectType;
 
 // TODO: Auto-generated Javadoc
 /**

@@ -62,7 +62,7 @@ public enum EffectType {
 	 *            the name
 	 * @return the enum from name
 	 */
-	public EffectType getEnumFromName(String name) {
+	public static EffectType getEnumFromName(String name) {
 		EffectType type;
 		try {
 			type = valueOf(name);

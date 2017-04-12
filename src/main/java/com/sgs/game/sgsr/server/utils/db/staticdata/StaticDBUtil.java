@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 
 import org.apache.commons.csv.CSVRecord;
 import org.apache.commons.io.FileUtils;
@@ -73,7 +72,7 @@ public class StaticDBUtil {
 	 * Download version file.
 	 */
 	private static void downloadVersionFile() {
-		versionFile = FileUtil.download(REMOTE_VERSION_FILE_URL, LOCAL_VERSION_FILE_PATH);
+		setVersionFile(FileUtil.download(REMOTE_VERSION_FILE_URL, LOCAL_VERSION_FILE_PATH));
 	}
 
 	/**
@@ -207,6 +206,25 @@ public class StaticDBUtil {
 	 */
 	public static void setStaticDataConfig(HashMap<String, String> staticDataConfig) {
 		StaticDBUtil.staticDataConfig = staticDataConfig;
+	}
+
+	/**
+	 * Gets the version file.
+	 *
+	 * @return the version file
+	 */
+	public static File getVersionFile() {
+		return versionFile;
+	}
+
+	/**
+	 * Sets the version file.
+	 *
+	 * @param versionFile
+	 *            the new version file
+	 */
+	public static void setVersionFile(File versionFile) {
+		StaticDBUtil.versionFile = versionFile;
 	}
 
 	// endregion GETTER AND SETTER

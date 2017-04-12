@@ -81,11 +81,8 @@ public enum DataFileType {
 	/** The secondary Rune. */
 	SecondaryRune("SecondaryRune"),
 
-	/** The secondary Rune configuration. */
-	SecondaryRuneConfiguration("SecondaryRuneConfiguration"),
-
 	/** The secondary Rune effect configuration. */
-	SecondaryRuneEffectConfiguration("SecondaryRuneEffectConfiguration");
+	SecondaryRuneEffect("SecondaryRuneEffect");
 
 	/** The name. */
 	private final String name;
@@ -118,5 +115,22 @@ public enum DataFileType {
 	 */
 	public String toString() {
 		return this.name;
+	}
+
+	/**
+	 * Gets the enum from name.
+	 *
+	 * @param name
+	 *            the name
+	 * @return the enum from name
+	 */
+	public static DataFileType getEnumFromName(String name) {
+		DataFileType type;
+		try {
+			type = valueOf(name);
+		} catch (Exception e) {
+			return DataFileType.None;
+		}
+		return type;
 	}
 }

@@ -100,6 +100,11 @@ public class BaseStaticDataDTO<T extends BaseStaticDataDTO<T>> implements IBaseS
 		this.description = description;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#clone()
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public T clone() {

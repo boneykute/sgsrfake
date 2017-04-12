@@ -19,18 +19,7 @@ public class FetchDataFromFile {
 	 * @param file
 	 *            the file
 	 */
-	private static void fetchSecondaryRuneEffectConfiguration(File file) {
-		// TODO Auto-generated method stub
-
-	}
-
-	/**
-	 * Fetch secondary rune configuration.
-	 *
-	 * @param file
-	 *            the file
-	 */
-	private static void fetchSecondaryRuneConfiguration(File file) {
+	private static void fetchSecondaryRuneEffect(File file) {
 		// TODO Auto-generated method stub
 
 	}
@@ -369,11 +358,8 @@ public class FetchDataFromFile {
 		case SecondaryRune:
 			fetchSecondaryRune(file);
 			break;
-		case SecondaryRuneConfiguration:
-			fetchSecondaryRuneConfiguration(file);
-			break;
-		case SecondaryRuneEffectConfiguration:
-			fetchSecondaryRuneEffectConfiguration(file);
+		case SecondaryRuneEffect:
+			fetchSecondaryRuneEffect(file);
 			break;
 		default:
 			break;
@@ -388,17 +374,6 @@ public class FetchDataFromFile {
 	 * @return the data file type
 	 */
 	private static DataFileType getDataFileType(final String fileName) {
-		if (fileName.startsWith("CharacterStat")) {
-			return DataFileType.CharacterStat;
-		} else if (fileName.startsWith("CharacterSkill")) {
-			return DataFileType.CharacterSkill;
-		} else {
-			for (DataFileType fileType : DataFileType.values()) {
-				if (fileName.equals(fileType.toString())) {
-					return fileType;
-				}
-			}
-		}
-		return DataFileType.None;
+		return DataFileType.getEnumFromName(fileName);
 	}
 }
