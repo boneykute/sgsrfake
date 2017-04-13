@@ -61,19 +61,49 @@ public class FileUtil {
 		Reader in;
 		try {
 			in = new FileReader(fileUrl);
-			Iterable<CSVRecord> records;
-			try {
-				records = CSVFormat.EXCEL.withFirstRecordAsHeader().parse(in);
-				return records;
-			} catch (IOException e) {
-				e.printStackTrace();
-				return null;
-			}
+			return readCSVFile(in);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 			return null;
 		}
 
+	}
+
+	/**
+	 * Read CSV file.
+	 *
+	 * @param file
+	 *            the file
+	 * @return the iterable
+	 */
+	public static Iterable<CSVRecord> readCSVFile(File file) {
+		Reader in;
+		try {
+			in = new FileReader(file);
+			return readCSVFile(in);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			return null;
+		}
+
+	}
+
+	/**
+	 * Read CSV file.
+	 *
+	 * @param in
+	 *            the in
+	 * @return the iterable
+	 */
+	private static Iterable<CSVRecord> readCSVFile(Reader in) {
+		Iterable<CSVRecord> records;
+		try {
+			records = CSVFormat.EXCEL.withFirstRecordAsHeader().parse(in);
+			return records;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	/**

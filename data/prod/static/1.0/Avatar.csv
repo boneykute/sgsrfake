@@ -1,0 +1,6 @@
+Id,Name,Description,RequirementCount,RequirementType,Amount
+1,Newbee,,3,TotalKillsCount,1
+,,,,TotalLogInCount,10
+,,,,TotalTrophiesCount,100
+2,Hunter,,1,TotalTrophiesCount,100
+3,Legend,,1,TotalTrophiesCount,1000

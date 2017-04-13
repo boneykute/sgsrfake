@@ -10,7 +10,7 @@ package com.sgs.game.sgsr.server.dto.staticdata;
  * @param <T>
  *            the generic type
  */
-public class BaseStaticDataDTO<T extends BaseStaticDataDTO<T>> implements IBaseStaticDataDTO<T> {
+public class BaseStaticDataDTO<T> implements IBaseStaticDataDTO<T> {
 
 	/** The id. */
 	protected int id;

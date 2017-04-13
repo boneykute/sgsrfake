@@ -3,11 +3,16 @@
  ****************************************/
 package com.sgs.game.sgsr.server;
 
+import java.util.HashMap;
+
+import com.sgs.game.sgsr.server.dto.staticdata.BaseStaticDataDTO;
 import com.sgs.game.sgsr.server.utils.FileUtil;
 import com.sgs.game.sgsr.server.utils.TimeUtil;
 import com.sgs.game.sgsr.server.utils.config.Constants.ENVIRONMENT;
 import com.sgs.game.sgsr.server.utils.config.Environment;
 import com.sgs.game.sgsr.server.utils.db.staticdata.StaticDBUtil;
+
+import junit.framework.Assert;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -58,6 +63,7 @@ public class App {
 	/**
 	 * Init stuff.
 	 */
+	@SuppressWarnings("rawtypes")
 	private static void init() {
 		App app = new App();
 		new Environment(app.getEnvironment());
@@ -66,10 +72,8 @@ public class App {
 		FileUtil.init();
 		TimeUtil.init();
 
-		StaticDBUtil.init();
+		// StaticDBUtil.init();
 
-		// Download static data
-		StaticDBUtil.downloadDataFirstTime();
 	}
 
 	/**

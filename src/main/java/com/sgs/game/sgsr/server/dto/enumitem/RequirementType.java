@@ -60,7 +60,7 @@ public enum RequirementType {
 	 *            the name
 	 * @return the enum from name
 	 */
-	public RequirementType getEnumFromName(String name) {
+	public static RequirementType getEnumFromName(String name) {
 		RequirementType type;
 		try {
 			type = valueOf(name);

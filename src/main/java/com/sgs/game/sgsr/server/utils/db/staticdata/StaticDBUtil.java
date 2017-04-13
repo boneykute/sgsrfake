@@ -4,15 +4,16 @@
 package com.sgs.game.sgsr.server.utils.db.staticdata;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 
 import org.apache.commons.csv.CSVRecord;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.filefilter.DirectoryFileFilter;
 
-import com.sgs.game.sgsr.server.dto.staticdata.IBaseStaticDataDTO;
+import com.sgs.game.sgsr.server.dto.staticdata.BaseStaticDataDTO;
 import com.sgs.game.sgsr.server.utils.FileUtil;
 
 // TODO: Auto-generated Javadoc
@@ -25,19 +26,19 @@ public class StaticDBUtil {
 
 	/** The static data. */
 	@SuppressWarnings("rawtypes")
-	private static HashMap<String, HashMap<String, HashMap<Integer, IBaseStaticDataDTO>>> staticData;
+	private static HashMap<String, HashMap<String, HashMap<Integer, BaseStaticDataDTO>>> staticData;
 
 	/** The static data config. */
 	private static HashMap<String, String> staticDataConfig;
 
 	/** The Constant REMOTE_VERSION_FILE_URL. */
-	private static final String REMOTE_VERSION_FILE_URL = "http://download1481.mediafireuserdownload.com/o87tjm789kqg/dvuci0hdikl0c5x/version.csv";
+	private static String REMOTE_VERSION_FILE_URL = "http://download1481.mediafireuserdownload.com/o87tjm789kqg/dvuci0hdikl0c5x/version.csv";
 
 	/** The Constant LOCAL_BASE_PATH. */
-	private static final String LOCAL_BASE_PATH = "data/static/";
+	private static String LOCAL_BASE_PATH = "data/prod/static/";
 
 	/** The Constant LOCAL_VERSION_FILE_PATH. */
-	private static final String LOCAL_VERSION_FILE_PATH = LOCAL_BASE_PATH + "version.csv";
+	private static String LOCAL_VERSION_FILE_PATH = LOCAL_BASE_PATH + "version.csv";
 
 	/** The version file. */
 	private static File versionFile;
@@ -61,17 +62,21 @@ public class StaticDBUtil {
 	/**
 	 * Fetch data first time.
 	 */
-	private static void fetchDataFirstTime() {
-		File localDirectory = new File(LOCAL_BASE_PATH);
+	public static void fetchDataFirstTime() {
+		File localStaticDataDirectory = new File(LOCAL_BASE_PATH);
 		String[] extensions = new String[] { "csv" };
-		Collection<File> files = FileUtils.listFiles(localDirectory, extensions, true);
-		files.forEach(file -> FetchDataFromFile.fetch(file));
+		File[] versionFolders = localStaticDataDirectory.listFiles((FileFilter) DirectoryFileFilter.DIRECTORY);
+		for (File versionFolder : versionFolders) {
+			staticData.put(versionFolder.getName(), new HashMap<>());
+			Collection<File> files = FileUtils.listFiles(versionFolder, extensions, true);
+			files.forEach(file -> FetchDataFromFile.fetch(versionFolder.getName(), file));
+		}
 	}
 
 	/**
 	 * Download version file.
 	 */
-	private static void downloadVersionFile() {
+	public static void downloadVersionFile() {
 		setVersionFile(FileUtil.download(REMOTE_VERSION_FILE_URL, LOCAL_VERSION_FILE_PATH));
 	}
 
@@ -117,52 +122,6 @@ public class StaticDBUtil {
 
 	}
 
-	/**
-	 * Process version record.
-	 *
-	 * @param record
-	 *            the record
-	 * @param previousKey
-	 *            the previous key
-	 */
-	@SuppressWarnings("rawtypes")
-	private static void processVersionRecord(CSVRecord record, String previousKey) {
-		// Check if version existed in static data (check by client id)
-		String key = record.get("Client") + "-" + record.get("Data");
-		boolean isExisted = staticData.containsKey(key);
-
-		if (!isExisted) {
-			// Clone data from previous data
-			HashMap<String, HashMap<Integer, IBaseStaticDataDTO>> previousVerionStaticData = staticData
-					.get(previousKey);
-			staticData.put(key, previousVerionStaticData);
-
-			// Download new static data depend on changed files
-			String[] changedFiles = record.get("ChangedFiles").split(",");
-			for (int i = 0; i < changedFiles.length; i++) {
-				String changedFileName = changedFiles[i];
-				File changedFile = FileUtil.download(changedFileName, LOCAL_BASE_PATH + changedFileName);
-				FetchDataFromFile.fetch(changedFile);
-			}
-		}
-	}
-
-	/**
-	 * Fetch version data from file.
-	 */
-	@SuppressWarnings("unused")
-	private static void fetchVersionDataFromFile() {
-		Iterable<CSVRecord> records = FileUtil.readCSVFile(LOCAL_VERSION_FILE_PATH);
-		String previousKey = "";
-		Iterator<CSVRecord> recordsIterator = records.iterator();
-		while (recordsIterator.hasNext()) {
-			CSVRecord record = recordsIterator.next();
-			processVersionRecord(record, previousKey);
-			previousKey = record.get("Client") + "-" + record.get("Data");
-			System.out.println(previousKey);
-		}
-	}
-
 	// endregion UPDATE DATA IN RUNTIME
 
 	// region GETTER AND SETTER
@@ -173,7 +132,7 @@ public class StaticDBUtil {
 	 * @return the static data
 	 */
 	@SuppressWarnings("rawtypes")
-	public static HashMap<String, HashMap<String, HashMap<Integer, IBaseStaticDataDTO>>> getStaticData() {
+	public static HashMap<String, HashMap<String, HashMap<Integer, BaseStaticDataDTO>>> getStaticData() {
 		return staticData;
 	}
 
@@ -184,8 +143,7 @@ public class StaticDBUtil {
 	 *            the static data
 	 */
 	@SuppressWarnings("rawtypes")
-	public static void setStaticData(
-			HashMap<String, HashMap<String, HashMap<Integer, IBaseStaticDataDTO>>> staticData) {
+	public static void setStaticData(HashMap<String, HashMap<String, HashMap<Integer, BaseStaticDataDTO>>> staticData) {
 		StaticDBUtil.staticData = staticData;
 	}
 
@@ -225,6 +183,63 @@ public class StaticDBUtil {
 	 */
 	public static void setVersionFile(File versionFile) {
 		StaticDBUtil.versionFile = versionFile;
+	}
+
+	/**
+	 * Gets the remote version file url.
+	 *
+	 * @return the remote version file url
+	 */
+	public static String getREMOTE_VERSION_FILE_URL() {
+		return REMOTE_VERSION_FILE_URL;
+	}
+
+	/**
+	 * Sets the remote version file url.
+	 *
+	 * @param rEMOTE_VERSION_FILE_URL
+	 *            the new remote version file url
+	 */
+	public static void setREMOTE_VERSION_FILE_URL(String rEMOTE_VERSION_FILE_URL) {
+		REMOTE_VERSION_FILE_URL = rEMOTE_VERSION_FILE_URL;
+	}
+
+	/**
+	 * Gets the local base path.
+	 *
+	 * @return the local base path
+	 */
+	public static String getLOCAL_BASE_PATH() {
+		return LOCAL_BASE_PATH;
+	}
+
+	/**
+	 * Sets the local base path.
+	 *
+	 * @param lOCAL_BASE_PATH
+	 *            the new local base path
+	 */
+	public static void setLOCAL_BASE_PATH(String lOCAL_BASE_PATH) {
+		LOCAL_BASE_PATH = lOCAL_BASE_PATH;
+	}
+
+	/**
+	 * Gets the local version file path.
+	 *
+	 * @return the local version file path
+	 */
+	public static String getLOCAL_VERSION_FILE_PATH() {
+		return LOCAL_VERSION_FILE_PATH;
+	}
+
+	/**
+	 * Sets the local version file path.
+	 *
+	 * @param lOCAL_VERSION_FILE_PATH
+	 *            the new local version file path
+	 */
+	public static void setLOCAL_VERSION_FILE_PATH(String lOCAL_VERSION_FILE_PATH) {
+		LOCAL_VERSION_FILE_PATH = lOCAL_VERSION_FILE_PATH;
 	}
 
 	// endregion GETTER AND SETTER

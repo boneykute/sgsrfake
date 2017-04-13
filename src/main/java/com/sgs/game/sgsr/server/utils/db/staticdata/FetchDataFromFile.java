@@ -4,7 +4,17 @@
 package com.sgs.game.sgsr.server.utils.db.staticdata;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
+import org.apache.commons.csv.CSVRecord;
+
+import com.sgs.game.sgsr.server.dto.enumitem.RequirementType;
+import com.sgs.game.sgsr.server.dto.staticdata.Avatar;
+import com.sgs.game.sgsr.server.dto.staticdata.BaseStaticDataDTO;
+import com.sgs.game.sgsr.server.dto.staticdata.GlobalConfig;
+import com.sgs.game.sgsr.server.dto.staticdata.subitem.Requirement;
 import com.sgs.game.sgsr.server.utils.FileUtil;
 
 // TODO: Auto-generated Javadoc
@@ -16,76 +26,84 @@ public class FetchDataFromFile {
 	/**
 	 * Fetch secondary rune effect configuration.
 	 *
+	 * @param version
+	 *            the version
 	 * @param file
 	 *            the file
 	 */
-	private static void fetchSecondaryRuneEffect(File file) {
-		// TODO Auto-generated method stub
-
+	private static void fetchSecondaryRuneEffect(String version, File file) {
+		Iterable<CSVRecord> records = FileUtil.readCSVFile(file);
 	}
 
 	/**
 	 * Fetch secondary rune.
 	 *
+	 * @param version
+	 *            the version
 	 * @param file
 	 *            the file
 	 */
-	private static void fetchSecondaryRune(File file) {
-		// TODO Auto-generated method stub
-
+	private static void fetchSecondaryRune(String version, File file) {
+		Iterable<CSVRecord> records = FileUtil.readCSVFile(file);
 	}
 
 	/**
 	 * Fetch primary rune configuration.
 	 *
+	 * @param version
+	 *            the version
 	 * @param file
 	 *            the file
 	 */
-	private static void fetchPrimaryRuneConfiguration(File file) {
-		// TODO Auto-generated method stub
-
+	private static void fetchPrimaryRuneConfiguration(String version, File file) {
+		Iterable<CSVRecord> records = FileUtil.readCSVFile(file);
 	}
 
 	/**
 	 * Fetch primary rune.
 	 *
+	 * @param version
+	 *            the version
 	 * @param file
 	 *            the file
 	 */
-	private static void fetchPrimaryRune(File file) {
-		// TODO Auto-generated method stub
-
+	private static void fetchPrimaryRune(String version, File file) {
+		Iterable<CSVRecord> records = FileUtil.readCSVFile(file);
 	}
 
 	/**
 	 * Fetch character skill.
 	 *
+	 * @param version
+	 *            the version
 	 * @param file
 	 *            the file
 	 */
-	private static void fetchCharacterSkill(File file) {
-		// TODO Auto-generated method stub
-
+	private static void fetchCharacterSkill(String version, File file) {
+		Iterable<CSVRecord> records = FileUtil.readCSVFile(file);
 	}
 
 	/**
 	 * Fetch character stat.
 	 *
+	 * @param version
+	 *            the version
 	 * @param file
 	 *            the file
 	 */
-	private static void fetchCharacterStat(File file) {
-		// TODO Auto-generated method stub
-
+	private static void fetchCharacterStat(String version, File file) {
+		Iterable<CSVRecord> records = FileUtil.readCSVFile(file);
 	}
 
 	/**
 	 * Fetch player level.
 	 *
+	 * @param version
+	 *            the version
 	 * @param file
 	 *            the file
 	 */
-	private static void fetchPlayerLevel(File file) {
+	private static void fetchPlayerLevel(String version, File file) {
 		// TODO Auto-generated method stub
 
 	}
@@ -93,10 +111,12 @@ public class FetchDataFromFile {
 	/**
 	 * Fetch season.
 	 *
+	 * @param version
+	 *            the version
 	 * @param file
 	 *            the file
 	 */
-	private static void fetchSeason(File file) {
+	private static void fetchSeason(String version, File file) {
 		// TODO Auto-generated method stub
 
 	}
@@ -104,10 +124,12 @@ public class FetchDataFromFile {
 	/**
 	 * Fetch league.
 	 *
+	 * @param version
+	 *            the version
 	 * @param file
 	 *            the file
 	 */
-	private static void fetchLeague(File file) {
+	private static void fetchLeague(String version, File file) {
 		// TODO Auto-generated method stub
 
 	}
@@ -115,10 +137,12 @@ public class FetchDataFromFile {
 	/**
 	 * Fetch dungeon.
 	 *
+	 * @param version
+	 *            the version
 	 * @param file
 	 *            the file
 	 */
-	private static void fetchDungeon(File file) {
+	private static void fetchDungeon(String version, File file) {
 		// TODO Auto-generated method stub
 
 	}
@@ -126,10 +150,12 @@ public class FetchDataFromFile {
 	/**
 	 * Fetch building.
 	 *
+	 * @param version
+	 *            the version
 	 * @param file
 	 *            the file
 	 */
-	private static void fetchBuilding(File file) {
+	private static void fetchBuilding(String version, File file) {
 		// TODO Auto-generated method stub
 
 	}
@@ -137,10 +163,12 @@ public class FetchDataFromFile {
 	/**
 	 * Fetch scroll.
 	 *
+	 * @param version
+	 *            the version
 	 * @param file
 	 *            the file
 	 */
-	private static void fetchScroll(File file) {
+	private static void fetchScroll(String version, File file) {
 		// TODO Auto-generated method stub
 
 	}
@@ -148,10 +176,12 @@ public class FetchDataFromFile {
 	/**
 	 * Fetch chest.
 	 *
+	 * @param version
+	 *            the version
 	 * @param file
 	 *            the file
 	 */
-	private static void fetchChest(File file) {
+	private static void fetchChest(String version, File file) {
 		// TODO Auto-generated method stub
 
 	}
@@ -159,10 +189,12 @@ public class FetchDataFromFile {
 	/**
 	 * Fetch booster.
 	 *
+	 * @param version
+	 *            the version
 	 * @param file
 	 *            the file
 	 */
-	private static void fetchBooster(File file) {
+	private static void fetchBooster(String version, File file) {
 		// TODO Auto-generated method stub
 
 	}
@@ -170,10 +202,12 @@ public class FetchDataFromFile {
 	/**
 	 * Fetch decoration.
 	 *
+	 * @param version
+	 *            the version
 	 * @param file
 	 *            the file
 	 */
-	private static void fetchDecoration(File file) {
+	private static void fetchDecoration(String version, File file) {
 		// TODO Auto-generated method stub
 
 	}
@@ -181,10 +215,12 @@ public class FetchDataFromFile {
 	/**
 	 * Fetch pack.
 	 *
+	 * @param version
+	 *            the version
 	 * @param file
 	 *            the file
 	 */
-	private static void fetchPack(File file) {
+	private static void fetchPack(String version, File file) {
 		// TODO Auto-generated method stub
 
 	}
@@ -192,10 +228,12 @@ public class FetchDataFromFile {
 	/**
 	 * Fetch shop.
 	 *
+	 * @param version
+	 *            the version
 	 * @param file
 	 *            the file
 	 */
-	private static void fetchShop(File file) {
+	private static void fetchShop(String version, File file) {
 		// TODO Auto-generated method stub
 
 	}
@@ -203,10 +241,12 @@ public class FetchDataFromFile {
 	/**
 	 * Fetch resource type.
 	 *
+	 * @param version
+	 *            the version
 	 * @param file
 	 *            the file
 	 */
-	private static void fetchResourceType(File file) {
+	private static void fetchResourceType(String version, File file) {
 		// TODO Auto-generated method stub
 
 	}
@@ -214,10 +254,12 @@ public class FetchDataFromFile {
 	/**
 	 * Fetch nick name.
 	 *
+	 * @param version
+	 *            the version
 	 * @param file
 	 *            the file
 	 */
-	private static void fetchNickName(File file) {
+	private static void fetchNickName(String version, File file) {
 		// TODO Auto-generated method stub
 
 	}
@@ -225,43 +267,57 @@ public class FetchDataFromFile {
 	/**
 	 * Fetch avatar.
 	 *
+	 * @param version
+	 *            the version
 	 * @param file
 	 *            the file
 	 */
-	private static void fetchAvatar(File file) {
-		// TODO Auto-generated method stub
+	@SuppressWarnings("rawtypes")
+	private static void fetchAvatar(String version, File file) {
+		Iterable<CSVRecord> records = FileUtil.readCSVFile(file);
+		HashMap<Integer, BaseStaticDataDTO> avatars = new HashMap<>();
+		int id = 0;
+		String name = "";
+		String description = "";
+		int requirementCount = 0;
+		List<Requirement> requirements = new ArrayList<>();
+		for (CSVRecord record : records) {
+			String idStr = record.get("Id");
+			if (!idStr.isEmpty()) {
+				id = Integer.parseInt(idStr);
+				name = record.get("Name");
+				description = record.get("Description");
+				requirementCount = Integer.parseInt(record.get("RequirementCount"));
+			}
+			if (requirements.size() < requirementCount - 1) {
+				RequirementType requirementType = RequirementType.getEnumFromName(record.get("RequirementType"));
+				int amount = Integer.parseInt(record.get("Amount"));
+				Requirement requirement = new Requirement(amount, requirementType);
+				requirements.add(requirement);
+			} else {
+				Avatar avatar = new Avatar(id, name, description, requirementCount, requirements);
+				avatars.put(id, avatar);
+				// Reset variable to prepare for a new item
+				id = 0;
+				name = "";
+				description = "";
+				requirementCount = 0;
+				requirements = new ArrayList<>();
+			}
+		}
 
+		StaticDBUtil.getStaticData().get(version).put(DataFileType.Avatar.toString(), avatars);
 	}
 
 	/**
 	 * Fetch daily login reward.
 	 *
+	 * @param version
+	 *            the version
 	 * @param file
 	 *            the file
 	 */
-	private static void fetchDailyLoginReward(File file) {
-		// TODO Auto-generated method stub
-
-	}
-
-	/**
-	 * Fetch faction.
-	 *
-	 * @param file
-	 *            the file
-	 */
-	private static void fetchFaction(File file) {
-		// TODO Auto-generated method stub
-
-	}
-
-	/**
-	 * Fetch element.
-	 *
-	 * @param file
-	 *            the file
-	 */
-	private static void fetchElement(File file) {
+	private static void fetchDailyLoginReward(String version, File file) {
 		// TODO Auto-generated method stub
 
 	}
@@ -269,21 +325,36 @@ public class FetchDataFromFile {
 	/**
 	 * Fetch global config.
 	 *
+	 * @param version
+	 *            the version
 	 * @param file
 	 *            the file
 	 */
-	private static void fetchGlobalConfig(File file) {
-		// TODO Auto-generated method stub
+	@SuppressWarnings("rawtypes")
+	private static void fetchGlobalConfig(String version, File file) {
+		Iterable<CSVRecord> records = FileUtil.readCSVFile(file);
+		HashMap<Integer, BaseStaticDataDTO> globalConfigs = new HashMap<>();
+		for (CSVRecord record : records) {
+			int id = Integer.parseInt(record.get("Id"));
+			String name = record.get("Name");
+			String description = record.get("Description");
+			float value = Float.parseFloat(record.get("Value"));
+			GlobalConfig globalConfig = new GlobalConfig(id, name, description, value);
+			globalConfigs.put(globalConfig.getId(), globalConfig);
+		}
 
+		StaticDBUtil.getStaticData().get(version).put(DataFileType.GlobalConfig.toString(), globalConfigs);
 	}
 
 	/**
 	 * Fetch data from file.
 	 *
+	 * @param version
+	 *            the version
 	 * @param file
 	 *            the file
 	 */
-	static void fetch(File file) {
+	static void fetch(String version, File file) {
 		// Get filename without extension to check
 		String fileNameWithoutExtension = FileUtil.getFileNameWithoutExtension(file.getName());
 		// Find data file type
@@ -291,75 +362,69 @@ public class FetchDataFromFile {
 		// Update static data
 		switch (dataFileType) {
 		case GlobalConfig:
-			fetchGlobalConfig(file);
-			break;
-		case Element:
-			fetchElement(file);
-			break;
-		case Faction:
-			fetchFaction(file);
+			fetchGlobalConfig(version, file);
 			break;
 		case DailyLoginReward:
-			fetchDailyLoginReward(file);
+			fetchDailyLoginReward(version, file);
 			break;
 		case Avatar:
-			fetchAvatar(file);
+			fetchAvatar(version, file);
 			break;
 		case NickName:
-			fetchNickName(file);
+			fetchNickName(version, file);
 			break;
 		case ResourceType:
-			fetchResourceType(file);
+			fetchResourceType(version, file);
 			break;
 		case Shop:
-			fetchShop(file);
+			fetchShop(version, file);
 			break;
 		case Pack:
-			fetchPack(file);
+			fetchPack(version, file);
 			break;
 		case Decoration:
-			fetchDecoration(file);
+			fetchDecoration(version, file);
 			break;
 		case Booster:
-			fetchBooster(file);
+			fetchBooster(version, file);
 			break;
 		case Chest:
-			fetchChest(file);
+			fetchChest(version, file);
 			break;
 		case Scroll:
-			fetchScroll(file);
+			fetchScroll(version, file);
 			break;
 		case Building:
-			fetchBuilding(file);
+			fetchBuilding(version, file);
 			break;
 		case Dungeon:
-			fetchDungeon(file);
+			fetchDungeon(version, file);
 			break;
 		case League:
-			fetchLeague(file);
+			fetchLeague(version, file);
 			break;
 		case Season:
-			fetchSeason(file);
+			fetchSeason(version, file);
 			break;
 		case PlayerLevel:
-			fetchPlayerLevel(file);
+			fetchPlayerLevel(version, file);
 			break;
 		case CharacterStat:
-			fetchCharacterStat(file);
+			fetchCharacterStat(version, file);
 			break;
 		case CharacterSkill:
-			fetchCharacterSkill(file);
+			fetchCharacterSkill(version, file);
 			break;
 		case PrimaryRune:
-			fetchPrimaryRune(file);
+			fetchPrimaryRune(version, file);
 		case PrimaryRuneConfiguration:
-			fetchPrimaryRuneConfiguration(file);
+			fetchPrimaryRuneConfiguration(version, file);
 			break;
 		case SecondaryRune:
-			fetchSecondaryRune(file);
+			fetchSecondaryRune(version, file);
 			break;
 		case SecondaryRuneEffect:
-			fetchSecondaryRuneEffect(file);
+			fetchSecondaryRuneEffect(version, file);
 			break;
 		default:
 			break;

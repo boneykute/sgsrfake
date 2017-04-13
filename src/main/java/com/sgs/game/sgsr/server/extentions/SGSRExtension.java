@@ -43,7 +43,7 @@ public class SGSRExtension extends SFSExtension {
 		initEventHandlers();
 
 		// Download static data
-		StaticDBUtil.downloadDataFirstTime();
+		StaticDBUtil.init();
 	}
 
 	/**
