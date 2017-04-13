@@ -12,6 +12,9 @@ public class DailyLoginReward extends BaseStaticDataDTO<DailyLoginReward> {
 	/** The pack id. */
 	private int packId;
 
+	/** The day. */
+	private int day;
+
 	/** The month. */
 	private int month;
 
@@ -31,13 +34,16 @@ public class DailyLoginReward extends BaseStaticDataDTO<DailyLoginReward> {
 	 *            the name
 	 * @param description
 	 *            the description
+	 * @param day
+	 *            the day
 	 * @param month
 	 *            the month
 	 * @param packId
 	 *            the pack id
 	 */
-	public DailyLoginReward(int id, String name, String description, int month, int packId) {
+	public DailyLoginReward(int id, String name, String description, int day, int month, int packId) {
 		super(id, name, description);
+		this.day = day;
 		this.month = month;
 		this.packId = packId;
 	}
@@ -59,6 +65,25 @@ public class DailyLoginReward extends BaseStaticDataDTO<DailyLoginReward> {
 	 */
 	public void setPackId(int packId) {
 		this.packId = packId;
+	}
+
+	/**
+	 * Gets the day.
+	 *
+	 * @return the day
+	 */
+	public int getDay() {
+		return day;
+	}
+
+	/**
+	 * Sets the day.
+	 *
+	 * @param day
+	 *            the new day
+	 */
+	public void setDay(int day) {
+		this.day = day;
 	}
 
 	/**
@@ -87,6 +112,6 @@ public class DailyLoginReward extends BaseStaticDataDTO<DailyLoginReward> {
 	 */
 	@Override
 	public DailyLoginReward clone() {
-		return new DailyLoginReward(id, name, description, month, packId);
+		return new DailyLoginReward(id, name, description, day, month, packId);
 	}
 }

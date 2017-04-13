@@ -10,10 +10,17 @@ import java.util.List;
 
 import org.apache.commons.csv.CSVRecord;
 
+import com.sgs.game.sgsr.server.dto.IBaseDTO;
 import com.sgs.game.sgsr.server.dto.enumitem.RequirementType;
 import com.sgs.game.sgsr.server.dto.staticdata.Avatar;
 import com.sgs.game.sgsr.server.dto.staticdata.BaseStaticDataDTO;
+import com.sgs.game.sgsr.server.dto.staticdata.DailyLoginReward;
 import com.sgs.game.sgsr.server.dto.staticdata.GlobalConfig;
+import com.sgs.game.sgsr.server.dto.staticdata.IBaseStaticDataDTO;
+import com.sgs.game.sgsr.server.dto.staticdata.NickName;
+import com.sgs.game.sgsr.server.dto.staticdata.Pack;
+import com.sgs.game.sgsr.server.dto.staticdata.Shop;
+import com.sgs.game.sgsr.server.dto.staticdata.subitem.PackItem;
 import com.sgs.game.sgsr.server.dto.staticdata.subitem.Requirement;
 import com.sgs.game.sgsr.server.utils.FileUtil;
 
@@ -220,9 +227,35 @@ public class FetchDataFromFile {
 	 * @param file
 	 *            the file
 	 */
+	@SuppressWarnings("rawtypes")
 	private static void fetchPack(String version, File file) {
-		// TODO Auto-generated method stub
+		Iterable<CSVRecord> records = FileUtil.readCSVFile(file);
+		HashMap<Integer, BaseStaticDataDTO> packs = new HashMap<>();
+		BaseStaticDataDTO dto = new BaseStaticDataDTO();
+		int itemCount = 0;
+		List<PackItem> items = new ArrayList<>();
+		for (CSVRecord record : records) {
+			String idStr = record.get("Id");
+			if (!idStr.isEmpty()) {
+				dto = getBaseStaticDTOFromRecord(record);
+				itemCount = Integer.parseInt(record.get("ItemCount"));
+			}
+			if (items.size() < itemCount - 1) {
+				String itemName = record.get("ItemName");
+				int amount = Integer.parseInt(record.get("Amount"));
+				PackItem item = new PackItem(items.size(), itemName, amount);
+				items.add(item);
+			} else {
+				Pack pack = new Pack(dto.getId(), dto.getName(), dto.getDescription(), itemCount, items);
+				packs.put(pack.getId(), pack);
+				// Reset variables
+				dto = new BaseStaticDataDTO();
+				itemCount = 0;
+				items = new ArrayList<>();
+			}
+		}
 
+		StaticDBUtil.getStaticData().get(version).put(DataFileType.Pack.toString(), packs);
 	}
 
 	/**
@@ -233,22 +266,27 @@ public class FetchDataFromFile {
 	 * @param file
 	 *            the file
 	 */
+	@SuppressWarnings("rawtypes")
 	private static void fetchShop(String version, File file) {
-		// TODO Auto-generated method stub
+		Iterable<CSVRecord> records = FileUtil.readCSVFile(file);
+		HashMap<Integer, BaseStaticDataDTO> shopItems = new HashMap<>();
 
-	}
+		for (CSVRecord record : records) {
+			BaseStaticDataDTO dto = getBaseStaticDTOFromRecord(record);
+			String type = record.get("Type");
+			int itemId = Integer.parseInt(record.get("ItemId"));
+			int price = Integer.parseInt(record.get("Price"));
+			int order = Integer.parseInt(record.get("Order"));
+			String category = record.get("Category");
+			String tab = record.get("Tab");
+			int cooldownTime = Integer.parseInt(record.get("CooldownTime"));
 
-	/**
-	 * Fetch resource type.
-	 *
-	 * @param version
-	 *            the version
-	 * @param file
-	 *            the file
-	 */
-	private static void fetchResourceType(String version, File file) {
-		// TODO Auto-generated method stub
+			Shop shopItem = new Shop(dto.getId(), dto.getName(), dto.getDescription(), type, itemId, price, order,
+					category, tab, cooldownTime);
+			shopItems.put(shopItem.getId(), shopItem);
+		}
 
+		StaticDBUtil.getStaticData().get(version).put(DataFileType.Shop.toString(), shopItems);
 	}
 
 	/**
@@ -259,9 +297,36 @@ public class FetchDataFromFile {
 	 * @param file
 	 *            the file
 	 */
+	@SuppressWarnings("rawtypes")
 	private static void fetchNickName(String version, File file) {
-		// TODO Auto-generated method stub
+		Iterable<CSVRecord> records = FileUtil.readCSVFile(file);
+		HashMap<Integer, BaseStaticDataDTO> nickNames = new HashMap<>();
+		BaseStaticDataDTO dto = new BaseStaticDataDTO();
+		int requirementCount = 0;
+		List<Requirement> requirements = new ArrayList<>();
+		for (CSVRecord record : records) {
+			String idStr = record.get("Id");
+			if (!idStr.isEmpty()) {
+				dto = getBaseStaticDTOFromRecord(record);
+				requirementCount = Integer.parseInt(record.get("RequirementCount"));
+			}
+			if (requirements.size() < requirementCount - 1) {
+				RequirementType requirementType = RequirementType.getEnumFromName(record.get("RequirementType"));
+				int amount = Integer.parseInt(record.get("Amount"));
+				Requirement requirement = new Requirement(amount, requirementType);
+				requirements.add(requirement);
+			} else {
+				NickName nickName = new NickName(dto.getId(), dto.getName(), dto.getDescription(), requirementCount,
+						requirements);
+				nickNames.put(nickName.getId(), nickName);
+				// Reset variable to prepare for a new item
+				dto = new BaseStaticDataDTO();
+				requirementCount = 0;
+				requirements = new ArrayList<>();
+			}
+		}
 
+		StaticDBUtil.getStaticData().get(version).put(DataFileType.NickName.toString(), nickNames);
 	}
 
 	/**
@@ -276,17 +341,13 @@ public class FetchDataFromFile {
 	private static void fetchAvatar(String version, File file) {
 		Iterable<CSVRecord> records = FileUtil.readCSVFile(file);
 		HashMap<Integer, BaseStaticDataDTO> avatars = new HashMap<>();
-		int id = 0;
-		String name = "";
-		String description = "";
+		BaseStaticDataDTO dto = new BaseStaticDataDTO();
 		int requirementCount = 0;
 		List<Requirement> requirements = new ArrayList<>();
 		for (CSVRecord record : records) {
 			String idStr = record.get("Id");
 			if (!idStr.isEmpty()) {
-				id = Integer.parseInt(idStr);
-				name = record.get("Name");
-				description = record.get("Description");
+				dto = getBaseStaticDTOFromRecord(record);
 				requirementCount = Integer.parseInt(record.get("RequirementCount"));
 			}
 			if (requirements.size() < requirementCount - 1) {
@@ -295,12 +356,11 @@ public class FetchDataFromFile {
 				Requirement requirement = new Requirement(amount, requirementType);
 				requirements.add(requirement);
 			} else {
-				Avatar avatar = new Avatar(id, name, description, requirementCount, requirements);
-				avatars.put(id, avatar);
+				Avatar avatar = new Avatar(dto.getId(), dto.getName(), dto.getDescription(), requirementCount,
+						requirements);
+				avatars.put(dto.getId(), avatar);
 				// Reset variable to prepare for a new item
-				id = 0;
-				name = "";
-				description = "";
+				dto = new BaseStaticDataDTO();
 				requirementCount = 0;
 				requirements = new ArrayList<>();
 			}
@@ -317,9 +377,23 @@ public class FetchDataFromFile {
 	 * @param file
 	 *            the file
 	 */
+	@SuppressWarnings("rawtypes")
 	private static void fetchDailyLoginReward(String version, File file) {
-		// TODO Auto-generated method stub
+		Iterable<CSVRecord> records = FileUtil.readCSVFile(file);
+		HashMap<Integer, BaseStaticDataDTO> dailyLoginRewards = new HashMap<>();
 
+		for (CSVRecord record : records) {
+			BaseStaticDataDTO dto = getBaseStaticDTOFromRecord(record);
+			int day = Integer.parseInt(record.get("Day"));
+			int month = Integer.parseInt(record.get("Month"));
+			int packId = Integer.parseInt(record.get("PackId"));
+
+			DailyLoginReward dailyLoginReward = new DailyLoginReward(dto.getId(), dto.getName(), dto.getDescription(),
+					day, month, packId);
+			dailyLoginRewards.put(dailyLoginReward.getId(), dailyLoginReward);
+		}
+
+		StaticDBUtil.getStaticData().get(version).put(DataFileType.DailyLoginReward.toString(), dailyLoginRewards);
 	}
 
 	/**
@@ -335,15 +409,37 @@ public class FetchDataFromFile {
 		Iterable<CSVRecord> records = FileUtil.readCSVFile(file);
 		HashMap<Integer, BaseStaticDataDTO> globalConfigs = new HashMap<>();
 		for (CSVRecord record : records) {
-			int id = Integer.parseInt(record.get("Id"));
-			String name = record.get("Name");
-			String description = record.get("Description");
+			BaseStaticDataDTO dto = getBaseStaticDTOFromRecord(record);
 			float value = Float.parseFloat(record.get("Value"));
-			GlobalConfig globalConfig = new GlobalConfig(id, name, description, value);
+			GlobalConfig globalConfig = new GlobalConfig(dto.getId(), dto.getName(), dto.getDescription(), value);
 			globalConfigs.put(globalConfig.getId(), globalConfig);
 		}
 
 		StaticDBUtil.getStaticData().get(version).put(DataFileType.GlobalConfig.toString(), globalConfigs);
+	}
+
+	/**
+	 * Gets the base static DTO from record.
+	 *
+	 * @param record
+	 *            the record
+	 * @return the base static DTO from record
+	 */
+	private static BaseStaticDataDTO<IBaseDTO> getBaseStaticDTOFromRecord(CSVRecord record) {
+		int id = Integer.parseInt(record.get("Id"));
+		String name = "";
+		String description = "";
+		try {
+			name = record.get("Name");
+		} catch (Exception e) {
+		}
+		try {
+			description = record.get("Description");
+		} catch (Exception e) {
+		}
+
+		BaseStaticDataDTO<IBaseDTO> dto = new BaseStaticDataDTO<>(id, name, description);
+		return dto;
 	}
 
 	/**
@@ -372,9 +468,6 @@ public class FetchDataFromFile {
 			break;
 		case NickName:
 			fetchNickName(version, file);
-			break;
-		case ResourceType:
-			fetchResourceType(version, file);
 			break;
 		case Shop:
 			fetchShop(version, file);

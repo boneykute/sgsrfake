@@ -20,12 +20,6 @@ public class Shop extends BaseStaticDataDTO<Shop> {
 	/** The price. */
 	private int price;
 
-	/** The resource type. */
-	private ResourceType resourceType;
-
-	/** The quantity. */
-	private int quantity;
-
 	/** The order. */
 	private int order;
 
@@ -60,10 +54,6 @@ public class Shop extends BaseStaticDataDTO<Shop> {
 	 *            the item id
 	 * @param price
 	 *            the price
-	 * @param resourceType
-	 *            the resource type
-	 * @param quantity
-	 *            the quantity
 	 * @param order
 	 *            the order
 	 * @param category
@@ -73,14 +63,12 @@ public class Shop extends BaseStaticDataDTO<Shop> {
 	 * @param cooldownTime
 	 *            the cooldown time
 	 */
-	public Shop(int id, String name, String description, String type, int itemId, int price, ResourceType resourceType,
-			int quantity, int order, String category, String tab, int cooldownTime) {
+	public Shop(int id, String name, String description, String type, int itemId, int price, int order, String category,
+			String tab, int cooldownTime) {
 		super(id, name, description);
 		this.type = type;
 		this.itemId = itemId;
 		this.price = price;
-		this.resourceType = resourceType;
-		this.quantity = quantity;
 		this.order = order;
 		this.category = category;
 		this.tab = tab;
@@ -142,44 +130,6 @@ public class Shop extends BaseStaticDataDTO<Shop> {
 	 */
 	public void setPrice(int price) {
 		this.price = price;
-	}
-
-	/**
-	 * Gets the resource type.
-	 *
-	 * @return the resource type
-	 */
-	public ResourceType getResourceType() {
-		return resourceType;
-	}
-
-	/**
-	 * Sets the resource type.
-	 *
-	 * @param resourceType
-	 *            the new resource type
-	 */
-	public void setResourceType(ResourceType resourceType) {
-		this.resourceType = resourceType;
-	}
-
-	/**
-	 * Gets the quantity.
-	 *
-	 * @return the quantity
-	 */
-	public int getQuantity() {
-		return quantity;
-	}
-
-	/**
-	 * Sets the quantity.
-	 *
-	 * @param quantity
-	 *            the new quantity
-	 */
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
 	}
 
 	/**
@@ -265,7 +215,6 @@ public class Shop extends BaseStaticDataDTO<Shop> {
 	 */
 	@Override
 	public Shop clone() {
-		return new Shop(id, category, category, type, itemId, price, resourceType, quantity, order, category, tab,
-				cooldownTime);
+		return new Shop(id, category, category, type, itemId, price, order, category, tab, cooldownTime);
 	}
 }

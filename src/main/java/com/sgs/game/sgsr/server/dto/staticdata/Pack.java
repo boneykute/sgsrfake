@@ -35,11 +35,14 @@ public class Pack extends BaseStaticDataDTO<Pack> {
 	 *            the name
 	 * @param desciption
 	 *            the desciption
+	 * @param itemCount
+	 *            the item count
 	 * @param items
 	 *            the items
 	 */
-	public Pack(int id, String name, String desciption, List<PackItem> items) {
+	public Pack(int id, String name, String desciption, int itemCount, List<PackItem> items) {
 		super(id, name, desciption);
+		this.itemCount = itemCount;
 		this.items = items;
 	}
 
@@ -88,6 +91,6 @@ public class Pack extends BaseStaticDataDTO<Pack> {
 	 */
 	@Override
 	public Pack clone() {
-		return new Pack(id, name, description, items);
+		return new Pack(id, name, description, itemCount, items);
 	}
 }
