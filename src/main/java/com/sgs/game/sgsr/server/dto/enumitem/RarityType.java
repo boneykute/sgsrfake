@@ -88,7 +88,7 @@ public enum RarityType {
 	 *            the name
 	 * @return the enum from name
 	 */
-	public RarityType getEnumFromName(String name) {
+	public static RarityType getEnumFromName(String name) {
 		RarityType type;
 		try {
 			type = valueOf(name);

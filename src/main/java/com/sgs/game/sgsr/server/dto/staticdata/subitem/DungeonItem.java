@@ -19,6 +19,23 @@ public class DungeonItem {
 	private int max;
 
 	/**
+	 * Instantiates a new dungeon item.
+	 *
+	 * @param type
+	 *            the type
+	 * @param min
+	 *            the min
+	 * @param max
+	 *            the max
+	 */
+	public DungeonItem(String type, int min, int max) {
+		super();
+		this.type = type;
+		this.min = min;
+		this.max = max;
+	}
+
+	/**
 	 * Gets the type.
 	 *
 	 * @return the type

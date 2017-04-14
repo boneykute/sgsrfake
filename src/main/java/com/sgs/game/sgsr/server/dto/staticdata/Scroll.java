@@ -17,12 +17,6 @@ public class Scroll extends BaseStaticDataDTO<Scroll> {
 	/** The rarity. */
 	private RarityType rarity;
 
-	/** The element count. */
-	private int elementCount;
-
-	/** The elements. */
-	private List<ElementType> elements;
-
 	/** The common percent. */
 	private float commonPercent;
 
@@ -34,6 +28,9 @@ public class Scroll extends BaseStaticDataDTO<Scroll> {
 
 	/** The legendary percent. */
 	private float legendaryPercent;
+
+	/** The elements. */
+	private List<ElementType> elements;
 
 	/**
 	 * Instantiates a new scroll.
@@ -53,8 +50,6 @@ public class Scroll extends BaseStaticDataDTO<Scroll> {
 	 *            the description
 	 * @param rarity
 	 *            the rarity
-	 * @param elementCount
-	 *            the element count
 	 * @param elements
 	 *            the elements
 	 * @param commonPercent
@@ -66,12 +61,10 @@ public class Scroll extends BaseStaticDataDTO<Scroll> {
 	 * @param legendaryPercent
 	 *            the legendary percent
 	 */
-	public Scroll(int id, String name, String description, RarityType rarity, int elementCount,
-			List<ElementType> elements, float commonPercent, float rarePercent, float epicPercent,
-			float legendaryPercent) {
+	public Scroll(int id, String name, String description, RarityType rarity, List<ElementType> elements,
+			float commonPercent, float rarePercent, float epicPercent, float legendaryPercent) {
 		super(id, name, description);
 		this.rarity = rarity;
-		this.elementCount = elementCount;
 		this.elements = elements;
 		this.commonPercent = commonPercent;
 		this.rarePercent = rarePercent;
@@ -96,25 +89,6 @@ public class Scroll extends BaseStaticDataDTO<Scroll> {
 	 */
 	public void setRarity(RarityType rarity) {
 		this.rarity = rarity;
-	}
-
-	/**
-	 * Gets the element count.
-	 *
-	 * @return the element count
-	 */
-	public int getElementCount() {
-		return elementCount;
-	}
-
-	/**
-	 * Sets the element count.
-	 *
-	 * @param elementCount
-	 *            the new element count
-	 */
-	public void setElementCount(int elementCount) {
-		this.elementCount = elementCount;
 	}
 
 	/**
@@ -219,8 +193,8 @@ public class Scroll extends BaseStaticDataDTO<Scroll> {
 	 */
 	@Override
 	public Scroll clone() {
-		return new Scroll(id, name, description, rarity, elementCount, elements, commonPercent, rarePercent,
-				epicPercent, legendaryPercent);
+		return new Scroll(id, name, description, rarity, elements, commonPercent, rarePercent, epicPercent,
+				legendaryPercent);
 	}
 
 }

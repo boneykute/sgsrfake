@@ -96,7 +96,7 @@ public enum ResourceType {
 	 *            the name
 	 * @return the enum from name
 	 */
-	public ResourceType getEnumFromName(String name) {
+	public static ResourceType getEnumFromName(String name) {
 		ResourceType type;
 		try {
 			type = valueOf(name);

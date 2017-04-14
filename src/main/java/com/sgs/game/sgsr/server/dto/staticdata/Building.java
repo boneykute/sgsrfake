@@ -35,7 +35,7 @@ public class Building extends BaseStaticDataDTO<Building> {
 	private boolean isAttackable;
 
 	/** The is on path. */
-	private int isOnPath;
+	private boolean isOnPath;
 
 	/** The levels. */
 	// Level list
@@ -75,7 +75,7 @@ public class Building extends BaseStaticDataDTO<Building> {
 	 *            the levels
 	 */
 	public Building(int id, String name, String description, int totalLevel, boolean isResourceGenerator,
-			ResourceType resourceType, float generateSpeed, int maximumResource, boolean isAttackable, int isOnPath,
+			ResourceType resourceType, float generateSpeed, int maximumResource, boolean isAttackable, boolean isOnPath,
 			List<BuildingLevelData> levels) {
 		super(id, name, description);
 		this.totalLevel = totalLevel;
@@ -207,7 +207,7 @@ public class Building extends BaseStaticDataDTO<Building> {
 	 *
 	 * @return the checks if is on path
 	 */
-	public int getIsOnPath() {
+	public boolean getIsOnPath() {
 		return isOnPath;
 	}
 
@@ -217,7 +217,7 @@ public class Building extends BaseStaticDataDTO<Building> {
 	 * @param isOnPath
 	 *            the new checks if is on path
 	 */
-	public void setIsOnPath(int isOnPath) {
+	public void setIsOnPath(boolean isOnPath) {
 		this.isOnPath = isOnPath;
 	}
 

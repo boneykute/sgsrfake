@@ -11,15 +11,29 @@ import java.util.List;
 import org.apache.commons.csv.CSVRecord;
 
 import com.sgs.game.sgsr.server.dto.IBaseDTO;
+import com.sgs.game.sgsr.server.dto.enumitem.ElementType;
+import com.sgs.game.sgsr.server.dto.enumitem.RarityType;
 import com.sgs.game.sgsr.server.dto.enumitem.RequirementType;
+import com.sgs.game.sgsr.server.dto.enumitem.ResourceType;
 import com.sgs.game.sgsr.server.dto.staticdata.Avatar;
 import com.sgs.game.sgsr.server.dto.staticdata.BaseStaticDataDTO;
+import com.sgs.game.sgsr.server.dto.staticdata.Booster;
+import com.sgs.game.sgsr.server.dto.staticdata.Building;
+import com.sgs.game.sgsr.server.dto.staticdata.Chest;
 import com.sgs.game.sgsr.server.dto.staticdata.DailyLoginReward;
+import com.sgs.game.sgsr.server.dto.staticdata.Decoration;
+import com.sgs.game.sgsr.server.dto.staticdata.Dungeon;
 import com.sgs.game.sgsr.server.dto.staticdata.GlobalConfig;
 import com.sgs.game.sgsr.server.dto.staticdata.IBaseStaticDataDTO;
 import com.sgs.game.sgsr.server.dto.staticdata.NickName;
 import com.sgs.game.sgsr.server.dto.staticdata.Pack;
+import com.sgs.game.sgsr.server.dto.staticdata.Scroll;
 import com.sgs.game.sgsr.server.dto.staticdata.Shop;
+import com.sgs.game.sgsr.server.dto.staticdata.subitem.BoostStats;
+import com.sgs.game.sgsr.server.dto.staticdata.subitem.BuildingLevelData;
+import com.sgs.game.sgsr.server.dto.staticdata.subitem.ChestItem;
+import com.sgs.game.sgsr.server.dto.staticdata.subitem.DungeonItem;
+import com.sgs.game.sgsr.server.dto.staticdata.subitem.DungeonLevelData;
 import com.sgs.game.sgsr.server.dto.staticdata.subitem.PackItem;
 import com.sgs.game.sgsr.server.dto.staticdata.subitem.Requirement;
 import com.sgs.game.sgsr.server.utils.FileUtil;
@@ -149,9 +163,56 @@ public class FetchDataFromFile {
 	 * @param file
 	 *            the file
 	 */
+	@SuppressWarnings("rawtypes")
 	private static void fetchDungeon(String version, File file) {
-		// TODO Auto-generated method stub
+		Iterable<CSVRecord> records = FileUtil.readCSVFile(file);
+		HashMap<Integer, BaseStaticDataDTO> dungeons = new HashMap<>();
 
+		BaseStaticDataDTO dto = new BaseStaticDataDTO();
+		int totalLevel = 0;
+		List<DungeonLevelData> levels = new ArrayList<>();
+
+		for (CSVRecord record : records) {
+			String idStr = record.get("Id");
+			if (!idStr.isEmpty()) {
+				dto = getBaseStaticDTOFromRecord(record);
+				totalLevel = Integer.parseInt(record.get("TotalLevel"));
+				levels = new ArrayList<>();
+			}
+			if (levels.size() < totalLevel - 1) {
+				// Dungeon level data stuff
+				String levelIdStr = record.get("Level");
+				int levelId = 0;
+				int requiredLevel = 0;
+				int foodConsume = 0;
+				int itemCount = 0;
+				List<DungeonItem> items = new ArrayList<>();
+
+				if (!levelIdStr.isEmpty()) {
+					levelId = Integer.parseInt(levelIdStr);
+					requiredLevel = Integer.parseInt(record.get("RequiredLevel"));
+					foodConsume = Integer.parseInt(record.get("FoodConsume"));
+					itemCount = Integer.parseInt(record.get("ItemCount"));
+					items = new ArrayList<>();
+				}
+				if (items.size() < itemCount - 1) {
+					int min = Integer.parseInt(record.get("Min"));
+					int max = Integer.parseInt(record.get("Max"));
+					String type = record.get("Type");
+					DungeonItem item = new DungeonItem(type, min, max);
+					items.add(item);
+				} else {
+					DungeonLevelData levelData = new DungeonLevelData(levelId, requiredLevel, foodConsume, itemCount,
+							items);
+					levels.add(levelData);
+				}
+			} else {
+				Dungeon dungeon = new Dungeon(dto.getId(), dto.getName(), dto.getDescription(), totalLevel, levels);
+				dungeons.put(dungeon.getId(), dungeon);
+			}
+		}
+
+		StaticDBUtil.getStaticData().get(version).put(DataFileType.Dungeon.toString(), dungeons);
 	}
 
 	/**
@@ -162,9 +223,61 @@ public class FetchDataFromFile {
 	 * @param file
 	 *            the file
 	 */
+	@SuppressWarnings("rawtypes")
 	private static void fetchBuilding(String version, File file) {
-		// TODO Auto-generated method stub
+		Iterable<CSVRecord> records = FileUtil.readCSVFile(file);
+		HashMap<Integer, BaseStaticDataDTO> buildings = new HashMap<>();
 
+		BaseStaticDataDTO dto = new BaseStaticDataDTO();
+		boolean isResourceGenerator = false;
+		ResourceType resourceType = ResourceType.None;
+		float generateSpeed = 0;
+		int maximumResource = 0;
+		boolean isAttackable = false;
+		boolean isOnPath = false;
+		int totalLevel = 0;
+		List<BuildingLevelData> levels = new ArrayList<>();
+
+		for (CSVRecord record : records) {
+			String idStr = record.get("Id");
+			if (!idStr.isEmpty()) {
+				dto = getBaseStaticDTOFromRecord(record);
+				isResourceGenerator = record.get("IsResourceGenerator").equals("1");
+				if (isResourceGenerator) {
+					resourceType = ResourceType.valueOf(record.get("ResourceType"));
+					generateSpeed = Float.parseFloat(record.get("GenerateSpeed"));
+					maximumResource = Integer.parseInt(record.get("MaximumResource"));
+				}
+				isAttackable = record.get("IsAttackable").equals("1");
+				isOnPath = record.get("IsOnPath").equals("1");
+				totalLevel = Integer.parseInt(record.get("TotalLevel"));
+				levels = new ArrayList<>();
+			}
+
+			if (levels.size() < totalLevel - 1) {
+				int hp = Integer.parseInt(record.get("HP"));
+				int cost = Integer.parseInt(record.get("Cost"));
+				int size = Integer.parseInt(record.get("Size"));
+				int damage = 0;
+				int attackSpeed = 0;
+				int range = 0;
+				if (isAttackable) {
+					damage = Integer.parseInt(record.get("Damage"));
+					attackSpeed = Integer.parseInt(record.get("AttackSpeed"));
+					range = Integer.parseInt(record.get("Range"));
+				}
+				BuildingLevelData levelData = new BuildingLevelData(levels.size(), hp, cost, damage, attackSpeed, range,
+						size);
+				levels.add(levelData);
+			} else {
+				Building building = new Building(dto.getId(), dto.getName(), dto.getDescription(), totalLevel,
+						isResourceGenerator, resourceType, generateSpeed, maximumResource, isAttackable, isOnPath,
+						levels);
+				buildings.put(building.getId(), building);
+			}
+		}
+
+		StaticDBUtil.getStaticData().get(version).put(DataFileType.Building.toString(), buildings);
 	}
 
 	/**
@@ -175,9 +288,33 @@ public class FetchDataFromFile {
 	 * @param file
 	 *            the file
 	 */
+	@SuppressWarnings("rawtypes")
 	private static void fetchScroll(String version, File file) {
-		// TODO Auto-generated method stub
+		Iterable<CSVRecord> records = FileUtil.readCSVFile(file);
+		HashMap<Integer, BaseStaticDataDTO> scrolls = new HashMap<>();
 
+		for (CSVRecord record : records) {
+			BaseStaticDataDTO dto = new BaseStaticDataDTO();
+			RarityType rarityType = RarityType.valueOf(record.get("Rariry"));
+			int commonPercent = Integer.parseInt(record.get("CommonPercent"));
+			int rarePercent = Integer.parseInt(record.get("RarePercent"));
+			int epicPercent = Integer.parseInt(record.get("EpicPercent"));
+			int legendaryPercent = Integer.parseInt(record.get("LegendaryPercent"));
+
+			// Fetch element type
+			List<ElementType> elements = new ArrayList<>();
+			String[] elementsStr = record.get("Elements").split(",");
+			for (String elementStr : elementsStr) {
+				ElementType elementType = ElementType.valueOf(elementStr.trim());
+				elements.add(elementType);
+			}
+
+			Scroll scroll = new Scroll(dto.getId(), dto.getName(), dto.getDescription(), rarityType, elements,
+					commonPercent, rarePercent, epicPercent, legendaryPercent);
+			scrolls.put(scroll.getId(), scroll);
+		}
+
+		StaticDBUtil.getStaticData().get(version).put(DataFileType.Scroll.toString(), scrolls);
 	}
 
 	/**
@@ -188,9 +325,59 @@ public class FetchDataFromFile {
 	 * @param file
 	 *            the file
 	 */
+	@SuppressWarnings("rawtypes")
 	private static void fetchChest(String version, File file) {
-		// TODO Auto-generated method stub
+		Iterable<CSVRecord> records = FileUtil.readCSVFile(file);
+		HashMap<Integer, BaseStaticDataDTO> chests = new HashMap<>();
 
+		BaseStaticDataDTO dto = new BaseStaticDataDTO();
+		RarityType rarityType = RarityType.None;
+		int unlockTime = 0;
+		int leagueId = 0;
+		int itemCount = 0;
+		List<ChestItem> items = new ArrayList<>();
+
+		for (CSVRecord record : records) {
+			String idStr = record.get("Id");
+			if (!idStr.isEmpty()) {
+				dto = getBaseStaticDTOFromRecord(record);
+				rarityType = RarityType.valueOf(record.get("Rarity"));
+				unlockTime = Integer.parseInt("Unlocktime");
+				leagueId = Integer.parseInt(record.get("LeagueId"));
+				itemCount = Integer.parseInt(record.get("ItemCount"));
+				items = new ArrayList<>();
+			}
+
+			if (items.size() < itemCount - 1) {
+				int min = Integer.parseInt(record.get("Min"));
+				int max = Integer.parseInt(record.get("Max"));
+				String type = record.get("Type");
+				int guaranteedRare = 0;
+				int guaranteedEpic = 0;
+				int guaranteedLegendary = 0;
+				float percentBonusRare = 0;
+				float percentBonusEpic = 0;
+				float percentBonusLegendary = 0;
+
+				if (type.equals("Scroll")) {
+					guaranteedRare = Integer.parseInt(record.get("GuaranreedRare"));
+					guaranteedEpic = Integer.parseInt(record.get("GuaranreedEpic"));
+					guaranteedLegendary = Integer.parseInt(record.get("GuaranreedLegendary"));
+					percentBonusRare = Float.parseFloat(record.get("PercentBonusRare"));
+					percentBonusEpic = Float.parseFloat(record.get("PercentBonusEpic"));
+					percentBonusLegendary = Float.parseFloat(record.get("PercentBonusLegendary"));
+				}
+				ChestItem chestItem = new ChestItem(type, min, max, guaranteedRare, guaranteedEpic, guaranteedLegendary,
+						percentBonusRare, percentBonusEpic, percentBonusLegendary);
+				items.add(chestItem);
+			} else {
+				Chest chest = new Chest(dto.getId(), dto.getName(), dto.getDescription(), rarityType, leagueId,
+						itemCount, unlockTime, items);
+				chests.put(chest.getId(), chest);
+			}
+		}
+
+		StaticDBUtil.getStaticData().get(version).put(DataFileType.Chest.toString(), chests);
 	}
 
 	/**
@@ -201,9 +388,36 @@ public class FetchDataFromFile {
 	 * @param file
 	 *            the file
 	 */
+	@SuppressWarnings("rawtypes")
 	private static void fetchBooster(String version, File file) {
-		// TODO Auto-generated method stub
+		Iterable<CSVRecord> records = FileUtil.readCSVFile(file);
+		HashMap<Integer, BaseStaticDataDTO> boosters = new HashMap<>();
 
+		BaseStaticDataDTO dto = new BaseStaticDataDTO();
+		int statsCount = 0;
+		List<BoostStats> boostStats = new ArrayList<>();
+
+		for (CSVRecord record : records) {
+			String idStr = record.get("Id");
+			if (!idStr.isEmpty()) {
+				dto = getBaseStaticDTOFromRecord(record);
+				statsCount = Integer.parseInt(record.get("BoostStatsCount"));
+				boostStats = new ArrayList<>();
+			}
+
+			if (boostStats.size() < statsCount - 1) {
+				String statName = record.get("StatName");
+				int amountPercent = Integer.parseInt(record.get("BoostAmountPercent"));
+				int amountFlat = Integer.parseInt(record.get("BoostAmountFlat"));
+				BoostStats stats = new BoostStats(statName, amountPercent, amountFlat);
+				boostStats.add(stats);
+			} else {
+				Booster booster = new Booster(dto.getId(), dto.getName(), dto.getDescription(), statsCount, boostStats);
+				boosters.put(booster.getId(), booster);
+			}
+		}
+
+		StaticDBUtil.getStaticData().get(version).put(DataFileType.Booster.toString(), boosters);
 	}
 
 	/**
@@ -214,9 +428,23 @@ public class FetchDataFromFile {
 	 * @param file
 	 *            the file
 	 */
+	@SuppressWarnings("rawtypes")
 	private static void fetchDecoration(String version, File file) {
-		// TODO Auto-generated method stub
+		Iterable<CSVRecord> records = FileUtil.readCSVFile(file);
+		HashMap<Integer, BaseStaticDataDTO> decorations = new HashMap<>();
+		for (CSVRecord record : records) {
+			BaseStaticDataDTO dto = getBaseStaticDTOFromRecord(record);
+			int price = Integer.parseInt(record.get("Price"));
+			ResourceType resourceType = ResourceType.getEnumFromName(record.get("ResourceType"));
+			int quantity = Integer.parseInt(record.get("Quantity"));
+			int order = Integer.parseInt(record.get("Order"));
 
+			Decoration decoration = new Decoration(dto.getId(), dto.getName(), dto.getDescription(), price,
+					resourceType, quantity, order);
+			decorations.put(decoration.getId(), decoration);
+		}
+
+		StaticDBUtil.getStaticData().get(version).put(DataFileType.Decoration.toString(), decorations);
 	}
 
 	/**
@@ -309,6 +537,7 @@ public class FetchDataFromFile {
 			if (!idStr.isEmpty()) {
 				dto = getBaseStaticDTOFromRecord(record);
 				requirementCount = Integer.parseInt(record.get("RequirementCount"));
+				requirements = new ArrayList<>();
 			}
 			if (requirements.size() < requirementCount - 1) {
 				RequirementType requirementType = RequirementType.getEnumFromName(record.get("RequirementType"));
@@ -319,10 +548,6 @@ public class FetchDataFromFile {
 				NickName nickName = new NickName(dto.getId(), dto.getName(), dto.getDescription(), requirementCount,
 						requirements);
 				nickNames.put(nickName.getId(), nickName);
-				// Reset variable to prepare for a new item
-				dto = new BaseStaticDataDTO();
-				requirementCount = 0;
-				requirements = new ArrayList<>();
 			}
 		}
 
@@ -349,6 +574,7 @@ public class FetchDataFromFile {
 			if (!idStr.isEmpty()) {
 				dto = getBaseStaticDTOFromRecord(record);
 				requirementCount = Integer.parseInt(record.get("RequirementCount"));
+				requirements = new ArrayList<>();
 			}
 			if (requirements.size() < requirementCount - 1) {
 				RequirementType requirementType = RequirementType.getEnumFromName(record.get("RequirementType"));
@@ -359,10 +585,6 @@ public class FetchDataFromFile {
 				Avatar avatar = new Avatar(dto.getId(), dto.getName(), dto.getDescription(), requirementCount,
 						requirements);
 				avatars.put(dto.getId(), avatar);
-				// Reset variable to prepare for a new item
-				dto = new BaseStaticDataDTO();
-				requirementCount = 0;
-				requirements = new ArrayList<>();
 			}
 		}
 

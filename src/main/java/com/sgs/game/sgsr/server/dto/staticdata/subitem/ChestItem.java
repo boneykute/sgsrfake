@@ -19,7 +19,7 @@ public class ChestItem {
 	private int max;
 
 	/** The guaranteed rate. */
-	private int guaranteedRate;;
+	private int guaranteedRare;;
 
 	/** The guaranteed epic. */
 	private int guaranteedEpic;
@@ -69,7 +69,7 @@ public class ChestItem {
 		this.type = type;
 		this.min = min;
 		this.max = max;
-		this.guaranteedRate = guaranteedRate;
+		this.guaranteedRare = guaranteedRate;
 		this.guaranteedEpic = guaranteedEpic;
 		this.guaranteedLegendary = guaranteedLegendary;
 		this.percentBonusRare = percentBonusRare;
@@ -140,7 +140,7 @@ public class ChestItem {
 	 * @return the guaranteed rate
 	 */
 	public int getGuaranteedRate() {
-		return guaranteedRate;
+		return guaranteedRare;
 	}
 
 	/**
@@ -150,7 +150,7 @@ public class ChestItem {
 	 *            the new guaranteed rate
 	 */
 	public void setGuaranteedRate(int guaranteedRate) {
-		this.guaranteedRate = guaranteedRate;
+		this.guaranteedRare = guaranteedRate;
 	}
 
 	/**

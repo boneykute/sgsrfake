@@ -5,7 +5,7 @@ package com.sgs.game.sgsr.server.dto.staticdata;
 
 import java.util.List;
 
-import com.sgs.game.sgsr.server.dto.staticdata.subitem.DungeonItem;
+import com.sgs.game.sgsr.server.dto.staticdata.subitem.DungeonLevelData;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -16,17 +16,8 @@ public class Dungeon extends BaseStaticDataDTO<Dungeon> {
 	/** The total level. */
 	private int totalLevel;
 
-	/** The required level. */
-	private int requiredLevel;
-
-	/** The food consume. */
-	private int foodConsume;
-
-	/** The item count. */
-	private int itemCount;
-
 	/** The items. */
-	private List<DungeonItem> items;
+	private List<DungeonLevelData> levels;
 
 	/**
 	 * Instantiates a new dungeon.
@@ -46,23 +37,13 @@ public class Dungeon extends BaseStaticDataDTO<Dungeon> {
 	 *            the description
 	 * @param totalLevel
 	 *            the total level
-	 * @param requiredLevel
-	 *            the required level
-	 * @param foodConsume
-	 *            the food consume
-	 * @param itemCount
-	 *            the item count
-	 * @param items
-	 *            the items
+	 * @param levels
+	 *            the levels
 	 */
-	public Dungeon(int id, String name, String description, int totalLevel, int requiredLevel, int foodConsume,
-			int itemCount, List<DungeonItem> items) {
+	public Dungeon(int id, String name, String description, int totalLevel, List<DungeonLevelData> levels) {
 		super(id, name, description);
 		this.totalLevel = totalLevel;
-		this.requiredLevel = requiredLevel;
-		this.foodConsume = foodConsume;
-		this.itemCount = itemCount;
-		this.items = items;
+		this.levels = levels;
 	}
 
 	/**
@@ -85,79 +66,22 @@ public class Dungeon extends BaseStaticDataDTO<Dungeon> {
 	}
 
 	/**
-	 * Gets the required level.
+	 * Gets the levels.
 	 *
-	 * @return the required level
+	 * @return the levels
 	 */
-	public int getRequiredLevel() {
-		return requiredLevel;
+	public List<DungeonLevelData> getLevels() {
+		return levels;
 	}
 
 	/**
-	 * Sets the required level.
+	 * Sets the levels.
 	 *
-	 * @param requiredLevel
-	 *            the new required level
+	 * @param levels
+	 *            the new levels
 	 */
-	public void setRequiredLevel(int requiredLevel) {
-		this.requiredLevel = requiredLevel;
-	}
-
-	/**
-	 * Gets the food consume.
-	 *
-	 * @return the food consume
-	 */
-	public int getFoodConsume() {
-		return foodConsume;
-	}
-
-	/**
-	 * Sets the food consume.
-	 *
-	 * @param foodConsume
-	 *            the new food consume
-	 */
-	public void setFoodConsume(int foodConsume) {
-		this.foodConsume = foodConsume;
-	}
-
-	/**
-	 * Gets the item count.
-	 *
-	 * @return the item count
-	 */
-	public int getItemCount() {
-		return itemCount;
-	}
-
-	/**
-	 * Sets the item count.
-	 *
-	 * @param itemCount
-	 *            the new item count
-	 */
-	public void setItemCount(int itemCount) {
-		this.itemCount = itemCount;
-	}
-
-	/**
-	 * Gets the items.
-	 *
-	 * @return the items
-	 */
-	public List<DungeonItem> getItems() {
-		return items;
-	}
-
-	/**
-	 * Sets the items.
-	 *
-	 * @param items
-	 *            the new items
-	 */
-	public void setItems(List<DungeonItem> items) {
-		this.items = items;
+	public void setLevels(List<DungeonLevelData> levels) {
+		this.levels = levels;
 	}
 
 	/*
@@ -167,7 +91,6 @@ public class Dungeon extends BaseStaticDataDTO<Dungeon> {
 	 */
 	@Override
 	public Dungeon clone() {
-		return new Dungeon(id, name, description, totalLevel, requiredLevel, foodConsume, itemCount, items);
+		return new Dungeon(id, name, description, totalLevel, levels);
 	}
-
 }
