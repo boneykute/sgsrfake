@@ -70,6 +70,7 @@ public class StaticDBUtil {
 			staticData.put(versionFolder.getName(), new HashMap<>());
 			Collection<File> files = FileUtils.listFiles(versionFolder, extensions, true);
 			files.forEach(file -> FetchDataFromFile.fetch(versionFolder.getName(), file));
+			// Create DAO
 		}
 	}
 

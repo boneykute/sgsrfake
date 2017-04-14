@@ -14,9 +14,6 @@ public class Season extends BaseStaticDataDTO<Season> {
 	/** The start date. */
 	private Date startDate;
 
-	/** The end date. */
-	private Date endDate;
-
 	/** The duration. */
 	private long duration;
 
@@ -41,18 +38,14 @@ public class Season extends BaseStaticDataDTO<Season> {
 	 *            the description
 	 * @param startDate
 	 *            the start date
-	 * @param endDate
-	 *            the end date
 	 * @param duration
 	 *            the duration
 	 * @param isRepeat
 	 *            the is repeat
 	 */
-	public Season(int id, String name, String description, Date startDate, Date endDate, long duration,
-			boolean isRepeat) {
+	public Season(int id, String name, String description, Date startDate, long duration, boolean isRepeat) {
 		super(id, name, description);
 		this.startDate = startDate;
-		this.endDate = endDate;
 		this.duration = duration;
 		this.isRepeat = isRepeat;
 	}
@@ -74,25 +67,6 @@ public class Season extends BaseStaticDataDTO<Season> {
 	 */
 	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
-	}
-
-	/**
-	 * Gets the end date.
-	 *
-	 * @return the end date
-	 */
-	public Date getEndDate() {
-		return endDate;
-	}
-
-	/**
-	 * Sets the end date.
-	 *
-	 * @param endDate
-	 *            the new end date
-	 */
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
 	}
 
 	/**
@@ -140,7 +114,7 @@ public class Season extends BaseStaticDataDTO<Season> {
 	 */
 	@Override
 	public Season clone() {
-		return new Season(id, name, description, startDate, endDate, duration, isRepeat);
+		return new Season(id, name, description, startDate, duration, isRepeat);
 	}
 
 }

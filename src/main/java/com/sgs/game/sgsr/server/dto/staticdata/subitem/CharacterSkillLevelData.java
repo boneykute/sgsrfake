@@ -5,6 +5,8 @@ package com.sgs.game.sgsr.server.dto.staticdata.subitem;
 
 import java.util.List;
 
+import com.sgs.game.sgsr.server.dto.enumitem.TargetType;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class CharacterSkillLevelData.
@@ -27,7 +29,7 @@ public class CharacterSkillLevelData {
 	private float cooldown;
 
 	/** The target. */
-	private String target;
+	private TargetType target;
 
 	/** The target range. */
 	private float targetRange;
@@ -48,10 +50,10 @@ public class CharacterSkillLevelData {
 	private float projectSpeed;
 
 	/** The shotgun. */
-	private boolean shotgun;
+	private boolean isShotgun;
 
 	/** The status change. */
-	private int statusChange;
+	private float statusChance;
 
 	/** The total effect. */
 	private int totalEffect;
@@ -87,8 +89,8 @@ public class CharacterSkillLevelData {
 	 *            the radius
 	 * @param angle
 	 *            the angle
-	 * @param aTKMultiplier
-	 *            the a TK multiplier
+	 * @param ATKMultiplier
+	 *            the ATK multiplier
 	 * @param projectileCount
 	 *            the projectile count
 	 * @param projectSpeed
@@ -103,8 +105,8 @@ public class CharacterSkillLevelData {
 	 *            the effects
 	 */
 	public CharacterSkillLevelData(int id, int levelUpCost, float duration, float castTime, float cooldown,
-			String target, float targetRange, float radius, int angle, float aTKMultiplier, int projectileCount,
-			float projectSpeed, boolean shotgun, int statusChange, int totalEffect, List<SkillEffect> effects) {
+			TargetType target, float targetRange, float radius, int angle, float ATKMultiplier, int projectileCount,
+			float projectSpeed, boolean shotgun, float statusChange, int totalEffect, List<SkillEffect> effects) {
 		this.id = id;
 		this.levelUpCost = levelUpCost;
 		this.duration = duration;
@@ -114,11 +116,11 @@ public class CharacterSkillLevelData {
 		this.targetRange = targetRange;
 		this.radius = radius;
 		this.angle = angle;
-		ATKMultiplier = aTKMultiplier;
+		this.ATKMultiplier = ATKMultiplier;
 		this.projectileCount = projectileCount;
 		this.projectSpeed = projectSpeed;
-		this.shotgun = shotgun;
-		this.statusChange = statusChange;
+		this.isShotgun = shotgun;
+		this.statusChance = statusChange;
 		this.totalEffect = totalEffect;
 		this.effects = effects;
 	}
@@ -223,7 +225,7 @@ public class CharacterSkillLevelData {
 	 *
 	 * @return the target
 	 */
-	public String getTarget() {
+	public TargetType getTarget() {
 		return target;
 	}
 
@@ -233,7 +235,7 @@ public class CharacterSkillLevelData {
 	 * @param target
 	 *            the new target
 	 */
-	public void setTarget(String target) {
+	public void setTarget(TargetType target) {
 		this.target = target;
 	}
 
@@ -357,7 +359,7 @@ public class CharacterSkillLevelData {
 	 * @return true, if is shotgun
 	 */
 	public boolean isShotgun() {
-		return shotgun;
+		return isShotgun;
 	}
 
 	/**
@@ -367,7 +369,7 @@ public class CharacterSkillLevelData {
 	 *            the new shotgun
 	 */
 	public void setShotgun(boolean shotgun) {
-		this.shotgun = shotgun;
+		this.isShotgun = shotgun;
 	}
 
 	/**
@@ -375,8 +377,8 @@ public class CharacterSkillLevelData {
 	 *
 	 * @return the status change
 	 */
-	public int getStatusChange() {
-		return statusChange;
+	public float getStatusChange() {
+		return statusChance;
 	}
 
 	/**
@@ -386,7 +388,7 @@ public class CharacterSkillLevelData {
 	 *            the new status change
 	 */
 	public void setStatusChange(int statusChange) {
-		this.statusChange = statusChange;
+		this.statusChance = statusChange;
 	}
 
 	/**

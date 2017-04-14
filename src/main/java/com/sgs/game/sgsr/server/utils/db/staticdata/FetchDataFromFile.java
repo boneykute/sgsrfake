@@ -4,39 +4,52 @@
 package com.sgs.game.sgsr.server.utils.db.staticdata;
 
 import java.io.File;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
 import org.apache.commons.csv.CSVRecord;
+import org.apache.commons.lang.time.DateUtils;
 
 import com.sgs.game.sgsr.server.dto.IBaseDTO;
 import com.sgs.game.sgsr.server.dto.enumitem.ElementType;
 import com.sgs.game.sgsr.server.dto.enumitem.RarityType;
 import com.sgs.game.sgsr.server.dto.enumitem.RequirementType;
 import com.sgs.game.sgsr.server.dto.enumitem.ResourceType;
+import com.sgs.game.sgsr.server.dto.enumitem.TargetType;
 import com.sgs.game.sgsr.server.dto.staticdata.Avatar;
 import com.sgs.game.sgsr.server.dto.staticdata.BaseStaticDataDTO;
 import com.sgs.game.sgsr.server.dto.staticdata.Booster;
 import com.sgs.game.sgsr.server.dto.staticdata.Building;
+import com.sgs.game.sgsr.server.dto.staticdata.CharacterSkill;
+import com.sgs.game.sgsr.server.dto.staticdata.CharacterStat;
 import com.sgs.game.sgsr.server.dto.staticdata.Chest;
 import com.sgs.game.sgsr.server.dto.staticdata.DailyLoginReward;
 import com.sgs.game.sgsr.server.dto.staticdata.Decoration;
 import com.sgs.game.sgsr.server.dto.staticdata.Dungeon;
 import com.sgs.game.sgsr.server.dto.staticdata.GlobalConfig;
 import com.sgs.game.sgsr.server.dto.staticdata.IBaseStaticDataDTO;
+import com.sgs.game.sgsr.server.dto.staticdata.League;
 import com.sgs.game.sgsr.server.dto.staticdata.NickName;
 import com.sgs.game.sgsr.server.dto.staticdata.Pack;
+import com.sgs.game.sgsr.server.dto.staticdata.PlayerLevel;
 import com.sgs.game.sgsr.server.dto.staticdata.Scroll;
+import com.sgs.game.sgsr.server.dto.staticdata.Season;
 import com.sgs.game.sgsr.server.dto.staticdata.Shop;
 import com.sgs.game.sgsr.server.dto.staticdata.subitem.BoostStats;
 import com.sgs.game.sgsr.server.dto.staticdata.subitem.BuildingLevelData;
+import com.sgs.game.sgsr.server.dto.staticdata.subitem.CharacterSkillLevelData;
+import com.sgs.game.sgsr.server.dto.staticdata.subitem.CharacterStatLevelData;
 import com.sgs.game.sgsr.server.dto.staticdata.subitem.ChestItem;
 import com.sgs.game.sgsr.server.dto.staticdata.subitem.DungeonItem;
 import com.sgs.game.sgsr.server.dto.staticdata.subitem.DungeonLevelData;
 import com.sgs.game.sgsr.server.dto.staticdata.subitem.PackItem;
 import com.sgs.game.sgsr.server.dto.staticdata.subitem.Requirement;
+import com.sgs.game.sgsr.server.dto.staticdata.subitem.SkillEffect;
 import com.sgs.game.sgsr.server.utils.FileUtil;
+import com.sgs.game.sgsr.server.utils.TimeUtil;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -100,8 +113,87 @@ public class FetchDataFromFile {
 	 * @param file
 	 *            the file
 	 */
+	@SuppressWarnings("rawtypes")
 	private static void fetchCharacterSkill(String version, File file) {
 		Iterable<CSVRecord> records = FileUtil.readCSVFile(file);
+		HashMap<Integer, BaseStaticDataDTO> characterSkills = new HashMap<>();
+
+		BaseStaticDataDTO dto = new BaseStaticDataDTO();
+		String type = "";
+		String skillType = "";
+		int totalLevel = 0;
+		List<CharacterSkillLevelData> levels = new ArrayList<>();
+
+		for (CSVRecord record : records) {
+			String idStr = record.get("Id");
+			if (!idStr.isEmpty()) {
+				dto = getBaseStaticDTOFromRecord(record);
+				type = record.get("Type");
+				skillType = record.get("SkillType");
+				totalLevel = Integer.parseInt(record.get("TotalLevel"));
+				levels = new ArrayList<>();
+			}
+			if (levels.size() < totalLevel - 1) {
+				// Level data stuff
+				String levelIdStr = record.get("Level");
+				int levelId = 0;
+				int levelUpCost = 0;
+				float duration = 0;
+				float castTime = 0;
+				float cooldown = 0;
+				TargetType targetType = TargetType.None;
+				float targetRange = 0;
+				float radius = 0;
+				int angle = 0;
+				float ATKMultiplier = 0;
+				int projectileCount = 0;
+				float projectileSpeed = 0;
+				boolean isShotgun = false;
+				float statusChance = 0;
+				int totalEffect = 0;
+				List<SkillEffect> effects = new ArrayList<>();
+
+				if (!levelIdStr.isEmpty()) {
+					levelId = Integer.parseInt(levelIdStr);
+					levelUpCost = Integer.parseInt(record.get("LevelUpcost"));
+					duration = Float.parseFloat(record.get("Duration"));
+					castTime = Float.parseFloat(record.get("CastTime"));
+					cooldown = Float.parseFloat(record.get("CoolDown"));
+					targetType = TargetType.valueOf(record.get("Target"));
+					targetRange = Float.parseFloat(record.get("TargetRamge"));
+					radius = Float.parseFloat(record.get("Radius"));
+					angle = Integer.parseInt(record.get("Angle"));
+					ATKMultiplier = Float.parseFloat(record.get("ATKMultiplier"));
+					projectileCount = Integer.parseInt(record.get("ProjectileCount"));
+					projectileSpeed = Integer.parseInt(record.get("ProjectileSpeed"));
+					isShotgun = record.get("IsShotGun").equals("1");
+					statusChance = Float.parseFloat(record.get("StatusChange"));
+					totalEffect = Integer.parseInt(record.get("TotalEffect"));
+					effects = new ArrayList<>();
+				}
+				if (effects.size() < totalEffect - 1) {
+					String effectStat = record.get("EffectedStat");
+					TargetType effectTargetType = TargetType.valueOf(record.get("EffectTarget"));
+					float effectAmount = Float.parseFloat(record.get("EffectAmount"));
+					float effectDuration = Float.parseFloat(record.get("EffectDuration"));
+					String effectOperator = record.get("EffectOperator");
+					SkillEffect effect = new SkillEffect(effectStat, effectTargetType, effectAmount, effectDuration,
+							effectOperator);
+					effects.add(effect);
+				} else {
+					CharacterSkillLevelData levelData = new CharacterSkillLevelData(levelId, levelUpCost, duration,
+							castTime, cooldown, targetType, targetRange, radius, angle, ATKMultiplier, projectileCount,
+							projectileSpeed, isShotgun, statusChance, totalEffect, effects);
+					levels.add(levelData);
+				}
+			} else {
+				CharacterSkill characterSkill = new CharacterSkill(dto.getId(), dto.getName(), dto.getDescription(),
+						type, skillType, totalLevel, levels);
+				characterSkills.put(characterSkill.getId(), characterSkill);
+			}
+		}
+
+		StaticDBUtil.getStaticData().get(version).put(DataFileType.CharacterSkill.toString(), characterSkills);
 	}
 
 	/**
@@ -112,8 +204,60 @@ public class FetchDataFromFile {
 	 * @param file
 	 *            the file
 	 */
+	@SuppressWarnings("rawtypes")
 	private static void fetchCharacterStat(String version, File file) {
 		Iterable<CSVRecord> records = FileUtil.readCSVFile(file);
+		HashMap<Integer, BaseStaticDataDTO> characterStats = new HashMap<>();
+		BaseStaticDataDTO dto = new BaseStaticDataDTO();
+		String role = "";
+		RarityType rarityType = RarityType.None;
+		ElementType elementType = ElementType.None;
+		int baseLevel = 0;
+		int baseStar = 0;
+		int totalLevel = 0;
+		List<CharacterStatLevelData> levels = new ArrayList<>();
+
+		for (CSVRecord record : records) {
+			String idStr = record.get("Id");
+			if (!idStr.isEmpty()) {
+				dto = getBaseStaticDTOFromRecord(record);
+				role = record.get("Role");
+				rarityType = RarityType.valueOf(record.get("Rarity"));
+				elementType = ElementType.valueOf(record.get("Element"));
+				baseLevel = Integer.parseInt(record.get("BaseLevel"));
+				baseStar = Integer.parseInt(record.get("BaseStar"));
+				totalLevel = Integer.parseInt(record.get("TotalLevel"));
+				levels = new ArrayList<>();
+			}
+			if (levels.size() < totalLevel - 1) {
+				int levelId = Integer.parseInt(record.get("Level"));
+				int star = Integer.parseInt(record.get("Star"));
+				int requiredSkillPoint = Integer.parseInt(record.get("RequiredSkillPoint"));
+				float aggroRange = Float.parseFloat(record.get("AggroRange"));
+				float attackRange = Float.parseFloat(record.get("AttackRange"));
+				float moveSpeed = Float.parseFloat(record.get("MoveSpeed"));
+				float attackSpeed = Float.parseFloat(record.get("AttackSpeed"));
+				float criticalRate = Float.parseFloat(record.get("CriticalRate"));
+				float criticalDamage = Float.parseFloat(record.get("CriticalDamage"));
+				float resistance = Float.parseFloat(record.get("Resistance"));
+				float regen = Float.parseFloat(record.get("Regen"));
+				float dodge = Float.parseFloat(record.get("Dodge"));
+				float blockDamageFlat = Float.parseFloat(record.get("BlockDamageFlat"));
+				float blockDamagePercent = Float.parseFloat(record.get("BlockDamagePercent"));
+				float lifePerHitFlat = Float.parseFloat(record.get("LifePerHitFlat"));
+				float lifePerHitPercent = Float.parseFloat(record.get("LifePerHitPercent"));
+
+				CharacterStatLevelData levelData = new CharacterStatLevelData(levelId, star, requiredSkillPoint,
+						aggroRange, attackRange, moveSpeed, attackSpeed, criticalRate, criticalDamage, resistance,
+						regen, dodge, blockDamageFlat, blockDamagePercent, lifePerHitFlat, lifePerHitPercent);
+				levels.add(levelData);
+			} else {
+				CharacterStat characterStat = new CharacterStat(dto.getId(), dto.getName(), dto.getDescription(), role,
+						rarityType, elementType, baseLevel, baseStar, totalLevel, levels);
+			}
+		}
+
+		StaticDBUtil.getStaticData().get(version).put(DataFileType.CharacterStat.toString(), characterStats);
 	}
 
 	/**
@@ -124,9 +268,19 @@ public class FetchDataFromFile {
 	 * @param file
 	 *            the file
 	 */
+	@SuppressWarnings("rawtypes")
 	private static void fetchPlayerLevel(String version, File file) {
-		// TODO Auto-generated method stub
+		Iterable<CSVRecord> records = FileUtil.readCSVFile(file);
+		HashMap<Integer, BaseStaticDataDTO> playerLevels = new HashMap<>();
 
+		for (CSVRecord record : records) {
+			BaseStaticDataDTO dto = getBaseStaticDTOFromRecord(record);
+			int requiredEXP = Integer.parseInt(record.get("RequiredEXP"));
+			PlayerLevel playerLevel = new PlayerLevel(dto.getId(), dto.getName(), dto.getDescription(), requiredEXP);
+			playerLevels.put(playerLevel.getId(), playerLevel);
+		}
+
+		StaticDBUtil.getStaticData().get(version).put(DataFileType.PlayerLevel.toString(), playerLevels);
 	}
 
 	/**
@@ -137,9 +291,32 @@ public class FetchDataFromFile {
 	 * @param file
 	 *            the file
 	 */
+	@SuppressWarnings("rawtypes")
 	private static void fetchSeason(String version, File file) {
-		// TODO Auto-generated method stub
+		Iterable<CSVRecord> records = FileUtil.readCSVFile(file);
+		HashMap<Integer, BaseStaticDataDTO> seasons = new HashMap<>();
 
+		for (CSVRecord record : records) {
+			BaseStaticDataDTO dto = getBaseStaticDTOFromRecord(record);
+			String startDateStr = record.get("StartDate");
+			int duration = Integer.parseInt(record.get("Duration"));
+			boolean isRepeat = record.get("IsRepeat").equals("1");
+			Date startDate = TimeUtil.convertStringToDate(startDateStr);
+			if (startDate == null) {
+				try {
+					throw new ParseException("FETCH SEASON STATIC DATA => Can't convert " + startDateStr + " to date",
+							0);
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+				return;
+			} else {
+				Season season = new Season(dto.getId(), dto.getName(), dto.getDescription(), startDate, duration,
+						isRepeat);
+				seasons.put(season.getId(), season);
+			}
+		}
+		StaticDBUtil.getStaticData().get(version).put(DataFileType.Season.toString(), seasons);
 	}
 
 	/**
@@ -150,9 +327,26 @@ public class FetchDataFromFile {
 	 * @param file
 	 *            the file
 	 */
+	@SuppressWarnings("rawtypes")
 	private static void fetchLeague(String version, File file) {
-		// TODO Auto-generated method stub
+		Iterable<CSVRecord> records = FileUtil.readCSVFile(file);
+		HashMap<Integer, BaseStaticDataDTO> leagues = new HashMap<>();
 
+		for (CSVRecord record : records) {
+			BaseStaticDataDTO dto = getBaseStaticDTOFromRecord(record);
+			int requiredTrophies = Integer.parseInt(record.get("RequiredTrophies"));
+			int demotionAt = Integer.parseInt(record.get("DemotionAt"));
+			String[] characterUnlockArr = record.get("CharacterUnlock").split(",");
+			List<String> characterUnlockList = new ArrayList<>();
+			for (String characterUnlock : characterUnlockArr) {
+				characterUnlockList.add(characterUnlock.trim());
+			}
+			League league = new League(dto.getId(), dto.getName(), dto.getDescription(), requiredTrophies, demotionAt,
+					characterUnlockList);
+			leagues.put(league.getId(), league);
+		}
+
+		StaticDBUtil.getStaticData().get(version).put(DataFileType.League.toString(), leagues);
 	}
 
 	/**
